@@ -1,0 +1,56 @@
+*{
+    color: white;
+    font-family: poppins;
+    margin: 0px;
+}
+.side_panel{
+    position: fixed;
+    background-color: rgb(23, 23, 23);
+    width: 200px;
+    height: 100%;
+}
+.photo{
+    height: 10em;
+    width: auto;
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+#title{
+    text-align: center;
+    padding-top: 10px;
+}
+.side_panel_content{
+    list-style: none;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+}
+.items{
+    padding: 10px;
+}
+.sidebar_icons{
+    height: 40px;
+    width: auto;
+}
+#dashboard_icon{
+    position: absolute;
+    top: 313px;
+    left: 10px;
+}
+#search_icon{
+    position: absolute;
+    top: 370px;
+    left: 10px;
+}
+#noti_icon{
+    position: absolute;
+    top: 420px;
+    left: 10px;
+}
+#logout_icon{
+    position: absolute;
+    top: 470px;
+    left: 10px;
+}
