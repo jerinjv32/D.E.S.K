@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="login_styles.css">
-    <title>Document</title>
+    <title>login</title>
+    <link rel="stylesheet" href="login.css">
+
 </head>
 <body>
-    <main>
-        <div class="container">
-            <h1 class="title">Login</h1>
-            <form>
-                <label>
-                    <label 
-                    <input type="text">Username<br>
-                    
-                </label>
-            </form>
+    <div class="container">
+        <div class="header">
+            <h1>SignIn</h1>
         </div>
-    </main>
+        <div class="box">
+            <h2>college id</h2>
+            <input type="text" id="uprn" placeholder="College id" required>
+            <h2 id="passwordtext">password</h2>
+            <input type="password" id="password" placeholder="Enter password" required>
+            <button type="submit">Log In</button>
+        </div>
+        
+    </div>
 </body>
 </html>
