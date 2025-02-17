@@ -1,20 +1,12 @@
 <?php
-// login.php
-
-// Include the database connection
 include('db.php');
-
-// Start the session
 session_start();
 
-// Check if the form is submitted    
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get user input
     $college_id = $_POST['college_id'];
     $password = $_POST['password'];
     $role = $_POST['module'];
 
-    // SQL query to fetch user based on college_id and role (no password hashing)
     $sql = "SELECT * FROM users WHERE college_id = ? AND role = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $college_id, $role);
@@ -22,15 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // User found, check the password (plain text)
         $user = $result->fetch_assoc();
         if ($password == $user['password']) {
-            // Password matches, login successful
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['college_id'] = $user['college_id'];
             $_SESSION['role'] = $user['role'];
 
-            // Redirect based on the role
             if ($user['role'] == 'student') {
                 header("Location: student_dashboard.php");
             } elseif ($user['role'] == 'faculty') {
@@ -40,11 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             exit();
         } else {
-            // Invalid password
             $error = "Invalid password!";
         }
     } else {
-        // User not found
         $error = "Invalid college ID or role!";
     }
 }
