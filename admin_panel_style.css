@@ -2,67 +2,6 @@
     margin: 0px;
     font-family: poppins;
 }
-.sidebar{
-    position: fixed;
-    background-color: rgb(23, 23, 23);
-    height: 100%;
-    width: 208px;
-}
-.profile_pic{
-    display: block;
-    border-radius: 50%;
-    height: 10em;
-    margin-top: 2em;
-    margin-left: 26px;
-}
-.item1{
-    text-align: center;
-    padding-top: 14px;
-    color: white;
-    font-weight: bold;
-    font-size: large;
-}
-.item2{
-    color: white;
-}
-.sidebar_content{
-    list-style: none;
-    font-size: large;
-    font-weight: bold;
-    position: relative;
-}
-.content{
-    margin: 16%;
-    padding-left: 3px;
-    position: relative;
-}
-.content:hover{
-    text-decoration: underline;
-}
-.sidebar_icons{
-    height: 33px;
-    width: auto;
-}
-#dashboard_icon{
-    position: absolute;
-    top: 252px;
-    left: 30px;
-}
-#search_icon{
-    position: absolute;
-    top: 310px;
-    left: 30px; 
-}
-#noti_icon{
-    position: absolute;
-    top: 363px;
-    left: 30px;
-}
-#logout_icon{
-    position: absolute;
-    top: 417px;
-    left: 31px;
-}
 .nav_bar{
     height: 53px;
     width: 100%;

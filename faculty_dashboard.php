@@ -1,9 +1,8 @@
 <?php
 session_start();
 
-// Check if the user is logged in and has the "faculty" role
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'faculty') {
-    header("Location: login.php"); // Redirect to login page if not logged in or role doesn't match
+    header("Location: login.php");
     exit();
 }
 ?>

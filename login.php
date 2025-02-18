@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $role = $_POST['module'];
 
-    $sql = "SELECT * FROM users WHERE college_id = ? AND role = ?";
+    $sql = "SELECT * FROM users WHERE username = ? AND role = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $college_id, $role);
     $stmt->execute();
