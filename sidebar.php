@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <?php 
-        $role = $_SESSION["role"];
+        $role = isset($_SESSION["role"]) ? $_SESSION["role"] : '';
+        if ($role != "student"){
+            $height_notifi = '363px';
+            $height_logout = '418px';
+        } else {
+            $height_notifi = '307px';
+            $height_logout = '363px';
+        }
     ?>
     <style>
         .sidebar{
@@ -41,6 +48,7 @@
         }
         .content:hover{
             text-decoration: underline;
+            cursor: pointer;
         }
         .sidebar_icons{
             height: 33px;
@@ -48,7 +56,7 @@
         }
         #dashboard_icon{
             position: absolute;
-            top: 250px;
+            top: 254px;
             left: 30px;
         }
         #search_icon{
@@ -58,12 +66,12 @@
         }
         #noti_icon{
             position: absolute;
-            top: 363px;
+            top: <?php echo $height_notifi ?>;
             left: 30px;
         }
         #logout_icon{
             position: absolute;
-            top: 418px;
+            top: <?php echo $height_logout ?>;
             left: 31px;
         }
     </style>
@@ -81,7 +89,7 @@
                 <input type="submit" value="Logout" name="logout_btn" class="content" id="line4">
             </form>
             <div class="sidebar_icons">
-                <img src="http://localhost:5500/icons/home_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" class="sidebar_icons" id="dashboard_icon">
+                <img src="http://localhost:5500/icons/apps_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" class="sidebar_icons" id="dashboard_icon">
                 <?php if($role != "student"){ ?>
                     <img src="http://localhost:5500/icons/search_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" class="sidebar_icons" id="search_icon">
                 <?php } ?>

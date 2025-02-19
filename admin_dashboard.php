@@ -26,7 +26,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
                 <img src="http://localhost:5500/icons/coure_management.png" class="icons" id="panel_1">
                 <figcaption class="panel_title" id="title1">Course Management</figcaption>
             </div>
-
             <div class="panel_col2" >
                 <img src="http://localhost:5500/icons/staff_management.png" class="icons" id="panel_2">
                 <figcaption class="panel_title" id="title2">Staff Management</figcaption>

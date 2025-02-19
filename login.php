@@ -9,9 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $role = $_POST['module'];
 
-    $sql = "SELECT * FROM users WHERE username = ? AND role = ?";
+    $sql = "SELECT * FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $college_id, $role);
+    $stmt->bind_param("s", $college_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <style>
             body{
                 font-family: poppins;
-                background-image: url("http://localhost:5500/background/v996-008.svg");
+                background-image: url("http://localhost:5500/background/139441191_3daeaaf0-bf35-47ec-9b33-293cdcf519b2.svg");
                 background-size: cover;
                 display: flex;
                 justify-content: center;
@@ -66,9 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 padding: 0;
                 display: flex;
                 flex-direction: column;
-                box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.36);
-                -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.36);
-                -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.36);
+                box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.33);
+                -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.33);
+                -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.33);
             }
             .header {
                 background-color: #232323;
@@ -95,13 +95,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 justify-content: center;
             }
             h2 {
-                margin: 10px 2px -1px;
+                margin: 10px 0 5px 2px;
                 font-size: 16px;
                 color: #333;
             }
             input[type="text"],
-            input[type="password"],
-            select {
+            input[type="password"]{
                 width: 300px;
                 height: 35px;
                 padding: 0 10px;
@@ -155,11 +154,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <h2 id="passwordtext">Password</h2>
                 <input type="password" id="password" name="password" placeholder="Enter password" class="login_input" required>
                 
-                <select name="module" id="module" class="login_input" required>
-                    <option value="student">Student</option>
-                    <option value="faculty">Faculty</option>
-                    <option value="admin">Admin</option>
-                </select>
                 
                 <button type="submit" class="login_input">Log In</button>
 
