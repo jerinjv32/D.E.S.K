@@ -78,7 +78,7 @@
 </head>
 <body>
     <div class="sidebar">
-            <div class="item1"><?php echo strtoupper($role); ?></div>
+            <div class="item1">WELCOME<?php echo strtoupper($role); ?></div>
             <img src="images/school-building-illustration_138676-2399.jpg" class="profile_pic">
             <form method="post" action="sidebar.php">
                 <input type="submit" value="Dashboard" class="content" id="line1"><br>

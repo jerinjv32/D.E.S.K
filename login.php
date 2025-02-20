@@ -7,7 +7,6 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $college_id = $_POST['college_id'];
     $password = $_POST['password'];
-    $role = $_POST['module'];
 
     $sql = "SELECT * FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = "Invalid password!";
         }
     } else {
-        $error = "Invalid college ID or role!";
+        $error = "Invalid college ID!";
     }
 }
 ?>
