@@ -59,6 +59,18 @@
         .my_table tbody tr:nth-child(even){
             background-color: white;
         }
+        #upload_btn{
+            background-color: rgb(33,33,33);
+            color: white;border-style: none;
+            border-radius: 3px;
+            font-size: medium;
+        }
+        #upload_btn:hover{
+            background-color: rgb(0, 170, 255);
+            transition: background-color .25s ease-in-out;
+            color: black;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -67,51 +79,41 @@
         <h3 class="nav_content1">Course Management</h3>
     </div>
     <main>
-        <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
-        <input type="text" name="course_name" id="course_text"><br><br>
-        <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Semester:</label>
-        <input type="number" name="semester" id="semester_text""><br><br>
-        <label for="date_chose" style="font-size: 14px;padding-right: 47px;padding-top:2px">Date:</label>
-        <input type="date" name="date" id="date_chose">
+        <label for="course_text" style="font-size: 14px;padding-right:10px;">Course:</label>
+        <input type="text" name="course_name" id="course_text" required>
+        <label for="semester_text" style="font-size: 14px;padding: 2px 2px 0 14px;">Semester:</label>
+        <input type="number" name="semester" id="semester_text" required><br><br>
+        <label for="date_chose" style="font-size: 14px;padding-right: 27px;padding-top:2px">Date:</label>
+        <input type="date" name="date" id="date_chose" required><br><br>
+        <input type="submit" id="upload_btn" value="+ upload"><br>
+        <hr style="margin: 10px 10px 0 auto;">
         <table class="my_table"style="margin-top:50px;">
             <thead>
                 <tr>
-                    <th>Subject Code</th>
+                    <th>Name</th>
                     <th>Subject Name</th>
                     <th>Semester</th>
-                    <th>Actions</th>
+                    <th>Attendance %</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>CST302</td>
+                    <td>Geetha Ravikumar</td>
                     <td>Compiler Design</td>
                     <td>6</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">Remove</button>
-                        </form>
-                    </td>
+                    <td>90%</td>
                 </tr>
                 <tr>
-                    <td>CST304</td>
-                    <td>Computer Graphics</td>
+                    <td>Nimisha Sabu</td>
+                    <td>Compiler Design</td>
                     <td>6</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">Remove</button>
-                        </form>
-                    </td>
+                    <td>86%</td>
                 </tr>
                 <tr>
-                    <td>CST306</td>
-                    <td>Algorithm Analysis</td>
+                    <td>Naveen Krishnajith</td>
+                    <td>Compiler Design</td>
                     <td>6</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">Remove</button>
-                        </form>
-                    </td>
+                    <td>78%</td>
                 </tr>
             </tbody>
         </table>
