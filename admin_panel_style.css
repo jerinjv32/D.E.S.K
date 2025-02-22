@@ -15,14 +15,32 @@
     color: white;
 }
 .panels{
-    display: inline-grid;
-    grid-template-columns: repeat(4,50px);
-    grid-template-rows: repeat(3,100px);   
-    column-gap: 180px;
-    row-gap: 130px;
+    display: grid;
     justify-items: center;
-    margin-left: 318px;
-    margin-top: 36px;
+    margin: 40px 20px 0 210px;
+    row-gap: 10px;
+    grid-template-areas: 
+    "panel1 panel2 panel3 panel4"
+    "panel5 panel6 panel7 panel8"
+    "panel9 . . .";
+}
+@media only screen and (max-width: 780px){
+    .panels{
+        display: grid;
+        justify-items: center;
+        margin: 40px 20px 0 210px;
+        row-gap: 10px;
+        grid-template-areas: 
+        "panel1"
+        "panel2"
+        "panel3"
+        "panel4"
+        "panel5"
+        "panel6"
+        "panel7"
+        "panel8"
+        "panel9";
+    }
 }
 .icons{
     height: 150px;
@@ -32,50 +50,41 @@
     border: 1px solid;
     border-radius: 10px;
     padding: 20px;
+    transition: transform 0.25s ease-in-out;
 }
 .icons:hover{
-    border-color: red;
-    border: 2px solid;
+    transform: scale(1.05);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 .panel_title:hover{
     text-decoration: underline;
 }
 .panel_col1{
-    grid-column: 1/2;
-    grid-row: 1/2;
+    grid-area: panel1;
 }
 .panel_col2{
-    grid-column: 2/3;
-    grid-row: 1/2;
+    grid-area: panel2;
 }
 .panel_col3{
-    grid-column: 3/4;
-    grid-row: 1/2;
+    grid-area: panel3;
 }
 .panel_col4{
-    grid-column: 4/5;
-    grid-row: 1/2;
+    grid-area: panel4;
 }
 .panel_col5{
-    grid-column: 1/2;
-    grid-row: 2/3;
+    grid-area: panel5;
 }
 .panel_col6{
-    grid-column: 2/3;
-    grid-row: 2/3;
+    grid-area: panel6;
 }
 .panel_col7{
-    grid-column: 3/4;
-    grid-row: 2/3;
+    grid-area: panel7;
 }
 .panel_col8{
-    grid-column: 4/5;
-    grid-row: 2/3;
+    grid-area: panel8;
 }
 .panel_col9{
-    grid-column: 1/2;
-    grid-row: 3/4;
-    padding-bottom: 20px;
+    grid-area: panel9;
 }
 .panel_title{
     font-size: small;

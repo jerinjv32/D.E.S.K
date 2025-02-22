@@ -58,9 +58,11 @@
             padding-left: 70px;
             position: relative;
             background: none;
+            transition: transform 0.25s linear;
         }
         .content:hover{
             text-decoration: underline;
+            transform: scale(1.05);
             cursor: pointer;
         }
         .sidebar_icons{
