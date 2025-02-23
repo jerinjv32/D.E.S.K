@@ -79,3 +79,7 @@
             "panel7";
     }
 }
+button{
+    border: none;
+    background-color: white;
+}

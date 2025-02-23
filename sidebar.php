@@ -4,13 +4,20 @@
     if(isset($_POST["dash_icon"])){
         if($_SESSION['role'] === "admin"){
             header('Location:admin_dashboard.php');   
+            exit();
         }
         else if($_SESSION['role'] === "faculty"){
-            header('Location:faculty_dashboard.php');   
+            header('Location:faculty_dashboard.php');  
+            exit(); 
         }    
         else if($_SESSION['role'] === "student"){
             header('Location:student_dashboard.php');   
-        }  
+            exit();
+        }
+    }
+    if(isset($_POST['search_icon'])){
+        header('Location:search.php');
+        exit();
     }
     if ($_SESSION['role'] !== "student"){
         $height_notifi = '363px';
@@ -28,6 +35,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
+        *{
+            font-family: poppins;
+            margin: 0px;
+        }
         .sidebar{
             position: fixed;
             background-color: rgb(23, 23, 23);   
@@ -98,7 +109,7 @@
             <form method="post" action="sidebar.php">
                 <input type="submit" value="Dashboard" name="dash_icon" class="content" id="line1"><br>
                 <?php if($_SESSION['role'] != "student"){ ?>
-                    <input type="submit" value="Search" class="content" id="line2"><br>
+                    <input type="submit" value="Search" name="search_icon" class="content" id="line2"><br>
                 <?php } ?>
                 <input type="submit" value="Notification" class="content" id="line3"><br>
                 <input type="submit" value="Logout" name="logout_btn" class="content" id="line4">

@@ -3,7 +3,11 @@
     if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
         header("Location: login.php");
         exit();
-}
+    }
+    if(isset($_GET['my_profile'])){
+        header('Location:profile_students.php');
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,23 +24,31 @@
         <h3 class="nav_content1">Dashboard</h3>
     </div>
     <main>
-        <form>
+        <form action="student_dashboard.php" method="GET">
             <div class="panels">
                 <div class="panel_col1"  >
-                    <input type="image" src="http://localhost:5500/icons/coure_management.png" class="icons" alt="my_profile">
-                    <figcaption class="panel_title" id="title1">My Profile</figcaption>
+                    <button name="my_profile">
+                        <img src="http://localhost:5500/icons/coure_management.png" class="icons" alt="my_profile">
+                        <figcaption class="panel_title" id="title1">My Profile</figcaption>
+                    </button>
                 </div>
                 <div class="panel_col2" >
-                    <input type="image" src="http://localhost:5500/icons/results.png" class="icons" alt="results">
-                    <figcaption class="panel_title" id="title6">Results</figcaption>
+                    <button name="results">
+                        <img src="http://localhost:5500/icons/results.png" class="icons" alt="results">
+                        <figcaption class="panel_title" id="title6">Results</figcaption>
+                    </button>
                 </div>
-                <div class="panel_col3" >
-                    <input type="image" src="http://localhost:5500/icons/academic.png" class="icons" alt="academic_assessment">
-                    <figcaption class="panel_title" id="title7">Academic Assessment</figcaption>
+                <div class="panel_col3" name="academic_assessment">
+                    <button>
+                        <img src="http://localhost:5500/icons/academic.png" class="icons" alt="academic_assessment">
+                        <figcaption class="panel_title" id="title7">Academic Assessment</figcaption>
+                    </button>
                 </div>
                 <div class="panel_col4">
-                    <input type="image" src="http://localhost:5500/icons/remedial_class.png" class="icons" alt="remedial_class">
-                    <figcaption class="panel_title" id="title8">Remedial Class</figcaption>
+                    <button name="remedial_class">
+                        <img src="http://localhost:5500/icons/remedial_class.png" class="icons" alt="remedial_class">
+                        <figcaption class="panel_title" id="title8">Remedial Class</figcaption>
+                    </button>
                 </div>
             </div>
         </form>

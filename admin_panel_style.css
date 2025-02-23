@@ -1,6 +1,6 @@
 *{
-    margin: 0px;
     font-family: poppins;
+    margin: 0px;
 }
 .nav_bar{
     height: 53px;
@@ -58,33 +58,6 @@
 }
 .panel_title:hover{
     text-decoration: underline;
-}
-.panel_col1{
-    grid-area: panel1;
-}
-.panel_col2{
-    grid-area: panel2;
-}
-.panel_col3{
-    grid-area: panel3;
-}
-.panel_col4{
-    grid-area: panel4;
-}
-.panel_col5{
-    grid-area: panel5;
-}
-.panel_col6{
-    grid-area: panel6;
-}
-.panel_col7{
-    grid-area: panel7;
-}
-.panel_col8{
-    grid-area: panel8;
-}
-.panel_col9{
-    grid-area: panel9;
 }
 .panel_title{
     font-size: small;

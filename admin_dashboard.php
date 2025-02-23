@@ -39,55 +39,55 @@
     <main>
         <form action="admin_dashboard.php" method="GET">
             <div class="panels">
-                <div class="panel_col1"  >
+                <div class="panel_col1" style="grid-area:panel1;">
                     <button name="course_management">  
                         <img src="http://localhost:5500/icons/coure_management.png" class="icons" alt="course_management">
                     </button>
                     <figcaption class="panel_title" id="title1">Course Management</figcaption>
                 </div>
-                <div class="panel_col2" >
+                <div class="panel_col2" style="grid-area:panel2;">
                     <button name="staff_management">
                         <img src="http://localhost:5500/icons/staff_management.png" class="icons" alt="staff_management">
                     </button>
                     <figcaption class="panel_title" id="title2">Staff Management</figcaption>
                 </div>
-                <div class="panel_col3" >
+                <div class="panel_col3" style="grid-area:panel3;">
                     <button name="student_management">
                         <img src="http://localhost:5500/icons/student_management.png" class="icons" alt="student_management">
                     </button>
                     <figcaption class="panel_title" id="title3">Student Management</figcaption>
                 </div>
-                <div class="panel_col4">
+                <div class="panel_col4" style="grid-area:panel4;">
                     <button name="attendance">
                         <img src="http://localhost:5500/icons/attendance.png" class="icons" alt="attendance">
                     </button>
                     <figcaption class="panel_title" id="title4">Attendance</figcaption>
                 </div>
-                <div class="panel_col5" >
+                <div class="panel_col5" style="grid-area:panel5;">
                     <button name="data_extractor">
                         <img src="http://localhost:5500/icons/data_extractor.png" class="icons" name="data_extractor">
                     </button>
                     <figcaption class="panel_title" id="title5">Data Extractor</figcaption>
                 </div>
-                <div class="panel_col6" >
+                <div class="panel_col6" style="grid-area:panel6;">
                     <button name="results">
                         <img src="http://localhost:5500/icons/results.png" class="icons" alt="results">
                     </button>
                     <figcaption class="panel_title" id="title6">Results</figcaption>
                 </div>
-                <div class="panel_col7" >
+                <div class="panel_col7" style="grid-area:panel7;">
                     <button name="academic_assessment">
                         <img src="http://localhost:5500/icons/academic.png" class="icons" alt="academic_assessment">
                     </button>
                     <figcaption class="panel_title" id="title7">Academic Assessment</figcaption>
                 </div>
                 <div class="panel_col8" >
-                    <button name="remedial_class">
+                    <button name="remedial_class" style="grid-area:panel8;">
                         <img src="http://localhost:5500/icons/remedial_class.png" class="icons" alt="remedial_class">
                     </button>
                     <figcaption class="panel_title" id="title8">Remedial Class</figcaption>
                 </div>
-                <div class="panel_col9" name="events">
+                <div class="panel_col9" style="grid-area:panel9;">
                     <button>
                         <img src="http://localhost:5500/icons/event.png" class="icons" alt="events">
                     </button>

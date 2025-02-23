@@ -33,7 +33,6 @@
             max-height: 100%;
             overflow: auto;
         }
-     
         .my_table{
             border-collapse: collapse;
             font-size: 0.9em;
