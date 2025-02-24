@@ -76,6 +76,5 @@
             </div>
         </form>
     </main>
-    <footer style="background-color:rgb(33,33,33);width:100%;height:53px;margin:100vh 0 0 0;"></footer>
 </body>
 </html>
