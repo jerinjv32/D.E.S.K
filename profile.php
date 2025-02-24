@@ -34,7 +34,7 @@
         .profile_container{
             display: grid;
             border: 2px solid;
-            border-radius: 10px;
+            border-radius: 5px;
             grid-template-areas: 
                 "panel1 panel2 panel2"
                 "panel3 panel3 panel3"

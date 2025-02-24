@@ -51,7 +51,7 @@
             font-size: 15px;
             font-weight: bold;
             color: #333;
-         transform: translate(-15px,10px);
+            transform: translate(-15px,10px);
         }
         #cbtn1:hover{
             background-color: #009879;

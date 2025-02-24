@@ -8,6 +8,10 @@
         header('Location:profile_students.php');
         exit();
     }
+    if(isset($_GET['academic_assessment'])){
+        header('Location:academic_assessment.php');
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,8 +42,8 @@
                         <figcaption class="panel_title" id="title6">Results</figcaption>
                     </button>
                 </div>
-                <div class="panel_col3" name="academic_assessment">
-                    <button>
+                <div class="panel_col3">
+                    <button name="academic_assessment">
                         <img src="http://localhost:5500/icons/academic.png" class="icons" alt="academic_assessment">
                         <figcaption class="panel_title" id="title7">Academic Assessment</figcaption>
                     </button>

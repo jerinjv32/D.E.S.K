@@ -111,7 +111,7 @@
             <tbody>
                 <tr>
                     <td>012</td>
-                    <td>Jasir.T.Nasir</td>
+                    <td>Jasir T Nasir</td>
                     <td>Btech</td>
                     <td>6</td>
                     <td>
@@ -122,7 +122,7 @@
                 </tr>
                 <tr>
                     <td>013</td>
-                    <td>Jerin.J.Varghese</td>
+                    <td>Jerin J Varghese</td>
                     <td>Btech</td>
                     <td>6</td>
                     <td>

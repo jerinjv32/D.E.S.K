@@ -8,8 +8,16 @@
         header("Location:profile.php");
         exit();
     }
-    elseif(isset($_GET['attendance'])){
+    if(isset($_GET['attendance'])){
         header("Location:attendance.php");
+        exit();
+    }
+    if(isset($_GET['academic_assessment'])){
+        header('Location:academic_assessment.php');
+        exit();
+    }
+    if(isset($_GET['events'])){
+        header('Location:events.php');
         exit();
     }
     session_write_close();
