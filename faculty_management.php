@@ -89,7 +89,7 @@
         <form>
             <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
             <input type="text" name="course_name" id="course_text"><br><br>
-            <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Semester:</label>
+            <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Department:</label>
             <input type="number" name="semester" id="semester_text"">
           
             <hr style="margin: 10px 10px 0 auto;">
@@ -109,7 +109,7 @@
             <tbody>
                 <tr>
                     <td>012</td>
-                    <td>Jasir T Nasir</td>
+                    <td>Faculty1</td>
                     <td>Btech</td>
                    
                     <td>
@@ -120,7 +120,7 @@
                 </tr>
                 <tr>
                     <td>013</td>
-                    <td>Jerin J Varghese</td>
+                    <td>Faculty2</td>
                     <td>Btech</td>
                     <td>
                         <form>
@@ -130,7 +130,7 @@
                 </tr>
                 <tr>
                     <td>014</td>
-                    <td>Joyal Joseph</td>
+                    <td>Faculty3</td>
                     <td>Btech</td>
                     <td>
                         <form>
@@ -140,7 +140,7 @@
                 </tr>
                 <tr>
                     <td>015</td>
-                    <td>Nikhil Das</td>
+                    <td>Faculty4</td>
                     <td>Btech</td>
                     <td>
                         <form>
