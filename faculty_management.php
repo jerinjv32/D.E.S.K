@@ -109,7 +109,7 @@
             <tbody>
                 <tr>
                     <td>012</td>
-                    <td>Jasir.T.Nasir</td>
+                    <td>Jasir T Nasir</td>
                     <td>Btech</td>
                    
                     <td>
@@ -120,7 +120,7 @@
                 </tr>
                 <tr>
                     <td>013</td>
-                    <td>Jerin.J.Varghese</td>
+                    <td>Jerin J Varghese</td>
                     <td>Btech</td>
                     <td>
                         <form>
@@ -151,5 +151,6 @@
             </tbody>
         </table>
     </main>
+    <footer style="background-color:rgb(33,33,33);width:100%;height:53px;margin:40px 0 0 0;"></footer>
 </body>
 </html>

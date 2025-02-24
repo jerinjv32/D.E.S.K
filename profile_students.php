@@ -28,13 +28,12 @@
         }
         main{
             margin: 20px 20px 20px 228px;
-            border-radius: 5px; 
             overflow: auto;
         }
         .profile_container{
             display: grid;
             border: 2px solid;
-            border-radius: 10px;
+            border-radius: 5px;
             grid-template-areas: 
                 "panel1 panel2 panel2"
                 "panel3 panel3 panel3"
@@ -45,6 +44,7 @@
             font-size: small;
             column-gap: 0px;
             overflow-x: hidden;
+            box-shadow: 0 0 5px rgba(0,0,0,0.25 );
         }
         #profile_pic{
             height: 206px;
@@ -110,5 +110,6 @@
             </div>
         </div>
     </main>
+    <footer style="background-color:rgb(33,33,33);width:100%;height:53px;margin:40px 0 0 0;"></footer>
 </body>
 </html>

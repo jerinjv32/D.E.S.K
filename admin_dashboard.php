@@ -9,16 +9,24 @@
         header("Location:course_management.php");
         exit();
     }
-    elseif(isset($_GET['staff_management'])){
+    if(isset($_GET['staff_management'])){
         header("Location:faculty_management.php");
         exit();
     }
-    elseif(isset($_GET['student_management'])){
+    if(isset($_GET['student_management'])){
         header("Location:student_management.php");
         exit();
     }
-    elseif(isset($_GET['attendance'])){
+    if(isset($_GET['attendance'])){
         header("Location:attendance.php");
+        exit();
+    }
+    if(isset($_GET['events'])){
+        header('Location:events.php');
+        exit();
+    }
+    if(isset($_GET['academic_assessment'])){
+        header('Location:academic_assessment.php');
         exit();
     }
     session_write_close();
@@ -88,7 +96,7 @@
                     <figcaption class="panel_title" id="title8">Remedial Class</figcaption>
                 </div>
                 <div class="panel_col9" style="grid-area:panel9;">
-                    <button>
+                    <button name="events">
                         <img src="http://localhost:5500/icons/event.png" class="icons" alt="events">
                     </button>
                     <figcaption class="panel_title" id="title9">Events</figcaption>
@@ -96,5 +104,6 @@
             </div>
         </form>
     </main>
+    <footer style="background-color:rgb(33,33,33);width:100%;height:53px;margin:40px 0 0 0;"></footer>
 </body>
 </html>

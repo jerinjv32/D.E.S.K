@@ -8,8 +8,16 @@
         header("Location:profile.php");
         exit();
     }
-    elseif(isset($_GET['attendance'])){
+    if(isset($_GET['attendance'])){
         header("Location:attendance.php");
+        exit();
+    }
+    if(isset($_GET['academic_assessment'])){
+        header('Location:academic_assessment.php');
+        exit();
+    }
+    if(isset($_GET['events'])){
+        header('Location:events.php');
         exit();
     }
     session_write_close();
@@ -76,5 +84,6 @@
             </div>
         </form>
     </main>
+    <footer style="background-color:rgb(33,33,33);width:100%;height:53px;margin:40px 0 0 0;"></footer>
 </body>
 </html>

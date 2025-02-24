@@ -51,7 +51,7 @@
             font-size: 15px;
             font-weight: bold;
             color: #333;
-         transform: translate(-15px,10px);
+            transform: translate(-15px,10px);
         }
         #cbtn1:hover{
             background-color: #009879;
@@ -186,5 +186,6 @@
             </tbody>
         </table>
     </main>
+    <footer style="background-color:rgb(33,33,33);width:100%;height:53px;margin:40px 0 0 0;"></footer>
 </body>
 </html>

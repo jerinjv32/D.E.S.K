@@ -44,6 +44,7 @@
 .icons:hover{
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
     transform: scale(1.05);
+    cursor: pointer;
 }
 .panel_title:hover{
     text-decoration: underline;

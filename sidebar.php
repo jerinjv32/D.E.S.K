@@ -19,6 +19,10 @@
         header('Location:search.php');
         exit();
     }
+    if(isset($_POST['notification_icon'])){
+        header('Location:notification.php');
+        exit();
+    }
     if ($_SESSION['role'] !== "student"){
         $height_notifi = '363px';
         $height_logout = '418px';
@@ -111,7 +115,7 @@
                 <?php if($_SESSION['role'] != "student"){ ?>
                     <input type="submit" value="Search" name="search_icon" class="content" id="line2"><br>
                 <?php } ?>
-                <input type="submit" value="Notification" class="content" id="line3"><br>
+                <input type="submit" value="Notification" name="notification_icon" class="content" id="line3"><br>
                 <input type="submit" value="Logout" name="logout_btn" class="content" id="line4">
             </form>
             <div class="sidebar_icons">
