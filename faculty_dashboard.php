@@ -20,6 +20,14 @@
         header('Location:events.php');
         exit();
     }
+    if(isset($_GET['results'])){
+        header('Location:result.php');
+        exit();
+    }
+    if(isset($_GET['remedial_class'])){
+        header('Location:remedial.php');
+        exit();
+    }
     session_write_close();
 ?>
 <!DOCTYPE html>
@@ -64,7 +72,7 @@
                     <figcaption class="panel_title" id="title7">Academic Assessment</figcaption>
                 </div>
                 <div class="panel_col5">
-                    <button name="remedial class">
+                    <button name="remedial_class">
                         <img src="http://localhost:5500/icons/remedial_class.png" class="icons" alt="remedial class">
                     </button>
                     <figcaption class="panel_title" id="title8">Remedial Class</figcaption>

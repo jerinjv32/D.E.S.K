@@ -29,6 +29,14 @@
         header('Location:academic_assessment.php');
         exit();
     }
+    if(isset($_GET['results'])){
+        header('Location:result.php');
+        exit();
+    }
+    if(isset($_GET['remedial_class'])){
+        header('Location:remedial.php');
+        exit();
+    }
     session_write_close();
 ?>
 <!DOCTYPE html>
