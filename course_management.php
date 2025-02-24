@@ -41,6 +41,7 @@
             margin: 2px auto 0 300px;
         }
         .course-btn{
+            transition:transform 0.25s ease-in-out;
             transform: scale(1.5);
             padding: 9px;
             background-color: rgb(33, 33, 33);
@@ -54,12 +55,18 @@
             transform: translate(-15px,10px);
         }
         #cbtn1:hover{
+            transform: scale(1.6);
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
             background-color: #009879;
         }
         #cbtn2:hover{
+            transform: scale(1.6);
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
             background-color: #0073e6;
         }
         #cbtn3:hover{
+            transform: scale(1.6);
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
             background-color: #e6002e;
         }
         #cbtn1:active,#cbtn2:active,#cbtn3:active{
@@ -108,8 +115,14 @@
             color:white;
         }
         #add_sub_btn:hover{
+            transform: scale(1.05);
             background-color: #007F66;
             cursor: pointer;
+        }
+
+        button{
+            border: none;
+            background-color: white;
         }
     </style>
 </head>
@@ -126,16 +139,23 @@
             <input type="number" name="semester" id="semester_text"">
             <div class="container">
                 <div>
-                    <input type="image" src="http://localhost:5500/icons/add_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="add_course" class="course-btn" id="cbtn1">
-                    <div class="btn-text">Add Course</div>
+                    <button>
+                        <img src="http://localhost:5500/icons/add_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="add_course" class="course-btn" id="cbtn1">
+                        <div class="btn-text">Add Course</div>
+
+                    </button>
                 </div>
-                <div>
-                    <input type="image" src="http://localhost:5500/icons/edit_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="edit_course" class="course-btn" id="cbtn2">
+                <div><button>
+                    <img src="http://localhost:5500/icons/edit_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="edit_course" class="course-btn" id="cbtn2">
                     <div class="btn-text">Edit Course</div>
+
+                </button>
                 </div>
-                <div>
-                    <input type="image" src="http://localhost:5500/icons/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="delete_course" class="course-btn" id="cbtn3">
+                <div><button>
+                    <img src="http://localhost:5500/icons/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="delete_course" class="course-btn" id="cbtn3">
                     <div class="btn-text">Delete Course</div>
+
+                </button>
                 </div>
             </div>
             <hr style="margin: 10px 10px 0 auto;">

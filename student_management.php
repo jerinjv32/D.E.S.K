@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    if(isset($_GET['add_stud'])){
+        header('Location:add_new_student.php');
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,8 +102,8 @@
           
             <hr style="margin: 10px 10px 0 auto;">
         </form>
-        <form>
-            <br><button type="submit" value="add_sub" id="add_sub_btn">+ Add new student</button>
+        <form action="add_new_students.php" method="GET">
+            <br><button type="submit" name="add_stud" value="add_sub" id="add_sub_btn">+ Add new student</button>
         </form>
         <table class="my_table"style="margin-top:30px;">
             <thead>
