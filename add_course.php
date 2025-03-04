@@ -25,6 +25,7 @@
             overflow: auto;
         }
     </style>
+    <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
 </head>
 <body>
     <?php include('sidebar.php') ?>
