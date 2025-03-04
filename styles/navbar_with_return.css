@@ -1,0 +1,24 @@
+*{
+    font-family: poppins;
+    margin:0px;
+}
+nav{
+    height: 53px;
+    width: 100%;
+    background-color: rgb(33, 33, 33);
+}
+.nav_content1{
+    display: block;
+    padding-left: 225px;
+    padding-top: 12px;
+    font-size: larger;
+    color: white;
+}
+span{
+    color: grey;
+    transition: color 0.25s linear;
+}
+span:hover{
+    cursor: pointer;
+    color: white;
+}

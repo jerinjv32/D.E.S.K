@@ -13,18 +13,6 @@
             font-family: poppins;
             margin:0px;
         }
-        nav{
-            height: 53px;
-            width: 100%;
-            background-color: rgb(33, 33, 33);
-        }
-        .nav_content1{
-            display: block;
-            padding-left: 225px;
-            padding-top: 12px;
-            font-size: larger;
-            color: white;
-        }
         main{
             height: 100px;
             border: 1px black solid;  
@@ -36,27 +24,14 @@
             max-height: 100%;
             overflow: auto;
         }
-        #back{
-            color: gray;
-            background-color: rgb(33, 33, 33);
-            border: none;
-            font-size: 1.05em;
-            font-weight: bold;
-            transition: color 0.25s linear;
-        }
-        #back:hover{
-            color: white;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
     <?php include('sidebar.php') ?>
     <nav>
-        <form>
-            <h3 class="nav_content1"><input type="submit" name="backto" id="back" value="Course Management"> / Add course</h3>
-        </form>
+        <h3 class="nav_content1"><span onclick="redirect('course_management.php')">Course Management </span> / Add course</h3>
     </nav>
     <main></main>
+    <script src="/includes/redirect.js"></script>
 </body>
 </html>

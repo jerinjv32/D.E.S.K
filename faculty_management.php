@@ -87,16 +87,13 @@
     </div>
     <main>
         <form>
-            <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
+            <label for="course_text" style="font-size: 14px;padding-right:10px;">Course Name:</label>
             <input type="text" name="course_name" id="course_text"><br><br>
-            <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Department:</label>
+            <label for="semester_text" style="font-size: 14px;padding-right:22px;padding-top:2px">Department:</label>
             <input type="number" name="semester" id="semester_text"">
-          
             <hr style="margin: 10px 10px 0 auto;">
         </form>
-        <form>
-            <br><button type="submit" value="add_sub" id="add_sub_btn">+ Add new faculty</button>
-        </form>
+        <br><button type="button" value="add_sub" id="add_sub_btn" onclick="redirect('add_new_faculty.php')">+ Add new faculty</button>
         <table class="my_table"style="margin-top:30px;">
             <thead>
                 <tr>
@@ -151,5 +148,6 @@
             </tbody>
         </table>
     </main>
+    <script src="/includes/redirect.js"></script>
 </body>
 </html>

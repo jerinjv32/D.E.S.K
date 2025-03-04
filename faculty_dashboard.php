@@ -4,30 +4,6 @@
         header("Location: login.php");
         exit();
     }
-    if(isset($_GET['my_profile'])){
-        header("Location:profile.php");
-        exit();
-    }
-    if(isset($_GET['attendance'])){
-        header("Location:attendance.php");
-        exit();
-    }
-    if(isset($_GET['academic_assessment'])){
-        header('Location:academic_assessment.php');
-        exit();
-    }
-    if(isset($_GET['events'])){
-        header('Location:events.php');
-        exit();
-    }
-    if(isset($_GET['results'])){
-        header('Location:result.php');
-        exit();
-    }
-    if(isset($_GET['remedial_class'])){
-        header('Location:remedial.php');
-        exit();
-    }
     session_write_close();
 ?>
 <!DOCTYPE html>
@@ -45,52 +21,37 @@
         <h3 class="nav_content1">Dashboard</h3>
     </div>
     <main>
-        <form action="faculty_dashboard.php" method="GET">
-            <div class="panels">
-                <div class="panel_col1"  >
-                    <button name="my_profile">
-                        <img src="http://localhost:5500/icons/coure_management.png" class="icons" alt="my_profile">
-                    </button>
-                    <figcaption class="panel_title" alt="title1">My Profile</figcaption>
-                </div>
-                <div class="panel_col2" >
-                    <button name="attendance">
-                        <img src="http://localhost:5500/icons/attendance.png" class="icons" alt="attendance">
-                    </button>
-                        <figcaption class="panel_title" id="title4">Attendance</figcaption>
-                </div>      
-                <div class="panel_col3" >
-                    <button name="results">
-                        <img src="http://localhost:5500/icons/results.png" class="icons" alt="results">
-                    </button>
-                    <figcaption class="panel_title" id="title6">Results</figcaption>
-                </div>
-                <div class="panel_col4" >
-                    <button name="academic_assessment">
-                        <img src="http://localhost:5500/icons/academic.png" class="icons" alt="academic_assessment">
-                    </button>
-                    <figcaption class="panel_title" id="title7">Academic Assessment</figcaption>
-                </div>
-                <div class="panel_col5">
-                    <button name="remedial_class">
-                        <img src="http://localhost:5500/icons/remedial_class.png" class="icons" alt="remedial class">
-                    </button>
-                    <figcaption class="panel_title" id="title8">Remedial Class</figcaption>
-                </div>
-                <div class="panel_col6">
-                    <button name="data_extractor">
-                        <img src="http://localhost:5500/icons/data_extractor.png" class="icons" alt="data_extractor">
-                    </button>
-                    <figcaption class="panel_title" id="title5">Data Extractor</figcaption>
-                </div>
-                <div class="panel_col7" >
-                <button name="events">
-                    <img src="http://localhost:5500/icons/event.png" class="icons" alt="events">
-                </button>
-                    <figcaption class="panel_title" id="title9">Events</figcaption>
-                </div>
+        <div class="panels">
+            <div class="panel_col1" onclick="redirect('profile.php')">
+                <img src="http://localhost:5500/icons/coure_management.png" class="icons" alt="my_profile">
+                <figcaption class="panel_title" alt="title1">My Profile</figcaption>
             </div>
-        </form>
+            <div class="panel_col2" onclick="redirect('attendance.php')">
+                <img src="http://localhost:5500/icons/attendance.png" class="icons" alt="attendance">
+                <figcaption class="panel_title" id="title4">Attendance</figcaption>
+            </div>      
+            <div class="panel_col3" onclick="redirect('result.php')">
+                <img src="http://localhost:5500/icons/results.png" class="icons" alt="results">
+                <figcaption class="panel_title" id="title6">Results</figcaption>
+            </div>
+            <div class="panel_col4" onclick="redirect('academic_assessment.php')">
+                <img src="http://localhost:5500/icons/academic.png" class="icons" alt="academic_assessment">
+                <figcaption class="panel_title" id="title7">Academic Assessment</figcaption>
+            </div>
+            <div class="panel_col5" onclick="redirect('remedial.php')">
+                <img src="http://localhost:5500/icons/remedial_class.png" class="icons" alt="remedial class">
+                <figcaption class="panel_title" id="title8">Remedial Class</figcaption>
+            </div>
+            <div class="panel_col6" >
+                <img src="http://localhost:5500/icons/data_extractor.png" class="icons" alt="data_extractor">
+                <figcaption class="panel_title" id="title5">Data Extractor</figcaption>
+            </div>
+            <div class="panel_col7" onclick="redirect('events.php')">
+                <img src="http://localhost:5500/icons/event.png" class="icons" alt="events">
+                <figcaption class="panel_title" id="title9">Events</figcaption>
+            </div>
+        </div>
     </main>
+    <script src="includes/redirect.js"></script>
 </body>
 </html>

@@ -49,6 +49,11 @@
             background-color: rgb(33, 33, 33);
             border-radius: 3px;
         }
+        .course-btn:hover{
+            transform: scale(1.55);
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
         .btn-text {
             display: block;
             font-size: 15px;
@@ -57,8 +62,6 @@
             transform: translate(-15px,10px);
         }
         #cbtn1:hover{
-            transform: scale(1.6);
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
             background-color: #009879;
         }
         #cbtn2:hover{
@@ -67,13 +70,7 @@
             background-color: #0073e6;
         }
         #cbtn3:hover{
-            transform: scale(1.6);
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
             background-color: #e6002e;
-        }
-        #cbtn1:active,#cbtn2:active,#cbtn3:active{
-            background-color: rgb(33, 33, 33);
-            opacity: 75%;
         }
         .my_table{
             border-collapse: collapse;
@@ -90,7 +87,7 @@
         }
         .my_table th, .my_table td{
             padding: 15px 15px;
-            min-width: 214px;
+            min-width: 16.5vw;
             border-bottom: solid #dddddd;
         }
         .my_table tbody tr{
@@ -110,21 +107,26 @@
             background-color:#e6002e;
             cursor: pointer;
         }
-        #add_sub_btn{
+        .button_add{
             border-style:none;
             background-color:rgb(33, 33, 33);
             border-radius:3px;
             color:white;
+            transition:transform 0.25s ease-in-out;
         }
-        #add_sub_btn:hover{
+        .button_add:hover{
             transform: scale(1.05);
             background-color: #007F66;
             cursor: pointer;
         }
-
-        button{
-            border: none;
-            background-color: white;
+        .icon_title{
+            padding-top: 4px;
+            font-size: 0.7em;
+            text-align: center;
+            font-weight: bold;
+        }
+        .flex_items {
+            justify-items: center;
         }
     </style>
 </head>
@@ -134,36 +136,33 @@
         <h3 class="nav_content1">Course Management</h3>
     </div>
     <main>
-        <form method="GET">
-            <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
-            <input type="text" name="course_name" id="course_text"><br><br>
-            <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Semester:</label>
-            <input type="number" name="semester" id="semester_text"">
-            <div class="container">
-                <div>
-                    <button name="add_course">
-                        <img src="http://localhost:5500/icons/add_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="add_course" class="course-btn" id="cbtn1">
-                        <div class="btn-text">Add Course</div>
-                    </button>
-                </div>
-                <div>
-                    <button name="edit_course">
-                        <img src="http://localhost:5500/icons/edit_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="edit_course" class="course-btn" id="cbtn2">
-                        <div class="btn-text">Edit Course</div>
-                    </button>
-                </div>
-                <div>
-                    <button name="delete_course">
-                        <img src="http://localhost:5500/icons/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="delete_course" class="course-btn" id="cbtn3">
-                        <div class="btn-text">Delete Course</div>
-                    </button>
-                </div>
+        <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
+        <input type="text" name="course_name" id="course_text"><br><br>
+        <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Semester:</label>
+        <input type="number" name="semester" id="semester_text"">
+        <div class="container">
+            <div class="flex_items" onclick="redirect('add_course.php')">
+                <img src="http://localhost:5500/icons/add_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="add_course" class="course-btn" id="cbtn1">
+                <figcaption class="icon_title" id="title1">Add Course</figcaption>
             </div>
-            <hr style="margin: 10px 10px 0 auto;">
-        </form>
-        <form>
-            <br><button type="submit" value="add_sub" id="add_sub_btn">+ Add new subjects</button>
-        </form>
+            <div class="flex_items">
+                <img src="http://localhost:5500/icons/edit_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="edit_course" class="course-btn" id="cbtn2">
+                <figcaption class="icon_title" id="title1">Edit Course</figcaption>
+            </div>
+            <div class="flex_items">
+                <img src="http://localhost:5500/icons/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="delete_course" class="course-btn" id="cbtn3">
+                <figcaption class="icon_title" id="title1">Remove</figcaption>
+            </div>
+        </div>
+        <hr style="margin: 10px 10px 0 auto;">
+        <br><button type="button" value="add_sub" id="add_sub_btn" class="button_add">+ Add new subjects</button><br><br>
+        <div> 
+            <label style="padding-right: 7px;">Subject Name:</label>
+            <input type="text" name="new_sub" placeholder="Enter Subject Name"><br><br>
+            <label style="padding-right: 12px;">Subject Code: </label>
+            <input type="text" name="new_sub_code" placeholder="Enter Subject Code"><br><br>
+            <input type="button" class="button_add" value="Add">
+        </div>
         <table class="my_table"style="margin-top:30px;">
             <thead>
                 <tr>
@@ -207,5 +206,6 @@
             </tbody>
         </table>
     </main>
+    <script src="/includes/redirect.js"></script>
 </body>
 </html>

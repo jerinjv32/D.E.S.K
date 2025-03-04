@@ -14,18 +14,6 @@
             margin: 0;
             font-family: poppins;
         }
-        .nav_bar{
-            height: 53px;
-            width: 100%;
-            background-color: rgb(33, 33, 33);
-        }
-        .nav_content1{
-            display: block;
-            padding-left: 225px;
-            padding-top: 12px;
-            font-size: larger;
-            color: white;
-        }
         main{
             margin: 20px 20px 20px 228px;
             overflow: auto;
@@ -60,11 +48,13 @@
             transform: scale(1.05);
         }
     </style>
+    <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
+    <script src="/includes/redirect.js"></script>
 </head>
 <body>
-    <div class="nav_bar">
-        <h3 class="nav_content1">My Profile</h3>
-    </div>
+    <nav>
+        <h3 class="nav_content1"><span onclick="redirect('student_management.php')">Student Management </span> / Add student</h3>
+    </nav>
     <main>
         <form method="post" action="builder/add_students.php">
             <div class="profile_container">
@@ -76,17 +66,17 @@
                 <div class="main_details" style="grid-area: panel2;">
                     <div style="margin:20px 530px 0 10px;justify-items:left;padding-left:50px;">
                         <label for="name_box">Name:</label>
-                        <input type="text" name="name" id="name_box" required>
+                        <input type="text" name="name" id="name_box" required><br><br>
                         <div>Date of birth:</div>
-                        <input type="date" name="dob" required>
-                        <div>Gender:</div><br>
+                        <input type="date" name="dob" required><br><br>
+                        <div>Gender:</div>
                         <select name="gender" required>
                             <option> male</option>
                             <option> female</option>
                             <option> other</option>
-                        </select> 
-                        <div>College Id:</div><br>
-                        <input type="text" name="collegeid" required>
+                        </select><br><br>
+                        <div>College Id:</div>
+                        <input type="text" name="collegeid" required><br><br>
                         <div>Admission No:</div>
                         <input type="number" name="admno" required>
                     </div>
@@ -97,9 +87,9 @@
                     <hr style="margin: 0 auto 0 0;">
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Course name:</div>
-                        <input type="text" name="coursename" required><br>
-                        <div>Year of join:</div><br>
-                        <input typr="date" name="yearjoin" required> 
+                        <input type="text" name="coursename" required><br><br>
+                        <div>Year of join:</div>
+                        <input typr="date" name="yearjoin" required> <br><br>
                         <div>Current Semester:</div>
                         <input type="number" name="sem" required>
                     </div>
@@ -110,9 +100,9 @@
                     <hr style="margin: 0 auto 0 0;">
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Email:</div>
-                        <input type="email" name="mail" required>
+                        <input type="email" name="mail" required><br><br>
                         <div>Phone number:</div>
-                        <input type="number" name="mobno" required>
+                        <input type="number" name="mobno" required><br><br>
                         <div>Address:</div>
                         <input type="text" name="address" style="width:400px;padding-bottom:200px;" required>
                     </div>
@@ -123,14 +113,14 @@
                     <hr style="margin: 0 auto 0 0;">
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Blood Group:</div>
-                        <input type="text" name="bloodgroup">
+                        <input type="text" name="bloodgroup"><br><br>
                         <div>Mother Tongue:</div>
-                        <input type="text" name="lang">
+                        <input type="text" name="lang"><br><br>
                         <div>Resident:</div>
                         <select required> 
                             <option>dayscholar</option>
                             <option>hostels</option>
-                        </select><br><br>
+                        </select><br><br><br>
                         <button name="addstu" style="border:none; background-color:rgb(33, 33, 33);color:white;border-radius: 3px;">add student</button>
                     </div>
                 </div>

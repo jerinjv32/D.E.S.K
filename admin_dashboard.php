@@ -5,39 +5,6 @@
         exit();
     }
     include('sidebar.php');
-    if(isset($_GET['course_management'])){
-        header("Location:course_management.php");
-        exit();
-    }
-    if(isset($_GET['staff_management'])){
-        header("Location:faculty_management.php");
-        exit();
-    }
-    if(isset($_GET['student_management'])){
-        header("Location:student_management.php");
-        exit();
-    }
-    if(isset($_GET['attendance'])){
-        header("Location:attendance.php");
-        exit();
-    }
-    if(isset($_GET['events'])){
-        header('Location:events.php');
-        exit();
-    }
-    if(isset($_GET['academic_assessment'])){
-        header('Location:academic_assessment.php');
-        exit();
-    }
-    if(isset($_GET['results'])){
-        header('Location:result.php');
-        exit();
-    }
-    if(isset($_GET['remedial_class'])){
-        header('Location:remedial.php');
-        exit();
-    }
-    session_write_close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,68 +16,49 @@
     <link rel="stylesheet" href="http://localhost:5500/admin_panel_style.css">
 </head>
 <body>
-    <div class="nav_bar">
+    <nav>
         <h3 class="nav_content1">Dashboard</h3>
-    </div>
+    </nav>
     <main>
-        <form action="admin_dashboard.php" method="GET">
-            <div class="panels">
-                <div class="panel_col1" style="grid-area:panel1;">
-                    <button name="course_management">  
-                        <img src="http://localhost:5500/icons/coure_management.png" class="icons" alt="course_management">
-                    </button>
-                    <figcaption class="panel_title" id="title1">Course Management</figcaption>
-                </div>
-                <div class="panel_col2" style="grid-area:panel2;">
-                    <button name="staff_management">
-                        <img src="http://localhost:5500/icons/staff_management.png" class="icons" alt="staff_management">
-                    </button>
-                    <figcaption class="panel_title" id="title2">Staff Management</figcaption>
-                </div>
-                <div class="panel_col3" style="grid-area:panel3;">
-                    <button name="student_management">
-                        <img src="http://localhost:5500/icons/student_management.png" class="icons" alt="student_management">
-                    </button>
-                    <figcaption class="panel_title" id="title3">Student Management</figcaption>
-                </div>
-                <div class="panel_col4" style="grid-area:panel4;">
-                    <button name="attendance">
-                        <img src="http://localhost:5500/icons/attendance.png" class="icons" alt="attendance">
-                    </button>
-                    <figcaption class="panel_title" id="title4">Attendance</figcaption>
-                </div>
-                <div class="panel_col5" style="grid-area:panel5;">
-                    <button name="data_extractor">
-                        <img src="http://localhost:5500/icons/data_extractor.png" class="icons" name="data_extractor">
-                    </button>
-                    <figcaption class="panel_title" id="title5">Data Extractor</figcaption>
-                </div>
-                <div class="panel_col6" style="grid-area:panel6;">
-                    <button name="results">
-                        <img src="http://localhost:5500/icons/results.png" class="icons" alt="results">
-                    </button>
-                    <figcaption class="panel_title" id="title6">Results</figcaption>
-                </div>
-                <div class="panel_col7" style="grid-area:panel7;">
-                    <button name="academic_assessment">
-                        <img src="http://localhost:5500/icons/academic.png" class="icons" alt="academic_assessment">
-                    </button>
-                    <figcaption class="panel_title" id="title7">Academic Assessment</figcaption>
-                </div>
-                <div class="panel_col8" >
-                    <button name="remedial_class" style="grid-area:panel8;">
-                        <img src="http://localhost:5500/icons/remedial_class.png" class="icons" alt="remedial_class">
-                    </button>
-                    <figcaption class="panel_title" id="title8">Remedial Class</figcaption>
-                </div>
-                <div class="panel_col9" style="grid-area:panel9;">
-                    <button name="events">
-                        <img src="http://localhost:5500/icons/event.png" class="icons" alt="events">
-                    </button>
-                    <figcaption class="panel_title" id="title9">Events</figcaption>
-                </div>
+        <div class="panels">
+            <div class="panel_col1" style="grid-area:panel1;" onclick="redirect('course_management.php')">
+                <img src="http://localhost:5500/icons/coure_management.png" class="icons" alt="course_management">
+                <figcaption class="panel_title" id="title1">Course Management</figcaption>
             </div>
-        </form>
+            <div class="panel_col2" style="grid-area:panel2;" onclick="redirect('faculty_management.php')">
+                <img src="http://localhost:5500/icons/staff_management.png" class="icons" alt="staff_management">
+                <figcaption class="panel_title" id="title2">Staff Management</figcaption>
+            </div>
+            <div class="panel_col3" style="grid-area:panel3;" onclick="redirect('student_management.php')">
+                <img src="http://localhost:5500/icons/student_management.png" class="icons" alt="student_management">
+                <figcaption class="panel_title" id="title3">Student Management</figcaption>
+            </div>
+            <div class="panel_col4" style="grid-area:panel4;" onclick="redirect('attendance.php')">
+                <img src="http://localhost:5500/icons/attendance.png" class="icons" alt="attendance">
+                <figcaption class="panel_title" id="title4">Attendance</figcaption>
+            </div>
+            <div class="panel_col5" style="grid-area:panel5;">
+                <img src="http://localhost:5500/icons/data_extractor.png" class="icons" name="data_extractor">
+                <figcaption class="panel_title" id="title5">Data Extractor</figcaption>
+            </div>
+            <div class="panel_col6" style="grid-area:panel6;" onclick="redirect('result.php')">
+                <img src="http://localhost:5500/icons/results.png" class="icons" alt="results">
+                <figcaption class="panel_title" id="title6">Results</figcaption>
+            </div>
+            <div class="panel_col7" style="grid-area:panel7;" onclick="redirect('academic_assessment.php')">
+                <img src="http://localhost:5500/icons/academic.png" class="icons" alt="academic_assessment">
+                <figcaption class="panel_title" id="title7">Academic Assessment</figcaption>
+            </div>
+            <div class="panel_col8" style="grid-area:panel8;" onclick="redirect('remedial.php')">
+                <img src="http://localhost:5500/icons/remedial_class.png" class="icons" alt="remedial_class">
+                <figcaption class="panel_title" id="title8">Remedial Class</figcaption>
+            </div>
+            <div class="panel_col9" style="grid-area:panel9;" onclick="redirect('events.php')">
+                <img src="http://localhost:5500/icons/event.png" class="icons" alt="events">
+                <figcaption class="panel_title" id="title9">Events</figcaption>
+            </div>
+        </div>
     </main>
+    <script src="includes/redirect.js"></script>
 </body>
 </html>
