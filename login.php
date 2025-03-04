@@ -7,15 +7,9 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $college_id = $_POST['college_id'];
     $password = $_POST['password'];
+    $user = $database->get('users','*',['username' => $college_id]);
 
-    $sql = "SELECT * FROM users WHERE username = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $college_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
+    if (!empty($user)) {
         if ($password == $user['password']) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['college_id'] = $user['college_id'];

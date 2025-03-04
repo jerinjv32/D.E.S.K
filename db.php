@@ -1,17 +1,18 @@
 <?php
+require 'vendor/autoload.php';
+
+use Medoo\Medoo;
 
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "cms";
+$dbname = "desk";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-?>
-
-
-
-
+$database = new Medoo([
+    'type' => 'mysql',
+    'host' => $servername,
+    'database' => $dbname,
+    'username' => $username,
+    'password' => $password,
+    'charset' => 'utf8mb4',
+]);
