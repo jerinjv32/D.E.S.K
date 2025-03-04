@@ -1,8 +1,20 @@
 <?php 
     session_start();
+    include('db.php');
     if(isset($_GET['add_stud'])){
         header('Location:add_new_student.php');
         exit();
+    }
+    $students = [];
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        $course = htmlspecialchars($_GET['course_name'] ?? '',ENT_QUOTES,'UTF-8');
+        $semester = filter_var($_GET['semester'] ??'',FILTER_VALIDATE_INT);
+    }
+    try{
+        $students = $database->select("student",["sname","college_id","cname","semester"],["cname"=>$course,"semester"=>$semester]);
+    } catch(PDOException $e) {
+        file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-",$e->getMessage(),PHP_EOL.FILE_APPEND);
+        echo "some error";
     }
 ?>
 <!DOCTYPE html>
@@ -40,7 +52,6 @@
             max-height: 100%;
             overflow: auto;
         }
-     
         .my_table{
             border-collapse: collapse;
             font-size: 0.9em;
@@ -56,7 +67,7 @@
         }
         .my_table th, .my_table td{
             padding: 15px 15px;
-            min-width: 214px;
+            min-width: 12.8vw;
             border-bottom: solid #dddddd;
         }
         .my_table tbody tr{
@@ -66,24 +77,26 @@
         .my_table tbody tr:nth-child(even){
             background-color: white;
         }
-        #remove_btn{
+        #add_stud_btn{
             border-style:none;
             background-color:rgb(33, 33, 33);
             border-radius:3px;
             color:white;
+            transition: background-color 0.25s linear;
         }
-        #remove_btn:hover{
-            background-color:#e6002e;
+        #add_stud_btn:hover{
+            background-color: #2E8B57;
             cursor: pointer;
         }
-        #add_sub_btn{
+        #edit_btn{
             border-style:none;
             background-color:rgb(33, 33, 33);
             border-radius:3px;
             color:white;
+            transition: background-color 0.25s linear;
         }
-        #add_sub_btn:hover{
-            background-color: #007F66;
+        #edit_btn:hover{
+            background-color: #0099FF;
             cursor: pointer;
         }
     </style>
@@ -94,16 +107,16 @@
         <h3 class="nav_content1">Student Management</h3>
     </div>
     <main>
-        <form>
+        <form method="GET">
             <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
             <input type="text" name="course_name" id="course_text"><br><br>
             <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Semester:</label>
             <input type="number" name="semester" id="semester_text"">
-          
+            <input type="submit" value="Search">
             <hr style="margin: 10px 10px 0 auto;">
         </form>
         <form action="add_new_students.php" method="GET">
-            <br><button type="submit" name="add_stud" value="add_sub" id="add_sub_btn">+ Add new student</button>
+            <br><button type="submit" name="add_stud" value="add_sub" id="add_stud_btn">+ Add new student</button>
         </form>
         <table class="my_table"style="margin-top:30px;">
             <thead>
@@ -112,54 +125,25 @@
                     <th>Name</th>
                     <th>Course</th>
                     <th>Semester</th>
-                    <th>edit</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>012</td>
-                    <td>Jasir T Nasir</td>
-                    <td>Btech</td>
-                    <td>6</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">edit</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>013</td>
-                    <td>Jerin J Varghese</td>
-                    <td>Btech</td>
-                    <td>6</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">edit</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>014</td>
-                    <td>Joyal Joseph</td>
-                    <td>Btech</td>
-                    <td>6</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">edit</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>015</td>
-                    <td>Nikhil Das</td>
-                    <td>Btech</td>
-                    <td>6</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">edit</button>
-                        </form>
-                    </td>
-                </tr>
+                <?php 
+                foreach($students as $student) {
+                    echo "<tr>";
+                    echo "<td>".$student['college_id']."</td>";
+                    echo "<td>".$student['sname']."</td>";
+                    echo "<td>".$student['cname']."</td>";
+                    echo "<td>".$student['semester']."</td>";
+                    echo "<td>";
+                    echo "<form method='post'>";
+                    echo "<button type='submit' name='edit' id='edit_btn'>Edit</button>";
+                    echo "</form>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                ?>
             </tbody>
         </table>
     </main>
