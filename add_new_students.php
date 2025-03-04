@@ -66,76 +66,76 @@
         <h3 class="nav_content1">My Profile</h3>
     </div>
     <main>
-        <div class="profile_container">
-            <!--Profile photo-->
-            <div class="profile_pic_col" style="grid-area: panel1; width: 200px;">
-                <img src="http://localhost:5500/images/user-profile-front-side.jpg" id="profile_pic">
-            </div>
-            <!--first part-->
-            <div class="main_details" style="grid-area: panel2;">
-                <div style="margin:20px 530px 0 10px;justify-items:left;padding-left:50px;">
-                    <label for="name_box">Name:</label>
-                    <input type="text" name="namtest" id="name_box">
-                    <div>Date of birth:</div>
-                    <input type="date" name="dob" >
-                    <div>Gender:</div><br>
-                    <select>
-                        <option> male</option>
-                        <option> female</option>
-                        <option> other</option>
-                    </select> 
-                    <div>College Id:</div><br>
-                    <input type="text" name="collegeid" >
-                    <div>Admission No:</div>
-                    <input type="number" name="admno" >
+        <form method="post" action="builder/add_students.php">
+            <div class="profile_container">
+                <!--Profile photo-->
+                <div class="profile_pic_col" style="grid-area: panel1; width: 200px;">
+                    <img src="http://localhost:5500/images/user-profile-front-side.jpg" id="profile_pic">
+                </div>
+                <!--first part-->
+                <div class="main_details" style="grid-area: panel2;">
+                    <div style="margin:20px 530px 0 10px;justify-items:left;padding-left:50px;">
+                        <label for="name_box">Name:</label>
+                        <input type="text" name="name" id="name_box" required>
+                        <div>Date of birth:</div>
+                        <input type="date" name="dob" required>
+                        <div>Gender:</div><br>
+                        <select name="gender" required>
+                            <option> male</option>
+                            <option> female</option>
+                            <option> other</option>
+                        </select> 
+                        <div>College Id:</div><br>
+                        <input type="text" name="collegeid" required>
+                        <div>Admission No:</div>
+                        <input type="number" name="admno" required>
+                    </div>
+                </div>
+                <!--Course details-->
+                <div class="address_cont" style="grid-area: panel3;">
+                    <h3>Course Details</h3>
+                    <hr style="margin: 0 auto 0 0;">
+                    <div style="padding: 10px 0 10px 20px;">
+                        <div>Course name:</div>
+                        <input type="text" name="coursename" required><br>
+                        <div>Year of join:</div><br>
+                        <input typr="date" name="yearjoin" required> 
+                        <div>Current Semester:</div>
+                        <input type="number" name="sem" required>
+                    </div>
+                </div>
+                <!--Address and contact details-->
+                <div class="address_cont" style="grid-area: panel4;">
+                    <h3>Address and Contact Details</h3>
+                    <hr style="margin: 0 auto 0 0;">
+                    <div style="padding: 10px 0 10px 20px;">
+                        <div>Email:</div>
+                        <input type="email" name="mail" required>
+                        <div>Phone number:</div>
+                        <input type="number" name="mobno" required>
+                        <div>Address:</div>
+                        <input type="text" name="address" style="width:400px;padding-bottom:200px;" required>
+                    </div>
+                </div>
+                <!--Other-->
+                <div class="other" style="grid-area: panel5;">
+                    <h3>Other Details</h3>
+                    <hr style="margin: 0 auto 0 0;">
+                    <div style="padding: 10px 0 10px 20px;">
+                        <div>Blood Group:</div>
+                        <input type="text" name="bloodgroup">
+                        <div>Mother Tongue:</div>
+                        <input type="text" name="lang">
+                        <div>Resident:</div>
+                        <select required> 
+                            <option>dayscholar</option>
+                            <option>hostels</option>
+                        </select><br><br>
+                        <button name="addstu" style="border:none; background-color:rgb(33, 33, 33);color:white;border-radius: 3px;">add student</button>
+                    </div>
                 </div>
             </div>
-            <!--Course details-->
-            <div class="address_cont" style="grid-area: panel3;">
-                <h3>Course Details</h3>
-                <hr style="margin: 0 auto 0 0;">
-                <div style="padding: 10px 0 10px 20px;">
-                    <div>Course name:</div>
-                    <input type="text" name="coursename"><br>
-                    <div>Year of join:</div><br>
-                    <input typr="date" name="yearjoin"> 
-                    <div>Current Semester:</div>
-                    <input type="number" name="sem">
-                </div>
-            </div>
-            <!--Address and contact details-->
-            <div class="address_cont" style="grid-area: panel4;">
-                <h3>Address and Contact Details</h3>
-                <hr style="margin: 0 auto 0 0;">
-                <div style="padding: 10px 0 10px 20px;">
-                    <div>Email:</div>
-                    <input type="email" name="mail">
-                
-                    <div>Phone number:</div>
-                    <input type="number" name="mobno">
-                    <div>Address:</div>
-                    <input type="text" name="address" style="width:400px;padding-bottom:200px;">
-                </div>
-            </div>
-            <!--Other-->
-            <div class="other" style="grid-area: panel5;">
-                <h3>Other Details</h3>
-                <hr style="margin: 0 auto 0 0;">
-                <div style="padding: 10px 0 10px 20px;">
-                    <div>Blood Group:</div>
-                    <input type="text" name="bloodgroup">
-                    <div>Mother Tongue:</div>
-                    <input type="text" name="lang">
-                    <div>Resident:</div>
-                    <select> 
-                        <option>dayscholar</option>
-                        <option>hostels</option>
-
-                    </select><br><br>
-                    <button name="addstu" style="border:none; background-color:rgb(33, 33, 33);color:white;border-radius: 3px;">add student</button>
-                </div>
-            </div>
-        </div>
+        </form>
     </main>
 </body>
 </html>

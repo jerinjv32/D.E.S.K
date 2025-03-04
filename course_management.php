@@ -1,3 +1,5 @@
+<?php 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,30 +134,29 @@
         <h3 class="nav_content1">Course Management</h3>
     </div>
     <main>
-        <form>
+        <form method="GET">
             <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
             <input type="text" name="course_name" id="course_text"><br><br>
             <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Semester:</label>
             <input type="number" name="semester" id="semester_text"">
             <div class="container">
                 <div>
-                    <button>
+                    <button name="add_course">
                         <img src="http://localhost:5500/icons/add_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="add_course" class="course-btn" id="cbtn1">
                         <div class="btn-text">Add Course</div>
-
                     </button>
                 </div>
-                <div><button>
-                    <img src="http://localhost:5500/icons/edit_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="edit_course" class="course-btn" id="cbtn2">
-                    <div class="btn-text">Edit Course</div>
-
-                </button>
+                <div>
+                    <button name="edit_course">
+                        <img src="http://localhost:5500/icons/edit_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="edit_course" class="course-btn" id="cbtn2">
+                        <div class="btn-text">Edit Course</div>
+                    </button>
                 </div>
-                <div><button>
-                    <img src="http://localhost:5500/icons/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="delete_course" class="course-btn" id="cbtn3">
-                    <div class="btn-text">Delete Course</div>
-
-                </button>
+                <div>
+                    <button name="delete_course">
+                        <img src="http://localhost:5500/icons/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="delete_course" class="course-btn" id="cbtn3">
+                        <div class="btn-text">Delete Course</div>
+                    </button>
                 </div>
             </div>
             <hr style="margin: 10px 10px 0 auto;">
