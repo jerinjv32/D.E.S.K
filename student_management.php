@@ -1,21 +1,27 @@
 <?php 
-    session_start();
-    include('db.php');
-    if(isset($_GET['add_stud'])){
-        header('Location:add_new_student.php');
-        exit();
+session_start();
+include('db.php');
+if(isset($_GET['add_stud'])){
+    header('Location:add_new_student.php');
+    exit();
+}
+$students = [];
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $course = htmlspecialchars($_GET['course_name'] ?? '',ENT_QUOTES,'UTF-8');
+    $semester = filter_var($_GET['semester'] ??'',FILTER_VALIDATE_INT);
+    
+}
+try{
+    $students = $database->select("student",["sname","college_id","cname","semester"],["cname"=>$course,"semester"=>$semester]);
+    if (empty($students) && isset($_POST['get_results'])) {
+        $error_msg = "Result not found";
+    } else {
+        $error_msg = "";
     }
-    $students = [];
-    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $course = htmlspecialchars($_GET['course_name'] ?? '',ENT_QUOTES,'UTF-8');
-        $semester = filter_var($_GET['semester'] ??'',FILTER_VALIDATE_INT);
-    }
-    try{
-        $students = $database->select("student",["sname","college_id","cname","semester"],["cname"=>$course,"semester"=>$semester]);
-    } catch(PDOException $e) {
-        file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-",$e->getMessage(),PHP_EOL.FILE_APPEND);
-        echo "some error";
-    }
+    } catch(Exception $e) {
+    file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+    echo "some error";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,10 +29,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <style>
         *{
-            font-family: poppins;
+            font-family: Poppins;
             margin:0px;
         }
         .nav_bar{
@@ -96,7 +102,7 @@
             transition: background-color 0.25s linear;
         }
         #edit_btn:hover{
-            background-color: #0099FF;
+            background-color: #2E8B57;
             cursor: pointer;
         }
     </style>
@@ -109,9 +115,9 @@
     <main>
         <form method="GET">
             <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
-            <input type="text" name="course_name" id="course_text"><br><br>
+            <input type="text" name="course_name" id="course_text" required><br><br>
             <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Semester:</label>
-            <input type="number" name="semester" id="semester_text"">
+            <input type="number" name="semester" id="semester_text"" required>
             <input type="submit" value="Search">
             <hr style="margin: 10px 10px 0 auto;">
         </form>

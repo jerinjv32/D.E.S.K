@@ -1,3 +1,22 @@
+<?php 
+session_start();
+include('db.php');
+$students = [];
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $course = htmlspecialchars($_GET['course_name'] ?? '',ENT_QUOTES,'UTF-8');
+}
+try{
+    $faculties = $database->select("faculty",["fname","college_id","cname"],["cname"=>$course]);
+    if (empty($faculties) && isset($_POST['get_results'])) {
+        $error_msg = "Result not found";
+    } else {
+        $error_msg = "";
+    }
+} catch(Exception $e) {
+    file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+    echo "some error occured";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,14 +105,14 @@
         <h3 class="nav_content1">Faculty Management</h3>
     </div>
     <main>
-        <form>
+        <form method="get">
             <label for="course_text" style="font-size: 14px;padding-right:10px;">Course Name:</label>
-            <input type="text" name="course_name" id="course_text"><br><br>
-            <label for="semester_text" style="font-size: 14px;padding-right:22px;padding-top:2px">Department:</label>
-            <input type="number" name="semester" id="semester_text"">
+            <input type="text" name="course_name" id="course_text" required><br><br>
+            <input type="submit" value="Get Results" id="get_results" name="get_results">
             <hr style="margin: 10px 10px 0 auto;">
         </form>
         <br><button type="button" value="add_sub" id="add_sub_btn" onclick="redirect('add_new_faculty.php')">+ Add new faculty</button>
+        <div><?php echo $error_msg; ?></div>
         <table class="my_table"style="margin-top:30px;">
             <thead>
                 <tr>
@@ -104,47 +123,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>012</td>
-                    <td>Faculty1</td>
-                    <td>Btech</td>
-                   
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">edit</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>013</td>
-                    <td>Faculty2</td>
-                    <td>Btech</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">edit</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>014</td>
-                    <td>Faculty3</td>
-                    <td>Btech</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">edit</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>015</td>
-                    <td>Faculty4</td>
-                    <td>Btech</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">edit</button>
-                        </form>
-                    </td>
-                </tr>
+                <?php 
+                    foreach($faculties as $faculty) {
+                        echo "<tr>";
+                        echo "<td>".$faculty['college_id']."</td>";
+                        echo "<td>".$faculty['fname']."</td>";
+                        echo "<td>".$faculty['cname']."</td>";
+                        echo "<td>";
+                        echo "<form method='post'>";
+                        echo "<button type='submit' name='edit' id='edit_btn'>Edit</button>";
+                        echo "</form>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
             </tbody>
         </table>
     </main>

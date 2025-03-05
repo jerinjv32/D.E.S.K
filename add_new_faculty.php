@@ -55,7 +55,7 @@
         <h3 class="nav_content1"><span onclick="redirect('faculty_management.php')">Faculty Management </span> / Add Faculty</h3>
     </nav>
     <main>
-        <form method="post" action="builder/add_students.php">
+        <form method="post" action="includes/faculty_entry.php">
             <div class="profile_container">
                 <!--Profile photo-->
                 <div class="profile_pic_col" style="grid-area: panel1; width: 200px;">
@@ -76,19 +76,17 @@
                         </select><br><br>
                         <div>College Id:</div>
                         <input type="text" name="collegeid" required><br><br>
-                        <div>Admission No:</div>
-                        <input type="number" name="admno" required>
                     </div>
                 </div>
                 <!--Course details-->
                 <div class="address_cont" style="grid-area: panel3;">
-                    <h3>Course Details</h3>
+                    <h3>Institution Details</h3>
                     <hr style="margin: 0 auto 0 0;">
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Course name:</div>
                         <input type="text" name="coursename" required><br><br>
                         <div>Year of join:</div>
-                        <input typr="date" name="yearjoin" required> 
+                        <input typr="text" name="yearjoin" required> 
                     </div>
                 </div>
                 <!--Address and contact details-->
@@ -97,9 +95,9 @@
                     <hr style="margin: 0 auto 0 0;">
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Email:</div>
-                        <input type="email" name="mail" required><br><br>
+                        <input type="text" name="mail" required><br><br>
                         <div>Phone number:</div>
-                        <input type="number" name="mobno" required><br><br>
+                        <input type="text" name="mobno" required><br><br>
                         <div>Address:</div>
                         <input type="text" name="address" style="width:400px;padding-bottom:200px;" required>
                     </div>
@@ -113,12 +111,8 @@
                         <input type="text" name="bloodgroup"><br><br>
                         <div>Mother Tongue:</div>
                         <input type="text" name="lang"><br><br>
-                        <div>Resident:</div>
-                        <select required> 
-                            <option>dayscholar</option>
-                            <option>hostels</option>
-                        </select><br><br><br>
-                        <button name="addstu" style="border:none; background-color:rgb(33, 33, 33);color:white;border-radius: 3px;">Add student</button>
+                        </select><br><br>
+                        <button name="addfac" style="border:none; background-color:rgb(33, 33, 33);color:white;border-radius: 3px;">Add faculty</button>
                     </div>
                 </div>
             </div>
