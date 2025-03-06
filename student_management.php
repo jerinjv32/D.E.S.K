@@ -58,31 +58,6 @@ try{
             max-height: 100%;
             overflow: auto;
         }
-        .my_table{
-            border-collapse: collapse;
-            font-size: 0.9em;
-            margin: 25px 0;
-            border-radius: 5px 5px 0 0;
-            overflow: hidden;
-            box-shadow: 0 5px 5px rgba(0,0,0,0.15);
-        }
-        .my_table thead tr{
-            background-color: rgb(33, 33, 33);
-            color: #ffffff;
-            font-weight: bold;
-        }
-        .my_table th, .my_table td{
-            padding: 15px 15px;
-            min-width: 12.8vw;
-            border-bottom: solid #dddddd;
-        }
-        .my_table tbody tr{
-            text-align: center;
-            background-color:rgb(236, 236, 236);
-        }
-        .my_table tbody tr:nth-child(even){
-            background-color: white;
-        }
         #add_stud_btn{
             border-style:none;
             background-color:rgb(33, 33, 33);
@@ -94,18 +69,12 @@ try{
             background-color: #2E8B57;
             cursor: pointer;
         }
-        #edit_btn{
-            border-style:none;
-            background-color:rgb(33, 33, 33);
-            border-radius:3px;
-            color:white;
-            transition: background-color 0.25s linear;
-        }
-        #edit_btn:hover{
-            background-color: #2E8B57;
-            cursor: pointer;
+        .my_table th,.my_table td{
+            min-width: 12.8vw;
         }
     </style>
+    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+    <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -135,23 +104,26 @@ try{
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                foreach($students as $student) {
-                    echo "<tr>";
-                    echo "<td>".$student['college_id']."</td>";
-                    echo "<td>".$student['sname']."</td>";
-                    echo "<td>".$student['cname']."</td>";
-                    echo "<td>".$student['semester']."</td>";
-                    echo "<td>";
-                    echo "<form method='post'>";
-                    echo "<button type='submit' name='edit' id='edit_btn'>Edit</button>";
-                    echo "</form>";
-                    echo "</td>";
-                    echo "</tr>";
-                }
-                ?>
+                    <?php 
+                    foreach($students as $student) {
+                        echo "<tr onclick=\"redirect('profile_students_dyn.php?id=".$student['college_id']."');\">";
+                        echo "<td>".$student['college_id']."</td>";
+                        echo "<td>".$student['sname']."</td>";
+                        echo "<td>".$student['cname']."</td>";
+                        echo "<td>".$student['semester']."</td>";
+                        echo "<td>";
+                        echo "<form method='post' action='includes/remove_student.php'>";
+                        echo "<input type='button' value='Edit' class='func_btn' onclick=\"event.stopPropagation();redirect('edit_students.php?id=".$student['college_id']."');\">";
+                        echo "<input type='hidden' name='hid_college_id' value=\"".$student['college_id']."\">";
+                        echo "<input type='submit' value='Remove' name='remove_btn' class='remove_btn' style=\"margin-left: 10px;\" onclick=\"event.stopPropagation();\">";
+                        echo "</form>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
             </tbody>
         </table>
     </main>
+    <script src="includes/redirect.js"></script>
 </body>
 </html>

@@ -47,7 +47,7 @@
         <h3 class="nav_content1">Events</h3>
     </div>
     <main>
-        <form>
+        <form method="post" action="includes/event_publisher.php">
             <div>
                 <label for="event_name_box" style="padding-right:10px;">Event Name:</label>
                 <input type="text" name="event_name" id="event_name_box" required>
@@ -59,21 +59,18 @@
                     <option calue="other">Other</option>            
                 </select><br><br>
                 
-                <label for="event_id_box" style="padding-right:43px;">Event Id:</label>
-                <input type="number" name="event_id" id="event_id_box" required>
 
-                <label for="event_notify_box" style="padding-right:48px;padding-left: 20px;">Notify:</label>
+                <label for="event_notify_box" style="padding-right:60px;">Notify:</label>
                 <select name="event_notify" id="event_notify_box" style="width:150px;height:25px;" required>
-                    <option value="all">All</option>
-                    <option value="course">Course</option>
-                    <option calue="Staffs">Staffs</option>            
-                </select><br><br>
+                    <option>All</option>
+                    <option>Staffs</option>            
+                </select>
 
-                <label for="event_date_box" style="padding-right:20px;">Event Date:</label>
+                <label for="event_date_box" style="padding-left: 47px;padding-right:8px;">Event Date:</label>
                 <input type="date" name="event_date" id="event_date_box" required><br><br>
 
-                <label for="event_details_box" style="padding-right:5px;">Event Details:</label>
-                <input type="text" name="event_details" id="event_details_box" style="width: 40vw;padding-bottom: 180px;" required><br><br>
+                <label style="padding-right:5px;">Event Details:</label>
+                <textarea name="event_details" id="event_details_box"  rows="6" cols="50" required></textarea><br><br>
 
                 <input type="submit" value="Publish" name="event_publish" id="event_publish_btn" style="border:none;background-color:rgb(33,33,33);color:white;font-size:large;border-radius:3px;">
             </div>

@@ -1,3 +1,7 @@
 2025-03-04 18-44-01-SQLSTATE[42S02]: Base table or view not found: 1146 Table 'desk.students' doesn't exist
 2025-03-04 18-48-08-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'name' in 'field list'
 2025-03-04 20-01-31-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '4347' for key 'student.adno'
+2025-03-05 20-10-07-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'event_details' in 'field list'
+2025-03-05 20-12-16-SQLSTATE[42S02]: Base table or view not found: 1146 Table 'desk.notify' doesn't exist
+2025-03-05 21-15-57-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '0' for key 'course.PRIMARY'
+2025-03-06 04-54-04-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '3865' for key 'student.adno'

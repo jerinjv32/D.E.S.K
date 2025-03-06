@@ -7,12 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 try{
     $faculties = $database->select("faculty",["fname","college_id","cname"],["cname"=>$course]);
-    if (empty($faculties) && isset($_POST['get_results'])) {
-        $error_msg = "Result not found";
-    } else {
-        $error_msg = "";
-    }
-} catch(Exception $e) {
+} catch(PDOException $e) {
     file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
     echo "some error occured";
 }
@@ -52,31 +47,6 @@ try{
             max-height: 100%;
             overflow: auto;
         }
-        .my_table{
-            border-collapse: collapse;
-            font-size: 0.9em;
-            margin: 25px 0;
-            border-radius: 5px 5px 0 0;
-            overflow: hidden;
-            box-shadow: 0 5px 5px rgba(0,0,0,0.15);
-        }
-        .my_table thead tr{
-            background-color: rgb(33, 33, 33);
-            color: #ffffff;
-            font-weight: bold;
-        }
-        .my_table th, .my_table td{
-            padding: 15px 15px;
-            min-width: 214px;
-            border-bottom: solid #dddddd;
-        }
-        .my_table tbody tr{
-            text-align: center;
-            background-color:rgb(236, 236, 236);
-        }
-        .my_table tbody tr:nth-child(even){
-            background-color: white;
-        }
         #remove_btn{
             border-style:none;
             background-color:rgb(33, 33, 33);
@@ -97,7 +67,12 @@ try{
             background-color: #007F66;
             cursor: pointer;
         }
+        .my_table th, .my_table td{
+            min-width: 16.5vw;
+        }
     </style>
+    <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
+    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -108,11 +83,10 @@ try{
         <form method="get">
             <label for="course_text" style="font-size: 14px;padding-right:10px;">Course Name:</label>
             <input type="text" name="course_name" id="course_text" required><br><br>
-            <input type="submit" value="Get Results" id="get_results" name="get_results">
+            <input type="submit" value="Get Results" id="get_results" name="get_results" class="func_btn">
             <hr style="margin: 10px 10px 0 auto;">
         </form>
-        <br><button type="button" value="add_sub" id="add_sub_btn" onclick="redirect('add_new_faculty.php')">+ Add new faculty</button>
-        <div><?php echo $error_msg; ?></div>
+        <br><input type="submit" class="add_btn" value="+ Add new faculty" onclick="redirect('add_new_faculty.php')">
         <table class="my_table"style="margin-top:30px;">
             <thead>
                 <tr>
@@ -125,13 +99,15 @@ try{
             <tbody>
                 <?php 
                     foreach($faculties as $faculty) {
-                        echo "<tr>";
+                        echo "<tr onclick=\"redirect('profile_faculty_dyn.php?id=".$faculty['college_id']."');\">";
                         echo "<td>".$faculty['college_id']."</td>";
                         echo "<td>".$faculty['fname']."</td>";
                         echo "<td>".$faculty['cname']."</td>";
                         echo "<td>";
                         echo "<form method='post'>";
-                        echo "<button type='submit' name='edit' id='edit_btn'>Edit</button>";
+                        echo "<input type='button' value='Edit' class='func_btn' onclick=\"event.stopPropagation();redirect('edit_faculty.php?id=".$faculty['college_id']."');\">";
+                        echo "<input type='hidden' name='hid_college_id' value=\"".$faculty['college_id']."\">";
+                        echo "<input type='submit' value='Remove' name='remove_btn' class='remove_btn' style=\"margin-left: 10px;\" onclick=\"event.stopPropagation();\">";
                         echo "</form>";
                         echo "</td>";
                         echo "</tr>";

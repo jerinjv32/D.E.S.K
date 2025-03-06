@@ -17,21 +17,10 @@ foreach ($fields as $field => $columnName){
     }
 }
 try {
-    if (!empty($query)) {
-        $insertion = $database->insert("faculty",$query);
-    } else {
-        throw new Exception("The query was empty");
-    }
-    if ($insertion) {
-        header('Location:../add_new_faculty.php');
-        die();
-    } else {
-        throw new Exception("The insertion wasn't successfull");
-    }
+    $database->update("faculty",$query,['college_id'=>$_POST['collegeid']]);
 } catch(PDOException $e) {
-    file_put_contents("error_log_faculty.txt",date("Y-m-d H-i-s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);
-    header('Location:../add_new_faculty.php');
-    die();
+    file_put_contents("error_log.txt",date("Y-m-d H-i-s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);
+    echo "Something went wrong, Try again later";
 }
-
-?>
+header('Location: ../faculty_management.php');
+exit();

@@ -79,7 +79,7 @@
 <body>
     <?php include('sidebar.php') ?>
     <div class="nav_bar">
-        <h3 class="nav_content1">Remedial</h3>
+        <h3 class="nav_content1">Remedial Class</h3>
     </div>
     <main>
         <label for="course_text" style="font-size: 14px;padding-right:10px;">Course:</label>

@@ -32,9 +32,9 @@
 </head>
 <body>
     <?php include('sidebar.php') ?>
-    <div class="nav_bar">
+    <nav>
         <h3 class="nav_content1">Dashboard</h3>
-    </div>
+    </nav>
     <main>
         <form action="student_dashboard.php" method="GET">
             <div class="panels">

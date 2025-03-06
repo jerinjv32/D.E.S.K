@@ -1,5 +1,13 @@
 <?php 
     session_start();
+    include('sidebar.php');
+    include('db.php');
+    try {
+        $courses = $database->select("course","cname");
+    } catch(PDOException $e) {
+        file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+        echo "Something went wrong,Try again later";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,22 +32,27 @@
             max-height: 100%;
             overflow: auto;
         }
-    </style>
+        </style>
     <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
     <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
 </head>
 <body>
-    <?php include('sidebar.php') ?>
     <nav>
-        <h3 class="nav_content1"><span onclick="redirect('course_management.php')">Course Management </span> / Add course</h3>
+        <h3 class="nav_content1"><span onclick="redirect('course_management.php')">Course Management </span> / Remove Course</h3>
     </nav>
     <main>
         <article>
-            <form action="includes/course_publisher.php" method="post">
-                <label>Course Name:</label>
-                <input type="text" name="cname" required>
+            <form action="includes/remove_course.php" method="post">
+                <label>Select Course:</label>
+                <select name="course" id="course_text" style="padding-right:5px;height:26px;">
+                    <option>Choose--></option>
+                    <?php foreach($courses as $course) {
+                        echo "<option>".$course."</option>";
+                    } 
+                    ?>
+                </select>
                 <br><br>
-                <input type="submit" value="Add Course" name="add_course" class="add_btn_medium">
+                <input type="submit" value="Remove Course" name="remove_course" class="remove_btn_medium">
             </form>
         </article>
     </main>

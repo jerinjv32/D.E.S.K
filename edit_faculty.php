@@ -1,6 +1,16 @@
 <?php 
     session_start();
+    include('db.php');
     include('sidebar.php');
+    $faculty_id = $_GET['id'];
+    $fields = [];
+    try{
+        $fields = $database->get("faculty","*",['college_id'=>$faculty_id]);
+
+    } catch(PDOException $e) {
+        file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+        echo("Something wrong, Try again Later");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,13 +60,14 @@
     </style>
     <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
     <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+    <script src="/includes/redirect.js"></script>
 </head>
 <body>
     <nav>
-        <h3 class="nav_content1"><span onclick="redirect('faculty_management.php')">Faculty Management </span> / Add Faculty</h3>
+        <h3 class="nav_content1"><span onclick="redirect('faculty_management.php')">Faculty Management </span> / Edit Faculty Details</h3>
     </nav>
     <main>
-        <form method="post" action="includes/faculty_entry.php">
+        <form method="post" action="includes/upload_faculty_edit.php">
             <div class="profile_container">
                 <!--Profile photo-->
                 <div class="profile_pic_col" style="grid-area: panel1; width: 200px;">
@@ -66,28 +77,28 @@
                 <div class="main_details" style="grid-area: panel2;">
                     <div style="margin:20px 530px 0 10px;justify-items:left;padding-left:50px;">
                         <label for="name_box">Name:</label>
-                        <input type="text" name="name" id="name_box" required><br><br>
+                        <input type="text" name="name" id="name_box" value="<?php echo $fields['fname']; ?>" required> <br><br>
                         <div>Date of birth:</div>
-                        <input type="date" name="dob" required><br><br>
+                        <input type="date" name="dob" value="<?php echo $fields['fdob'];?>" required><br><br>
                         <div>Gender:</div>
-                        <select name="gender" required>
+                        <select name="gender" value="<?php echo $fields['fgender'];?>" required>
                             <option> male</option>
                             <option> female</option>
                             <option> other</option>
                         </select><br><br>
                         <div>College Id:</div>
-                        <input type="text" name="collegeid" required><br><br>
+                        <input type="text" name="collegeid" value="<?php echo $fields['college_id'];?>" required><br><br>
                     </div>
                 </div>
-                <!--Institution details-->
-                <div class="address_cont" style="grid-area: panel3;">
+                 <!--Institution details-->
+                 <div class="address_cont" style="grid-area: panel3;">
                     <h3>Institution Details</h3>
                     <hr style="margin: 0 auto 0 0;">
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Course name:</div>
-                        <input type="text" name="coursename" required><br><br>
+                        <input type="text" name="coursename" value="<?php echo $fields['cname'];?>" required><br><br>
                         <div>Year of join:</div>
-                        <input typr="text" name="yearjoin" required> 
+                        <input typr="text" name="yearjoin" value="<?php echo $fields['yoj'];?>" required> 
                     </div>
                 </div>
                 <!--Address and contact details-->
@@ -96,11 +107,11 @@
                     <hr style="margin: 0 auto 0 0;">
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Email:</div>
-                        <input type="text" name="mail" required><br><br>
+                        <input type="text" name="mail" value="<?php echo $fields['email'];?>" required><br><br>
                         <div>Phone number:</div>
-                        <input type="text" name="mobno" required><br><br>
+                        <input type="text" name="mobno" value="<?php echo $fields['fpno'];?>" required><br><br>
                         <div>Address:</div>
-                        <input type="text" name="address" style="width:400px;padding-bottom:200px;" required>
+                        <input type="text" name="address" style="width:400px;padding-bottom:200px;" value="<?php echo $fields['address'];?>" required>
                     </div>
                 </div>
                 <!--Other-->
@@ -109,15 +120,19 @@
                     <hr style="margin: 0 auto 0 0;">
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Blood Group:</div>
-                        <input type="text" name="bloodgroup"><br><br>
+                        <input type="text" name="bloodgroup" value="<?php echo $fields['blood_group'];?>""><br><br>
                         <div>Mother Tongue:</div>
-                        <input type="text" name="lang"><br><br>
-                        <input type="submit" name="addfac" class="add_btn" value="Add to Faculties">
+                        <input type="text" name="lang" value="<?php echo $fields['mother_tongue'];?>"><br><br>
+                        <div>Resident:</div>
+                        <select name="resident" value="<?php echo $fields['resident'];?>" required> 
+                            <option>dayscholar</option>
+                            <option>hostel</option>
+                        </select><br><br><br>
+                        <input type="submit" name="edit_fact" class="func_btn" value="Submit">
                     </div>
                 </div>
             </div>
         </form>
     </main>
-    <script src="/includes/redirect.js"></script>
 </body>
 </html>

@@ -1,4 +1,15 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+include('db.php');
+$notifications = [];
+try{
+    $notifications = $database->select("notification","*");
+}catch(PDOException $e){
+    file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+    echo "Something Wrong, Try again later";
+}
+$notifications = $database->select("notification","*");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,31 +45,8 @@
             max-height: 100%;
             overflow: auto;
         }
-        .notification_content{
-            border-collapse: collapse;
-            font-size: 0.9em;
-            margin: 25px 0;
-            border-radius: 5px 5px 0 0;
-            overflow: hidden;
-            box-shadow: 0 5px 5px rgba(0,0,0,0.15);
-        }
-        .notification_content thead tr{
-            background-color: rgb(33, 33, 33);
-            color:white;
-            font-weight: bold;
-        }
-        .notification_content tbody tr{
-            background-color:rgb(236, 236, 236);
-            text-align: center;
-        }
-        .notification_content th,.notification_content td{
-            padding: 15px 15px;
-            border-bottom: solid #dddddd;
-        }
-        .notification_content tbody tr:nth-child(even){
-            background-color: white;
-        }
     </style>
+    <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -66,7 +54,7 @@
         <h3 class="nav_content1">Notification</h3>
     </div>
     <main>
-        <table class="notification_content">
+        <table class="my_table">
             <thead>
                 <tr>
                     <th style="width: 5vw;">Sl.no.</th>
@@ -75,11 +63,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td>There is no notification</td>
-                    <td></td>
-                </tr>
+            <?php 
+                    foreach($notifications as $notification) {
+                        echo "<tr>";
+                        echo "<td>".$notification['slno']."</td>";
+                        echo "<td>".$notification['date']."</td>";
+                        echo "<td>".$notification['content']."</td>";
+                        echo "</tr>";
+                    }
+                    ?>
             </tbody>
         </table>
     </main>

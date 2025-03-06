@@ -105,7 +105,7 @@
             width: 30px;
             background-color: #ffffff;
             border-color: #333;
-            border-radius: ;
+            border-radius: 3px;
         }
         #remove_btn:hover{
             background-color:#e6002e;
@@ -136,10 +136,7 @@
             <input type="number" name="semester" id="semester_text"><br><br>
             <label for="course_text" style="font-size: 14px;padding-right:40px;">Exam Name:</label>
             <input type="text" name="course_name" id="course_text">
-            <div class="container">
-               
-               
-               
+            <div class="container"> 
             </div>
             <hr style="margin: 10px 10px 0 auto;">
         </form>

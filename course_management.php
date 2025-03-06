@@ -1,4 +1,16 @@
 <?php 
+session_start();
+include('db.php');
+$subjects = [];
+try {
+    $courses = $database->select("course","*");
+    if(isset($_GET['display'])){
+        $subjects = $database->select("subjects","*");
+    }
+} catch(PDOException $e) {
+    file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+    echo "Something went wrong,Try again later";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,31 +84,6 @@
         #cbtn3:hover{
             background-color: #e6002e;
         }
-        .my_table{
-            border-collapse: collapse;
-            font-size: 0.9em;
-            margin: 25px 0;
-            border-radius: 5px 5px 0 0;
-            overflow: hidden;
-            box-shadow: 0 5px 5px rgba(0,0,0,0.15);
-        }
-        .my_table thead tr{
-            background-color: rgb(33, 33, 33);
-            color: #ffffff;
-            font-weight: bold;
-        }
-        .my_table th, .my_table td{
-            padding: 15px 15px;
-            min-width: 16.5vw;
-            border-bottom: solid #dddddd;
-        }
-        .my_table tbody tr{
-            text-align: center;
-            background-color:rgb(236, 236, 236);
-        }
-        .my_table tbody tr:nth-child(even){
-            background-color: white;
-        }
         #remove_btn{
             border-style:none;
             background-color:rgb(33, 33, 33);
@@ -128,7 +115,12 @@
         .flex_items {
             justify-items: center;
         }
+        .my_table th,.my_table td{
+            min-width: 16.5vw;
+        }
     </style>
+    <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
+    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -137,9 +129,16 @@
     </div>
     <main>
         <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
-        <input type="text" name="course_name" id="course_text"><br><br>
+        <select name="course_name" id="course_text" style="padding-right:5px;height:26px;">
+            <option>Choose--></option>
+            <?php foreach($courses as $course) {
+                echo "<option>".$course['cname']."</option>";
+            } 
+            ?>
+        </select>
+        <br><br>
         <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Semester:</label>
-        <input type="number" name="semester" id="semester_text"">
+        <input type="number" name="semester" id="semester_text" oninput="notBelowOne(this);">
         <div class="container">
             <div class="flex_items" onclick="redirect('add_course.php')">
                 <img src="http://localhost:5500/icons/add_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="add_course" class="course-btn" id="cbtn1">
@@ -149,63 +148,68 @@
                 <img src="http://localhost:5500/icons/edit_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="edit_course" class="course-btn" id="cbtn2">
                 <figcaption class="icon_title" id="title1">Edit Course</figcaption>
             </div>
-            <div class="flex_items">
+            <div class="flex_items" onclick="redirect('remove_course.php');">
                 <img src="http://localhost:5500/icons/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="delete_course" class="course-btn" id="cbtn3">
                 <figcaption class="icon_title" id="title1">Remove</figcaption>
             </div>
         </div>
+        <form method="get">
+            <input type="submit" id="display" name="display" value="Results" class="func_btn_medium">
+        </form>
         <hr style="margin: 10px 10px 0 auto;">
         <br><button type="button" value="add_sub" id="add_sub_btn" class="button_add">+ Add new subjects</button><br><br>
-        <div> 
+        
+        <form action="includes/add_sub.php" method="post">
+            <label style="padding-right: 12px;">Select Course: </label>
+            <select name="course_name" style="padding-right:5px;height:26px;">
+                <option>Choose--></option>
+                <?php foreach($courses as $course) {
+                    echo '<option value="'.$course['course_id'].'">'.$course['cname'].'</option>';
+                } 
+                ?>
+            </select>
+            
             <label style="padding-right: 7px;">Subject Name:</label>
-            <input type="text" name="new_sub" placeholder="Enter Subject Name"><br><br>
+            <input type="text" name="new_sub" placeholder="Enter Subject Name" required>
+            
+            
             <label style="padding-right: 12px;">Subject Code: </label>
-            <input type="text" name="new_sub_code" placeholder="Enter Subject Code"><br><br>
-            <input type="button" class="button_add" value="Add">
-        </div>
-        <table class="my_table"style="margin-top:30px;">
-            <thead>
-                <tr>
-                    <th>Subject Code</th>
-                    <th>Subject Name</th>
-                    <th>Semester</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+            <input type="text" name="new_sub_code" placeholder="Enter Subject Code" required><br><br>
+            
+            <label for="semester_text" style="padding-right:45px;padding-top:2px">Semester:</label>
+            <input type="number" name="sub_sem" oninput="notBelowOne(this);" required><br><br>
+
+            <input type="submit" name="add_sub" class="button_add" value="Add">
+        </form>
+            
+            <table class="my_table"style="margin-top:30px;">
+                <thead>
+                    <tr>
+                        <th>Subject Code</th>
+                        <th>Subject Name</th>
+                        <th>Semester</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
             <tbody>
-                <tr>
-                    <td>CST302</td>
-                    <td>Compiler Design</td>
-                    <td>6</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">Remove</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CST304</td>
-                    <td>Computer Graphics</td>
-                    <td>6</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">Remove</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CST306</td>
-                    <td>Algorithm Analysis</td>
-                    <td>6</td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">Remove</button>
-                        </form>
-                    </td>
-                </tr>
+                <?php 
+                    foreach($subjects as $sub) {
+                        echo "<tr>";
+                        echo "<td>".$sub['subject_id']."</td>";
+                        echo "<td>".$sub['subject_name']."</td>";
+                        echo "<td>".$sub['semester']."</td>";
+                        echo "<td>";
+                        echo "<form method='post'>";
+                        echo "<input type='submit' name='edit' value='Edit' class='func_btn'>";
+                        echo "</form>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
             </tbody>
         </table>
     </main>
+    <script src="/includes/not_below_1.js"></script>
     <script src="/includes/redirect.js"></script>
 </body>
 </html>
