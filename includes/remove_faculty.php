@@ -9,5 +9,5 @@ try {
     file_put_contents("error_log.txt",date("Y-m-d H-i-s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);
     echo "Something went wrong, Try again later";
 }
-header('Location: ../student_management.php');
+header('Location: ../faculty_management.php');
 exit();

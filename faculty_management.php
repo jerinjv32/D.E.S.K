@@ -2,11 +2,12 @@
 session_start();
 include('db.php');
 $students = [];
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $course = htmlspecialchars($_GET['course_name'] ?? '',ENT_QUOTES,'UTF-8');
-}
+$cname = htmlspecialchars($_GET['course_name'] ?? '',ENT_QUOTES,'UTF-8');
+$database->pdo->beginTransaction();
 try{
-    $faculties = $database->select("faculty",["fname","college_id","cname"],["cname"=>$course]);
+    $courses = $database->select("course","cname");
+    $faculties = $database->select("faculty",["fname","college_id","cname"],["cname"=>$cname]);
+    $database->pdo->commit();
 } catch(PDOException $e) {
     file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
     echo "some error occured";
@@ -82,8 +83,15 @@ try{
     <main>
         <form method="get">
             <label for="course_text" style="font-size: 14px;padding-right:10px;">Course Name:</label>
-            <input type="text" name="course_name" id="course_text" required><br><br>
-            <input type="submit" value="Get Results" id="get_results" name="get_results" class="func_btn">
+            <select name="course_name" required>
+                <option>-->Choose</option>
+                <?php 
+                foreach ($courses as $course) {
+                    echo "<option>".$course."</option>";
+                }
+                ?>
+            </select><br><br>
+            <input type="submit" value="Get Results" name="get_results" class="func_btn">
             <hr style="margin: 10px 10px 0 auto;">
         </form>
         <br><input type="submit" class="add_btn" value="+ Add new faculty" onclick="redirect('add_new_faculty.php')">
@@ -104,7 +112,7 @@ try{
                         echo "<td>".$faculty['fname']."</td>";
                         echo "<td>".$faculty['cname']."</td>";
                         echo "<td>";
-                        echo "<form method='post'>";
+                        echo "<form method='post' action='includes/remove_faculty.php'>";
                         echo "<input type='button' value='Edit' class='func_btn' onclick=\"event.stopPropagation();redirect('edit_faculty.php?id=".$faculty['college_id']."');\">";
                         echo "<input type='hidden' name='hid_college_id' value=\"".$faculty['college_id']."\">";
                         echo "<input type='submit' value='Remove' name='remove_btn' class='remove_btn' style=\"margin-left: 10px;\" onclick=\"event.stopPropagation();\">";

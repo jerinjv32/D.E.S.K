@@ -1,4 +1,5 @@
 <?php
+session_start();
 include ('../db.php');
 $fields = ['name'=>'fname','dob'=>'fdob','gender'=>'fgender','collegeid'=>'college_id',
             'coursename'=>'cname','yearjoin'=>'yoj','mail'=>'email','mobno'=>'fpno',
@@ -33,5 +34,4 @@ try {
     header('Location:../add_new_faculty.php');
     die();
 }
-
 ?>

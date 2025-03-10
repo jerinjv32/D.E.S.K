@@ -2,7 +2,7 @@
     session_start();
     include('db.php');
     include('sidebar.php');
-    $college_id = $_GET['id'] ?? null;
+    $college_id = htmlspecialchars($_GET['id'] ?? null,ENT_QUOTES,'UTF-8');
     try{
             $details = $database->get("faculty","*",['college_id'=>$college_id]);
         } catch(PDOException $e) {

@@ -1,6 +1,13 @@
 <?php 
     session_start();
+    include('db.php');
     include('sidebar.php');
+    try {
+        $cnames = $database->select("course","cname");
+    } catch(PDOException $e) {
+        file_put_contents("error_log_faculty.txt",date("Y-m-d H-i-s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);
+        die("Some Error Occured");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,8 +72,8 @@
                 <!--first part-->
                 <div class="main_details" style="grid-area: panel2;">
                     <div style="margin:20px 530px 0 10px;justify-items:left;padding-left:50px;">
-                        <label for="name_box">Name:</label>
-                        <input type="text" name="name" id="name_box" required><br><br>
+                        <label for="name_box">Name:</label><br>
+                        <input type="text" name="name" required><br><br>
                         <div>Date of birth:</div>
                         <input type="date" name="dob" required><br><br>
                         <div>Gender:</div>
@@ -85,7 +92,14 @@
                     <hr style="margin: 0 auto 0 0;">
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Course name:</div>
-                        <input type="text" name="coursename" required><br><br>
+                        <select name="course_name" required>
+                            <option>Choose Course--></option>
+                            <?php foreach($cnames as $course) {
+                            echo "<option>".$course."</option>";
+                            }
+                            ?>
+                        </select>
+                        <br><br>
                         <div>Year of join:</div>
                         <input typr="text" name="yearjoin" required> 
                     </div>
