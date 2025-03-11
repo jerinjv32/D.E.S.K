@@ -1,18 +1,14 @@
 <?php 
-    session_start();
-    include('sidebar.php');
-    $student_id = $_GET['id'] ?? null;
-    try{
-        $students = $database->select("student",["sname","college_id","cname","semester"],["cname"=>$course,"semester"=>$semester]);
-        if (empty($students) && isset($_POST['get_results'])) {
-            $error_msg = "Result not found";
-        } else {
-            $error_msg = "";
-        }
-        } catch(Exception $e) {
+session_start();
+include('db.php');
+include('sidebar.php');
+$college_id = $_SESSION['college_id'] ?? null;
+try{
+        $details = $database->get("student","*",['college_id'=>$college_id]);
+    } catch(PDOException $e) {
         file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
         echo "some error";
-    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,18 +21,6 @@
         *{
             margin: 0;
             font-family: poppins;
-        }
-        .nav_bar{
-            height: 53px;
-            width: 100%;
-            background-color: rgb(33, 33, 33);
-        }
-        .nav_content1{
-            display: block;
-            padding-left: 225px;
-            padding-top: 12px;
-            font-size: larger;
-            color: white;
         }
         main{
             margin: 20px 20px 20px 228px;
@@ -69,11 +53,12 @@
             padding-left: 20px;
         }
     </style>
+    <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
 </head>
 <body>
-    <div class="nav_bar">
+    <nav>
         <h3 class="nav_content1">My Profile</h3>
-    </div>
+    </nav>
     <main>
         <div class="profile_container">
             <!--Profile photo-->
@@ -83,31 +68,31 @@
             <!--first part-->
             <div class="main_details" style="grid-area: panel2;">
                 <div style="margin:20px 530px 0 10px;justify-items:left;padding-left:50px;">
-                    <div>Name:</div><br>
-                    <div>Date of birth:</div><br>
-                    <div>Gender:</div><br>
-                    <div>College Id:</div><br>
-                    <div>Admission No:</div>
+                    <div>Name: <?php echo $details['sname']; ?></div><br>
+                    <div>Date of birth: <?php echo $details['sdob']; ?></div><br>
+                    <div>Gender: <?php echo $details['gender']; ?></div><br>
+                    <div>College Id: <?php echo $details['college_id']; ?></div><br>
+                    <div>Admission No: <?php echo $details['adno']; ?></div>
                 </div>
             </div>
             <!--Course details-->
             <div class="address_cont" style="grid-area: panel3;">
-                <h3>Course Details</h3>
-                <hr style="margin: 0 auto 0 0;">
-                <div style="padding: 10px 0 10px 20px;">
-                    <div>Course name:</div><br>
-                    <div>Year of join:</div><br>
-                    <div>Current Semester:</div>
-                </div>
+            <h3>Course Details</h3>
+                    <hr style="margin: 0 auto 0 0;">
+                    <div style="padding: 10px 0 10px 20px;">
+                        <div>Course name: <?php echo $details['cname']; ?></div><br>
+                        <div>Year of join: <?php echo $details['yoj']; ?></div><br>
+                        <div>Current Semester: <?php echo $details['semester']; ?></div>
+                    </div>
             </div>
             <!--Address and contact details-->
             <div class="address_cont" style="grid-area: panel4;">
                 <h3>Address and Contact Details</h3>
                 <hr style="margin: 0 auto 0 0;">
                 <div style="padding: 10px 0 10px 20px;">
-                    <div>Email:</div><br>
-                    <div>Phone number:</div><br>
-                    <div>Address:</div>
+                    <div>Email: <?php echo $details['email']; ?></div><br>
+                    <div>Phone number: <?php echo $details['mobno']; ?></div><br>
+                    <div>Address: <?php echo $details['address']; ?></div>
                 </div>
             </div>
             <!--Other-->
@@ -115,12 +100,13 @@
                 <h3>Other Details</h3>
                 <hr style="margin: 0 auto 0 0;">
                 <div style="padding: 10px 0 10px 20px;">
-                    <div>Blood Group:</div><br>
-                    <div>Mother Tongue:</div><br>
-                    <div>Resident:</div>
+                    <div>Blood Group: <?php echo $details['blood_group']??''; ?></div><br>
+                    <div>Mother Tongue: <?php echo $details['mother_tongue']??''; ?></div><br>
+                    <div>Resident: <?php echo $details['resident']; ?></div>
                 </div>
             </div>
         </div>
     </main>
+    <script src="/includes/redirect.js"></script>
 </body>
 </html>

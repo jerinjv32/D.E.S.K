@@ -43,7 +43,7 @@ try {
             border-radius: 5px;
             padding:20px 10px 0 20px;
             box-shadow: 0 5px 5px rgba(0,0,0,0.25);
-            min-height: 500px;
+            min-height: 600px;
             max-height: 100%;
             overflow: auto;
         }

@@ -16,22 +16,19 @@ foreach ($fields as $field => $columnName){
         }
     }
 }
+$password = htmlspecialchars($_POST['password'] ?? '',ENT_QUOTES,'UTF-8');
+$hash = password_hash($password,PASSWORD_DEFAULT);
+$role = "student";
+$database->pdo->beginTransaction();
 try {
-    if (!empty($query)) {
-        $insertion = $database->insert("student",$query);
-    } else {
-        throw new Exception("The query was empty");
-    }
-    if ($insertion) {
-        header('Location:../add_new_students.php');
-        die();
-    } else {
-        throw new Exception("The insertion wasn't successfull");
-    }
+    $database->insert("student",$query);
+    $database->insert("users",['username'=>$query['college_id'],'password'=>$password,'role'=>$role]);
+    $database->pdo->commit();
 } catch(PDOException $e) {
     file_put_contents("error_log.txt",date("Y-m-d H-i-s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);
     header('Location:../add_new_students.php');
     die();
 }
+header('Location:../add_new_students.php');
 
 ?>

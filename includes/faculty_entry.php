@@ -17,21 +17,24 @@ foreach ($fields as $field => $columnName){
         }
     }
 }
+$password = htmlspecialchars($_POST['password'] ?? '',ENT_QUOTES,'UTF-8');
+$hash = password_hash($password,PASSWORD_DEFAULT);
+$role = htmlspecialchars($_POST['role'] ?? '',ENT_QUOTES,'UTF-8');
+$role = strtolower($role);
+$database->pdo->beginTransaction();
 try {
-    if (!empty($query)) {
-        $insertion = $database->insert("faculty",$query);
-    } else {
-        throw new Exception("The query was empty");
-    }
-    if ($insertion) {
-        header('Location:../add_new_faculty.php');
-        die();
-    } else {
-        throw new Exception("The insertion wasn't successfull");
-    }
+    $database->insert("faculty",$query);
+    $database->insert("users",['username'=>$query['college_id'],'password'=>$password,'role'=>$role]);
+    $database->pdo->commit();
 } catch(PDOException $e) {
     file_put_contents("error_log_faculty.txt",date("Y-m-d H-i-s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);
     header('Location:../add_new_faculty.php');
     die();
 }
+<<<<<<< Updated upstream
+=======
+header('Location:../add_new_faculty.php');
+exit();
+
+>>>>>>> Stashed changes
 ?>

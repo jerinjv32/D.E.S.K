@@ -65,7 +65,7 @@
                 <!--first part-->
                 <div class="main_details" style="grid-area: panel2;">
                     <div style="margin:20px 530px 0 10px;justify-items:left;padding-left:50px;">
-                        <label for="name_box">Name:</label>
+                        <label for="name_box">Name:</label><br>
                         <input type="text" name="name" id="name_box" required><br><br>
                         <div>Date of birth:</div>
                         <input type="date" name="dob" required><br><br>
@@ -75,10 +75,12 @@
                             <option> female</option>
                             <option> other</option>
                         </select><br><br>
-                        <div>College Id:</div>
-                        <input type="text" name="collegeid" required><br><br>
                         <div>Admission No:</div>
                         <input type="text" name="admno" required>
+                        <div>College Id:</div>
+                        <input type="text" name="collegeid" required><br><br>
+                        <div>Password:</div>
+                        <input type="text" name="password" required><br><br>
                     </div>
                 </div>
                 <!--Course details-->
@@ -88,7 +90,7 @@
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Course name:</div>
                         <input type="text" name="coursename" required><br><br>
-                        <div>Year of join:</div>
+                        <div>Year of join:</div><br>
                         <input type="text" name="yearjoin" required> <br><br>
                         <div>Current Semester:</div>
                         <input type="text" name="sem" required>

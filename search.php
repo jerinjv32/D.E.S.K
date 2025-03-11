@@ -71,6 +71,7 @@ if (isset($_POST['search_btn'])) {
         }
     </style>
     <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
+    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -114,7 +115,7 @@ if (isset($_POST['search_btn'])) {
                         echo "<td>".$content['semester']."</td>";
                         echo "<td>";
                         echo "<form method='post'>";
-                        echo "<button type='submit' name='edit' id='edit_btn'>Edit</button>";
+                        echo "<input type='button' value='Edit' class='func_btn' onclick=\"event.stopPropagation();redirect('edit_students.php?id=".$content['college_id']."');\">";
                         echo "</form>";
                         echo "</td>";
                         echo "</tr>";
@@ -123,5 +124,6 @@ if (isset($_POST['search_btn'])) {
             </tbody>
         </table>
     </main>
+    <script src="includes/redirect.js"></script>
 </body>
 </html>

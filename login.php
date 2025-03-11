@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($user)) {
         if ($password == $user['password']) {
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['college_id'] = $user['college_id'];
+            $_SESSION['college_id'] = $user['username'];
             $_SESSION['role'] = $user['role'];
 
             if ($user['role'] == 'student') {
