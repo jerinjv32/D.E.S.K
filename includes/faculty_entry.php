@@ -32,7 +32,10 @@ try {
     die();
 }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 header('Location:../add_new_faculty.php');
 exit();
 

@@ -74,8 +74,11 @@
                     <div style="margin:20px 530px 0 10px;justify-items:left;padding-left:50px;">
                         <label for="name_box">Name:</label><br>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <input type="text" name="name" required><br><br>
 =======
+=======
+>>>>>>> Stashed changes
                         <input type="text" name="name" id="name_box" required><br><br>
 >>>>>>> Stashed changes
                         <div>Date of birth:</div>

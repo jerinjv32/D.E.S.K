@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 2025-03-08 18-35-41-SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM "course"' at line 1
 2025-03-08 18-38-03-SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM "course"' at line 1
 2025-03-09 09-56-39-SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM "course"' at line 1
@@ -25,6 +26,10 @@
 2025-03-09 10-05-25-SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM "course"' at line 1
 2025-03-09 10-05-25-SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM "course"' at line 1
 2025-03-09 10-05-25-SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM "course"' at line 1
+=======
+2025-03-06 07-49-28-SQLSTATE[42S02]: Base table or view not found: 1146 Table 'desk.faculty' doesn't exist
+2025-03-06 07-49-34-SQLSTATE[42S02]: Base table or view not found: 1146 Table 'desk.faculty' doesn't exist
+>>>>>>> Stashed changes
 =======
 2025-03-06 07-49-28-SQLSTATE[42S02]: Base table or view not found: 1146 Table 'desk.faculty' doesn't exist
 2025-03-06 07-49-34-SQLSTATE[42S02]: Base table or view not found: 1146 Table 'desk.faculty' doesn't exist
