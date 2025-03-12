@@ -76,7 +76,7 @@
                             <option> other</option>
                         </select><br><br>
                         <div>Admission No:</div>
-                        <input type="text" name="admno" required>
+                        <input type="text" name="admno" required><br><br>
                         <div>College Id:</div>
                         <input type="text" name="collegeid" required><br><br>
                         <div>Password:</div>
@@ -90,7 +90,7 @@
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Course name:</div>
                         <input type="text" name="coursename" required><br><br>
-                        <div>Year of join:</div><br>
+                        <div>Year of join:</div>
                         <input type="text" name="yearjoin" required> <br><br>
                         <div>Current Semester:</div>
                         <input type="text" name="sem" required>

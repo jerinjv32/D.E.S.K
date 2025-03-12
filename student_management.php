@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     
 }
 try{
+    $cnames = $database->select("course","cname");
     $students = $database->select("student",["sname","college_id","cname","semester"],["cname"=>$course,"semester"=>$semester]);
     if (empty($students) && isset($_POST['get_results'])) {
         $error_msg = "Result not found";
@@ -84,10 +85,17 @@ try{
     <main>
         <form method="GET">
             <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
-            <input type="text" name="course_name" id="course_text" required><br><br>
+            <select name="course_name" id="course_text"  required>
+                <option>Choose--></option>
+                <?php
+                foreach ($cnames as $cname) {
+                    echo "<option>".$cname."</option>";
+                }
+                ?>
+            </select><br><br>
             <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Semester:</label>
-            <input type="number" name="semester" id="semester_text"" required>
-            <input type="submit" value="Search">
+            <input type="number" name="semester" id="semester_text" oninput="notBelowOne(this)" required>
+            <br><br><input type="submit" value="Search" class="func_btn">
             <hr style="margin: 10px 10px 0 auto;">
         </form>
         <form action="add_new_students.php" method="GET">
@@ -125,5 +133,6 @@ try{
         </table>
     </main>
     <script src="includes/redirect.js"></script>
+    <script src="includes/not_below_1.js"></script>
 </body>
 </html>
