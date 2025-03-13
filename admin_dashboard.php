@@ -38,22 +38,18 @@
                 <figcaption class="panel_title" id="title4">Attendance</figcaption>
             </div>
             <div class="panel_col5" style="grid-area:panel5;">
-                <img src="http://localhost:5500/icons/data_extractor.png" class="icons" name="data_extractor">
-                <figcaption class="panel_title" id="title5">Data Extractor</figcaption>
-            </div>
-            <div class="panel_col6" style="grid-area:panel6;" onclick="redirect('result.php')">
                 <img src="http://localhost:5500/icons/results.png" class="icons" alt="results">
                 <figcaption class="panel_title" id="title6">Results</figcaption>
             </div>
-            <div class="panel_col7" style="grid-area:panel7;" onclick="redirect('academic_assessment.php')">
+            <div class="panel_col7" style="grid-area:panel6;" onclick="redirect('academic_assessment.php')">
                 <img src="http://localhost:5500/icons/academic.png" class="icons" alt="academic_assessment">
                 <figcaption class="panel_title" id="title7">Academic Assessment</figcaption>
             </div>
-            <div class="panel_col8" style="grid-area:panel8;" onclick="redirect('remedial.php')">
+            <div class="panel_col8" style="grid-area:panel7;" onclick="redirect('remedial.php')">
                 <img src="http://localhost:5500/icons/remedial_class.png" class="icons" alt="remedial_class">
                 <figcaption class="panel_title" id="title8">Remedial Class</figcaption>
             </div>
-            <div class="panel_col9" style="grid-area:panel9;" onclick="redirect('events.php')">
+            <div class="panel_col9" style="grid-area:panel8;" onclick="redirect('events.php')">
                 <img src="http://localhost:5500/icons/event.png" class="icons" alt="events">
                 <figcaption class="panel_title" id="title9">Events</figcaption>
             </div>

@@ -43,10 +43,6 @@
                 <figcaption class="panel_title" id="title8">Remedial Class</figcaption>
             </div>
             <div class="panel_col6" >
-                <img src="http://localhost:5500/icons/data_extractor.png" class="icons" alt="data_extractor">
-                <figcaption class="panel_title" id="title5">Data Extractor</figcaption>
-            </div>
-            <div class="panel_col7" onclick="redirect('events.php')">
                 <img src="http://localhost:5500/icons/event.png" class="icons" alt="events">
                 <figcaption class="panel_title" id="title9">Events</figcaption>
             </div>

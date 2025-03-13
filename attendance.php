@@ -4,6 +4,7 @@
     $database->pdo->beginTransaction();
     $datas = [];
     $row = [];
+    $subjects = [];
     $courseId = htmlspecialchars($_GET['course_name']??'',ENT_QUOTES,'UTF-8');
     $semester = htmlspecialchars($_GET['sem']??'',ENT_QUOTES,'UTF-8');
      
