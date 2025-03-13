@@ -2,14 +2,25 @@
     session_start();
     include('db.php');
     $database->pdo->beginTransaction();
+    $datas = [];
+    $row = [];
+    $courseId = htmlspecialchars($_GET['course_name']??'',ENT_QUOTES,'UTF-8');
+    $semester = htmlspecialchars($_GET['sem']??'',ENT_QUOTES,'UTF-8');
+     
     try {
         $courses  = $database->select("course","*");
         if (isset($_GET['show_result'])) {
+            $datas = $database->select('attendance','*', ['course_id'=>$courseId,'semester'=>$semester]);
         }
+        foreach ($datas as $data) {
+            $subjects[] = $data['subject_id'];
+            $row[$data['name']][$data['subject_id']] = $data['percentage'];
+        }
+        $subjects = array_unique($subjects);
         $database->pdo->commit();
     } catch (PDOException $e) {
         file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
-        echo "Something Went Wrong Try again later";
+        die("<h1>Something Went Wrong Try again later</h1>");
     }
 ?>
 <!DOCTYPE html>
@@ -64,40 +75,45 @@
             <label for="course_text" style="font-size: 14px;padding-right:10px;">Course:</label>
             <select name="course_name" required>
                 <option>Choose--></option>
-                <?php
-                foreach ($courses as $cname) {
-                    echo "<option>".$cname['cname']."</option>";
-                }
-                ?>
+                <?php foreach ($courses as $cname): ?>
+                    <option value=<?= $cname['course_id'] ?>><?= $cname['cname']; ?></option>;
+                <?php endforeach ?>
             </select>
-    
             <label for="semester_text" style="font-size: 14px;padding: 2px 2px 0 14px;">Semester:</label>
             <input type="number" name="sem" oninput="notBelowOne(this);" required><br><br>
-        
             <input type="submit" name="show_result" class="func_btn" value="Show Results"><br><br>
             
         </form>
-        <input type="submit" class="func_btn" value="+ upload"><br>
+        <form method="post" action="includes/attendance_upload.php" enctype="multipart/form-data">
+            <input type="file" class="func_btn" name="file"><br><br>
+            <input type="submit">
+        </form>
 
         <hr style="margin: 10px 10px 0 auto;">
+        <?php if (!empty($row) && !empty($subjects)): ?>
         <table class="my_table"style="margin-top:50px;">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Course</th>
                     <th>Semester</th>
-                    <th>Sub1</th>
-                    <th>Sub2</th>
-                    <th>Sub3</th>
-                    <th>Sub4</th>
-                    <th>Sub5</th>
-                    <th>Sub6</th>
-                    <th>Sub7</th>
+                    <?php foreach ($subjects as $sub): ?>
+                        <th><?= $sub ?></th>
+                    <?php endforeach ?>
                 </tr>
             </thead>
             <tbody>
+                <?php foreach ($row as $name=>$subjectData): ?>
+                    <tr>
+                        <td><?= $name; ?></td>
+                        <td><?= $semester; ?></td>
+                        <?php foreach ($subjects as $subject): ?>
+                            <td><?= $subjectData[$subject] ?? 'N/a'; ?></td>
+                        <?php endforeach ?>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
+        <?php endif; ?>
     </main>
     <script src="includes/not_below_1.js"></script>
 </body>

@@ -1,0 +1,4 @@
+2025-03-13 00-19-39-SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'college_id' cannot be null
+2025-03-13 00-25-05-SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'name' cannot be null
+2025-03-13 00-25-39-SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails ("desk"."attendance", CONSTRAINT "attendance_ibfk_1" FOREIGN KEY ("course_id") REFERENCES "course" ("course_id") ON DELETE CASCADE ON UPDATE RESTRICT)
+2025-03-13 01-49-33-SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails ("desk"."attendance", CONSTRAINT "attendance_ibfk_2" FOREIGN KEY ("subject_id") REFERENCES "subjects" ("subject_id") ON DELETE CASCADE ON UPDATE RESTRICT)
