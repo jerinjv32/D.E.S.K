@@ -45,6 +45,9 @@ $notifications = $database->select("notification","*");
             max-height: 100%;
             overflow: auto;
         }
+        .my_table td, .my_table th {
+            min-width: 10vw;
+        }
     </style>
     <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
 </head>
@@ -57,7 +60,6 @@ $notifications = $database->select("notification","*");
         <table class="my_table">
             <thead>
                 <tr>
-                    <th style="width: 5vw;">Sl.no.</th>
                     <th style="width: 13vw;">Date</th>
                     <th style="width: 52vw;">Content</th>
                 </tr>
@@ -66,7 +68,6 @@ $notifications = $database->select("notification","*");
             <?php 
                     foreach($notifications as $notification) {
                         echo "<tr>";
-                        echo "<td>".$notification['slno']."</td>";
                         echo "<td>".$notification['date']."</td>";
                         echo "<td>".$notification['content']."</td>";
                         echo "</tr>";

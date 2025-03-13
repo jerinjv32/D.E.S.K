@@ -1,4 +1,28 @@
-<?php session_start() ?>
+<?php 
+session_start();
+include('db.php');
+try {
+    $courses = $database->select('course','*');
+} catch (PDOException $e) {
+    file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+    die("<h1>Something Went Wrong Try again later</h1>");
+}
+$results = [];
+try {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $collegeId = $_POST['college_id'] ?? '';
+        $sem = $_POST['semester'] ?? '';
+        $results = $database->select('results','*',['college_id'=>$collegeId,'semester'=>$sem]);
+    }
+} catch (PDOException $e) {
+    file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+    die("<h1>Something Went Wrong Try again later</h1>");
+}
+$labels = array_column($results, 'subject_id');
+$mark = array_column($results, 'mark');
+
+$json_data = json_encode(['labels'=>$labels,'data'=>$mark]);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +53,7 @@
             border-radius: 5px;
             padding:20px 10px 0 20px;
             box-shadow: 0 5px 5px rgba(0,0,0,0.25);
-            min-height: 500px;
+            min-height: 700px;
             max-height: 100%;
             overflow: auto;
         }
@@ -52,21 +76,56 @@
         <h3 class="nav_content1">Academic Assessment</h3>
     </div>
     <main>
-        <form>
-            <div>
-                <label for="course_box" style="padding-right: 19px;">Course:</label>
-                <input type="text" name="course" id="course_box" placeholder="Enter Course" required>
+        <form method='post'>
+            <label for="course_box" style="padding-right: 19px;">Course:</label>
+            <select name="course_name" id="course_box" required>
+                <option>Choose--></option>
+                <?php foreach ($courses as $cname): ?>
+                    <option value="<?= $cname['course_id']; ?>"><?= $cname['cname']; ?></option>
+                <?php endforeach ?>
+            </select>
+            <label for="college_id_box" style="padding:0 10px 0 20px;">college id:</label>
+            <input type="type" name="college_id" id="college_id_box" placeholder="Enter College id" required><br><br>    
+            
+            <label for="semester_box">Semester:</label>
+            <input type="number" name="semester" id="semester_box" placeholder="Choose Semester" oninput="notBelowOne(this)" required>
+            <br><br>
 
-                <label for="college_id_box" style="padding:0 10px 0 20px;">college id:</label>
-                <input type="text" name="college_id" id="college_id_box" placeholder="Enter College Id" required><br><br>
-
-
-                <label for="semester_box">Semester:</label>
-                <input type="number" name="semester" id="semester_box" placeholder="Choose Semester" required><br><br>
+            <input type="submit" value="Show Results" name="show_results" id="show_results_box">
+            </form>
+            <br>
+            <canvas id="myChart" style="width: 100px;"></canvas>
+            
+            <script src="/includes/not_below_1.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const chartData = <?php echo $json_data; ?>;
+                console.log('chart data:', chartData);
                 
-                <input type="submit" value="Show Results" name="show_results" id="show_results_box">
-            </div>
-        </form>
-    </main>
-</body>
+                const labels = chartData.labels;
+                const data = chartData.data;
+                const ctx = document.getElementById('myChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Student Marks',
+                            data: data,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });                
+            </script>
+        </main>
+    </body>
 </html>
