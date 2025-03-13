@@ -54,22 +54,14 @@
     <main>
         <form>
             <div>
-                <label for="course_box" style="padding-right: 10px;">Course:</label>
+                <label for="course_box" style="padding-right: 19px;">Course:</label>
                 <input type="text" name="course" id="course_box" placeholder="Enter Course" required>
 
                 <label for="college_id_box" style="padding:0 10px 0 20px;">college id:</label>
                 <input type="text" name="college_id" id="college_id_box" placeholder="Enter College Id" required><br><br>
 
-                <label for="subject_box" style="padding:0 7px 0 0;">Subject:</label>
-                <select name="subject" id="subject_box" style="width: 130px;height: 25px;" required>
-                    <option>Subject 1</option>
-                    <option>Subject 2</option>
-                    <option>Subject 3</option>
-                    <option>subject 4</option>
-                    <option>Subject 5</option>
-                </select>
 
-                <label for="semester_box" style="padding: 0 11px 0 66px">Semester:</label>
+                <label for="semester_box">Semester:</label>
                 <input type="number" name="semester" id="semester_box" placeholder="Choose Semester" required><br><br>
                 
                 <input type="submit" value="Show Results" name="show_results" id="show_results_box">

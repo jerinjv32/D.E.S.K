@@ -38,7 +38,7 @@
                 <figcaption class="panel_title" id="title4">Attendance</figcaption>
             </div>
             <div class="panel_col5" style="grid-area:panel5;">
-                <img src="http://localhost:5500/icons/results.png" class="icons" alt="results">
+                <img src="http://localhost:5500/icons/results.png" class="icons" alt="results" onclick="redirect('result.php')">
                 <figcaption class="panel_title" id="title6">Results</figcaption>
             </div>
             <div class="panel_col7" style="grid-area:panel6;" onclick="redirect('academic_assessment.php')">

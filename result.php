@@ -1,17 +1,42 @@
-<?php 
+<?php
     session_start();
+    include('db.php');
+    $database->pdo->beginTransaction();
+    $datas = [];
+    $row = [];
+    $subjects = [];
+    $courseId = htmlspecialchars($_GET['course_name']??'',ENT_QUOTES,'UTF-8');
+    $semester = htmlspecialchars($_GET['sem']??'',ENT_QUOTES,'UTF-8');
+     
+    try {
+        $courses  = $database->select("course","*");
+        if (isset($_GET['show_result'])) {
+            $datas = $database->select('results','*', ['course_id'=>$courseId,'semester'=>$semester]);
+        }
+        foreach ($datas as $data) {
+            $subjects[] = $data['subject_id'];
+            $row[$data['name']][$data['subject_id']] = $data['mark'];
+        }
+        $subjects = array_unique($subjects);
+        $database->pdo->commit();
+    } catch (PDOException $e) {
+        file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+        die("<h1>Something Went Wrong Try again later</h1>");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
+    <title>Results</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
+    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
     <style>
         *{
+            margin: 0px;
             font-family: poppins;
-            margin:0px;
         }
         .nav_bar{
             height: 53px;
@@ -32,172 +57,65 @@
             border-radius: 5px;
             padding:20px 10px 0 20px;
             box-shadow: 0 5px 5px rgba(0,0,0,0.25);
-            min-height: 700px;
+            min-height: 500px;
             max-height: 100%;
             overflow: auto;
         }
-        .container{
-            position: relative;
-            display: flex;
-            bottom: 67px;
-            gap: 4em;
-            margin: 2px auto 0 300px;
-        }
-        .course-btn{
-            transform: scale(1.5);
-            padding: 12px;
-            background-color: rgb(33, 33, 33);
-            border-radius: 3px;
-            transform: translate(5px,10px);
-        }
-        .btn-text {
-            display: block;
-            font-size: 15px;
-            font-weight: bold;
-            color: #333;
-         transform: translate(5px,10px);
-        }
-        #cbtn1:hover{
-            background-color: #009879;
-        }
-        #cbtn2:hover{
-            background-color: #0073e6;
-        }
-        #cbtn3:hover{
-            background-color: #e6002e;
-        }
-        #cbtn1:active,#cbtn2:active,#cbtn3:active{
-            background-color: rgb(33, 33, 33);
-            opacity: 75%;
-        }
-        .my_table{
-            border-collapse: collapse;
-            font-size: 0.9em;
-            margin: 25px 0;
-            border-radius: 5px 5px 0 0;
-            overflow: hidden;
-            box-shadow: 0 5px 5px rgba(0,0,0,0.15);
-        }
-        .my_table thead tr{
-            background-color: rgb(33, 33, 33);
-            color: #ffffff;
-            font-weight: bold;
-        }
-        .my_table th, .my_table td{
-            padding: 15px 15px;
-            min-width: 180px;
-            border-bottom: solid #dddddd;
-        }
-        .my_table tbody tr{
-            text-align: center;
-            background-color:rgb(236, 236, 236);
-        }
-        .my_table tbody tr:nth-child(even){
-            background-color: white;
-        }
-        #remove_btn{
-            border-style:none;
-            background-color:rgb(33, 33, 33);
-            border-radius:3px;
-            color:white;
-        }
-        #mark_entry{
-            width: 30px;
-            background-color: #ffffff;
-            border-color: #333;
-            border-radius: 3px;
-        }
-        #remove_btn:hover{
-            background-color:#e6002e;
-            cursor: pointer;
-        }
-        #add_sub_btn{
-            border-style:none;
-            background-color:rgb(33, 33, 33);
-            border-radius:3px;
-            color:white;
-        }
-        #add_sub_btn:hover{
-            background-color: #007F66;
-            cursor: pointer;
+        .my_table td,.my_table th{
+            min-width: 5vw;
         }
     </style>
 </head>
 <body>
     <?php include('sidebar.php') ?>
     <div class="nav_bar">
-        <h3 class="nav_content1">Result</h3>
+        <h3 class="nav_content1">Results</h3>
     </div>
     <main>
-        <form>
-            <label for="course_text" style="font-size: 14px;padding-right:30px;">Select Course:</label>
-            <input type="text" name="course_name" id="course_text"><br><br>
-            <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Select Semester:</label>
-            <input type="number" name="semester" id="semester_text"><br><br>
-            <label for="course_text" style="font-size: 14px;padding-right:40px;">Exam Name:</label>
-            <input type="text" name="course_name" id="course_text">
-            <div class="container"> 
-            </div>
-            <hr style="margin: 10px 10px 0 auto;">
+        <form method="GET">
+            <label for="course_text" style="font-size: 14px;padding-right:10px;">Course:</label>
+            <select name="course_name" required>
+                <option>Choose--></option>
+                <?php foreach ($courses as $cname): ?>
+                    <option value=<?= $cname['course_id'] ?>><?= $cname['cname']; ?></option>;
+                <?php endforeach ?>
+            </select>
+            <label for="semester_text" style="font-size: 14px;padding: 2px 2px 0 14px;">Semester:</label>
+            <input type="number" name="sem" oninput="notBelowOne(this);" required><br><br>
+            <input type="submit" name="show_result" class="func_btn" value="Show Results"><br><br>
+            
         </form>
-      
-        <table class="my_table"style="margin-top:30px;">
+        <form method="post" action="includes/result_publisher.php" enctype="multipart/form-data">
+            <input type="file" class="func_btn" name="file"><br><br>
+            <input type="submit" value="Publish">
+        </form>
+
+        <hr style="margin: 10px 10px 0 auto;">
+        <?php if (!empty($row) && !empty($subjects)): ?>
+        <table class="my_table"style="margin-top:50px;">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>FLAT</th>
-                    <th>CN</th>
-                    <th>MPMC</th>
-                    <th>SS</th>
-                    <th>Total</th>
-                    <th>edit</th>
+                    <th>Semester</th>
+                    <?php foreach ($subjects as $sub): ?>
+                        <th><?= $sub ?></th>
+                    <?php endforeach ?>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>Student1</th>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">Save</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Student2</th>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">Save</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Student3</th>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td><input type="text" id="mark_entry"></td>
-                    <td>
-                        <form>
-                            <button type="submit" value="Remove" id="remove_btn">Save</button>
-                        </form>
-                    </td>
-                </tr>
+                <?php foreach ($row as $name=>$subjectData): ?>
+                    <tr>
+                        <td><?= $name; ?></td>
+                        <td><?= $semester; ?></td>
+                        <?php foreach ($subjects as $subject): ?>
+                            <td><?= $subjectData[$subject] ?? 'N/a'; ?></td>
+                        <?php endforeach ?>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
-        <form>
-            <br><button type="submit" value="add_sub" id="add_sub_btn">Publish</button>
-        </form>
+        <?php endif; ?>
     </main>
+    <script src="includes/not_below_1.js"></script>
 </body>
 </html>

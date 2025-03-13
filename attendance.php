@@ -69,7 +69,7 @@
 <body>
     <?php include('sidebar.php') ?>
     <div class="nav_bar">
-        <h3 class="nav_content1">Course Management</h3>
+        <h3 class="nav_content1">Attendance</h3>
     </div>
     <main>
         <form method="GET">
