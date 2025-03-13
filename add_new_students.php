@@ -49,6 +49,7 @@
         }
     </style>
     <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
+    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
     <script src="/includes/redirect.js"></script>
 </head>
 <body>
@@ -123,7 +124,7 @@
                             <option>dayscholar</option>
                             <option>hostel</option>
                         </select><br><br><br>
-                        <button name="addstu" style="border:none; background-color:rgb(33, 33, 33);color:white;border-radius: 3px;">add student</button>
+                        <input type="submit" name="addstu" class="add_btn" value="add student">
                     </div>
                 </div>
             </div>

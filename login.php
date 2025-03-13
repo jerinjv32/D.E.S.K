@@ -5,29 +5,31 @@ include('db.php');
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $college_id = $_POST['college_id'];
-    $password = $_POST['password'];
+    $college_id = htmlspecialchars($_POST['college_id']??'',ENT_QUOTES,'');
+    $password = htmlspecialchars($_POST['password']??'',ENT_QUOTES,'UTF-8');
     $user = $database->get('users','*',['username' => $college_id]);
 
     if (!empty($user)) {
-        if ($password == $user['password']) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['college_id'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
-
-            if ($user['role'] == 'student') {
-                header("Location: student_dashboard.php");
-            } elseif ($user['role'] == 'faculty') {
-                header("Location: faculty_dashboard.php");
-            } elseif ($user['role'] == 'admin') {
-                header("Location: admin_dashboard.php");
+        if ($college_id === $user['username']){
+            if (password_verify($password,$user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['college_id'] = $user['username'];
+                $_SESSION['role'] = $user['role'];
+    
+                if ($user['role'] == 'student') {
+                    header("Location: student_dashboard.php");
+                } elseif ($user['role'] == 'faculty') {
+                    header("Location: faculty_dashboard.php");
+                } elseif ($user['role'] == 'admin') {
+                    header("Location: admin_dashboard.php");
+                }
+                exit();
+            } else {
+                $error = "Invalid password!";
             }
-            exit();
         } else {
-            $error = "Invalid password!";
+            $error = "Invalid college ID!";
         }
-    } else {
-        $error = "Invalid college ID!";
     }
 }
 ?>

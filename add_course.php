@@ -1,5 +1,8 @@
 <?php 
     session_start();
+    if (!empty($_GET['check'])) {
+        $check = $_GET['check'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,5 +47,15 @@
         </article>
     </main>
     <script src="/includes/redirect.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+        let check = <?php echo $check; ?>;
+        if (check == 1) {
+            swal.fire ({
+                title: 'Completed',
+                text: 'Upload Was successfull',
+                icon: 'success'
+            });
+        }
+    </script>
 </body>
 </html>

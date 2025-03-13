@@ -22,7 +22,7 @@ $role = "student";
 $database->pdo->beginTransaction();
 try {
     $database->insert("student",$query);
-    $database->insert("users",['username'=>$query['college_id'],'password'=>$password,'role'=>$role]);
+    $database->insert("users",['username'=>$query['college_id'],'password'=>$hash,'role'=>$role]);
     $database->pdo->commit();
 } catch(PDOException $e) {
     file_put_contents("error_log.txt",date("Y-m-d H-i-s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);

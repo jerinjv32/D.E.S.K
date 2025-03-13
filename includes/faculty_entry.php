@@ -24,20 +24,13 @@ $role = strtolower($role);
 $database->pdo->beginTransaction();
 try {
     $database->insert("faculty",$query);
-    $database->insert("users",['username'=>$query['college_id'],'password'=>$password,'role'=>$role]);
+    $database->insert("users",['username'=>$query['college_id'],'password'=>$hash,'role'=>$role]);
     $database->pdo->commit();
 } catch(PDOException $e) {
     file_put_contents("error_log_faculty.txt",date("Y-m-d H-i-s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);
     header('Location:../add_new_faculty.php');
     die();
 }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
 header('Location:../add_new_faculty.php');
 exit();
-
->>>>>>> Stashed changes
 ?>

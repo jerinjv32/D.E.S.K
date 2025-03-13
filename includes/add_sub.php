@@ -6,9 +6,9 @@ if (isset($_POST['add_sub'])) {
     $sub_id = htmlspecialchars($_POST['new_sub_code'] ?? '',ENT_QUOTES,'UTF-8');
     $sem = filter_var($_POST['sub_sem'] ?? '',FILTER_VALIDATE_INT);
 
-    $database->insert("subjects",['subject_id'=>$sub_id,'subject_name'=>$sub_name,'semester'=>$sem,'course_id'=>$cid]);
 }
 try {
+    $database->insert("subjects",['subject_id'=>$sub_id,'subject_name'=>$sub_name,'semester'=>$sem,'course_id'=>$cid]);
     header('Location: ../course_management.php');
     exit();
 } catch(PDOException $e) {

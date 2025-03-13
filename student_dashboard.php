@@ -9,11 +9,11 @@
         exit();
     }
     if(isset($_GET['academic_assessment'])){
-        header('Location:academic_assessment.php');
+        header('Location:academic_assessment_student.php');
         exit();
     }
     if(isset($_GET['results'])){
-        header('Location:result.php');
+        header('Location:result_student.php');
         exit();
     }
     if(isset($_GET['remedial_class'])){

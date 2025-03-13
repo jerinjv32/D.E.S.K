@@ -97,7 +97,7 @@ $json_data = json_encode(['labels'=>$labels,'data'=>$mark]);
             <canvas id="myChart" style="width: 100px;"></canvas>
             
             <script src="/includes/not_below_1.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="node_modules/chart.js"></script>
             <script>
                 const chartData = <?php echo $json_data; ?>;
                 console.log('chart data:', chartData);
