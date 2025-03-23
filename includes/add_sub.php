@@ -9,9 +9,14 @@ if (isset($_POST['add_sub'])) {
 }
 try {
     $database->insert("subjects",['subject_id'=>$sub_id,'subject_name'=>$sub_name,'semester'=>$sem,'course_id'=>$cid]);
-    header('Location: ../course_management.php');
+    header('Location: ../course_management.php?check=100');
     exit();
 } catch(PDOException $e) {
-    file_put_contents("error_log.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
-    echo "Something went wrong,Try again later";
+    if ($e->getCode() == 23000) {
+        header('Location: ../course_management.php?check=-100');
+        exit();
+    } else {
+        file_put_contents("error_log.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+        echo "Something went wrong,Try again later";
+    }
 }

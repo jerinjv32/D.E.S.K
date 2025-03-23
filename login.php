@@ -1,9 +1,6 @@
 <?php
-
 include('db.php');
-
 session_start();
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $college_id = htmlspecialchars($_POST['college_id']??'',ENT_QUOTES,'');
     $password = htmlspecialchars($_POST['password']??'',ENT_QUOTES,'UTF-8');

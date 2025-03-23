@@ -33,8 +33,10 @@
             overflow: auto;
         }
         </style>
-    <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
-    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+        <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
+        <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+        <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+        <script src="/includes/alert.js"></script>
 </head>
 <body>
     <nav>
@@ -44,7 +46,7 @@
         <article>
             <form action="includes/remove_course.php" method="post">
                 <label>Select Course:</label>
-                <select name="course" id="course_text" style="padding-right:5px;height:26px;">
+                <select name="course" id="course_text" style="padding-right:5px;height:26px;min-width:200px;">
                     <option>Choose--></option>
                     <?php foreach($courses as $course) {
                         echo "<option>".$course."</option>";
@@ -56,6 +58,15 @@
             </form>
         </article>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let search = new URLSearchParams(window.location.search);
+            let check = Number(search.get('check'));
+            if (check === 1) {
+                showAlert('Done','Course Is Removed','success');
+            }
+        })
+    </script>
     <script src="/includes/redirect.js"></script>
 </body>
 </html>

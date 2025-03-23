@@ -1,8 +1,5 @@
 <?php 
     session_start();
-    if (!empty($_GET['check'])) {
-        $check = $_GET['check'];
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,9 +24,11 @@
             max-height: 100%;
             overflow: auto;
         }
-    </style>
-    <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
-    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+        </style>
+        <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
+        <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+        <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+        <script src="/includes/alert.js"></script>
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -38,24 +37,26 @@
     </nav>
     <main>
         <article>
-            <form action="includes/course_publisher.php" method="post">
+            <form action="includes/course_publisher.php" method="post" autocomplete="off">
                 <label>Course Name:</label>
                 <input type="text" name="cname" required>
                 <br><br>
                 <input type="submit" value="Add Course" name="add_course" class="add_btn_medium">
             </form>
         </article>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                let search = new URLSearchParams(window.location.search);
+                let check = Number(search.get('check'));
+                console.log('Value:',check);
+                if (check === 1) {
+                    showAlert('Done','Course Is Added','success');
+                } else if (check === -1) {
+                    showAlert('Failed','Course Already Exists','error');
+                }
+            })
+        </script>
     </main>
     <script src="/includes/redirect.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
-        let check = <?php echo $check; ?>;
-        if (check == 1) {
-            swal.fire ({
-                title: 'Completed',
-                text: 'Upload Was successfull',
-                icon: 'success'
-            });
-        }
-    </script>
 </body>
 </html>
