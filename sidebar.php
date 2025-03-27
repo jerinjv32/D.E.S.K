@@ -20,8 +20,13 @@
         exit();
     }
     if(isset($_POST['notification_icon'])){
-        header('Location:notification.php');
-        exit();
+        if ($_SESSION['role'] == 'admin') {
+            header('Location:notification_admin.php');
+            exit(); 
+        } else {
+            header('Location:notification.php');
+            exit();
+        }
     }
     if ($_SESSION['role'] !== "student"){
         $height_notifi = '363px';
