@@ -13,6 +13,7 @@ return array(
     'PhpOffice\\PhpSpreadsheet\\' => array($vendorDir . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet'),
     'Medoo\\' => array($vendorDir . '/catfan/medoo/src'),
     'Matrix\\' => array($vendorDir . '/markbaker/matrix/classes/src'),
+    'Hackzilla\\PasswordGenerator\\' => array($vendorDir . '/hackzilla/password-generator'),
     'Composer\\Pcre\\' => array($vendorDir . '/composer/pcre/src'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
 );

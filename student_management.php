@@ -36,18 +36,6 @@ try{
             font-family: Poppins;
             margin:0px;
         }
-        .nav_bar{
-            height: 53px;
-            width: 100%;
-            background-color: rgb(33, 33, 33);
-        }
-        .nav_content1{
-            display: block;
-            padding-left: 225px;
-            padding-top: 12px;
-            font-size: larger;
-            color: white;
-        }
         main{
             height: 100px;
             border: 1px black solid;  
@@ -59,23 +47,12 @@ try{
             max-height: 100%;
             overflow: auto;
         }
-        #add_stud_btn{
-            border-style:none;
-            background-color:rgb(33, 33, 33);
-            border-radius:3px;
-            color:white;
-            transition: background-color 0.25s linear;
-        }
-        #add_stud_btn:hover{
-            background-color: #2E8B57;
-            cursor: pointer;
-        }
-        .my_table th,.my_table td{
-            min-width: 12.8vw;
-        }
     </style>
     <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
     <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
+    <link rel="stylesheet" href="http://localhost:5500/styles/student_management.css">
+    <script src='node_modules/sweetalert2/dist/sweetalert2.all.min.js'></script>
+    <script src='includes/alert.js'></script>
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -85,7 +62,7 @@ try{
     <main>
         <form method="GET">
             <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
-            <select name="course_name" id="course_text"  required>
+            <select name="course_name" id="course_text" style="width:175px;" required>
                 <option>Choose--></option>
                 <?php
                 foreach ($cnames as $cname) {
@@ -94,13 +71,25 @@ try{
                 ?>
             </select><br><br>
             <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Semester:</label>
-            <input type="number" name="semester" id="semester_text" oninput="notBelowOne(this)" required>
-            <br><br><input type="submit" value="Search" class="func_btn">
+            <select name="semester" style="width:175px;">
+                <?php for ($i=1; $i <= 8; $i+=1): ?>
+                <option><?= $i ?></option>
+                <?php endfor ?>
+            </select>
+            <br><br><input type="submit" value="Search" name="search_btn" class="func_btn">
             <hr style="margin: 10px 10px 0 auto;">
-        </form>
-        <form action="add_new_students.php" method="GET">
-            <br><button type="submit" name="add_stud" value="add_sub" id="add_stud_btn">+ Add new student</button>
-        </form>
+        </form><br>
+        <div class='flex-container'>
+            <form action="add_new_students.php" method="GET" class='flex-items'>
+                <br><button type="submit" name="add_stud" value="add_sub" class="add_btn">+ Add new student</button>
+            </form>
+            <form method="POST" action="includes/upload_students.php" enctype="multipart/form-data">
+                <button type="button" name="upload_file" class="add_btn" title="Upload SpreadSheet" style="display:flex;justify-content: center;align-items:center;" onclick="document.getElementById('file_upload').click()">
+                    <img src="icons\upload_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">Upload</button>
+                <input type="file" name="file" id="file_upload" title="Upload Spreadsheet" required>
+            </form>
+        </div>
+        <?php if(isset($_GET['search_btn'])): ?>
         <table class="my_table"style="margin-top:30px;">
             <thead>
                 <tr>
@@ -112,27 +101,54 @@ try{
                 </tr>
             </thead>
             <tbody>
-                    <?php 
-                    foreach($students as $student) {
-                        echo "<tr onclick=\"redirect('profile_students_dyn.php?id=".$student['college_id']."');\">";
-                        echo "<td>".$student['college_id']."</td>";
-                        echo "<td>".$student['sname']."</td>";
-                        echo "<td>".$student['cname']."</td>";
-                        echo "<td>".$student['semester']."</td>";
-                        echo "<td>";
-                        echo "<form method='post' action='includes/remove_student.php'>";
-                        echo "<input type='button' value='Edit' class='func_btn' onclick=\"event.stopPropagation();redirect('edit_students.php?id=".$student['college_id']."');\">";
-                        echo "<input type='hidden' name='hid_college_id' value=\"".$student['college_id']."\">";
-                        echo "<input type='submit' value='Remove' name='remove_btn' class='remove_btn' style=\"margin-left: 10px;\" onclick=\"event.stopPropagation();\">";
-                        echo "</form>";
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                    ?>
+                <?php if (!empty($students)): ?>
+                    <?php foreach($students as $student): ?>
+                        <tr onclick="redirect('profile_students_dyn.php?id=<?=$student['college_id']?>');" >
+                            <td><?=$student['college_id']?></td>
+                            <td><?=$student['cname']?></td>
+                            <td><?=$student['sname']?></td>
+                            <td><?=$student['semester']?></td>
+                            <td>
+                            <form method='post' action='includes/remove_student.php'>
+                                <input type='button' value='Edit' class='func_btn' onclick="event.stopPropagation();redirect(edit_students.php?id=<?= $student['college_id'] ?>">
+                                <input type='hidden' name='hid_college_id' value="<?=$student['college_id']?>">
+                                <input type='submit' value='Remove' name='remove_btn' class='remove_btn' style="margin-left: 10px;" onclick="event.stopPropagation();">
+                            </form>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                    <?php else: ?>
+                    <tr>
+                        <td colspan="5" style="text-align:center; font-weight:bold;">No Results</td>
+                    </tr>
+                <?php endif ?>
             </tbody>
         </table>
+        <?php endif ?>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let search = new URLSearchParams(window.location.search);
+            let check = Number(search.get('check'));
+            switch (check) {
+                case 100:
+                    showAlert('Done','Uploaded Successfully','success');
+                    break;
+                case 101:
+                    showAlert('Failed','Upload Failed','error');
+                    break;
+                case 200:
+                    showAlert('Loading Failed','Couldn\'t Load the file','error');
+                    break;
+                case 201:
+                    showAlert('Wrong File Type','File Type is Not supported','error');
+                    break;
+                case 23000:
+                    showAlert('Failed','Student Data Already Exists','error');
+                    break;
+            }
+        });
+    </script>
     <script src="includes/redirect.js"></script>
-    <script src="includes/not_below_1.js"></script>
 </body>
 </html>

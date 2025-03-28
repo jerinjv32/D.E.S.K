@@ -1,0 +1,27 @@
+.nav_bar{
+    height: 53px;
+    width: 100%;
+    background-color: rgb(33, 33, 33);
+}
+.nav_content1{
+    display: block;
+    padding-left: 225px;
+    padding-top: 12px;
+    font-size: larger;
+    color: white;
+}
+.my_table th,.my_table td{
+    min-width: 12.8vw;
+}
+.flex-container {
+    display: inline-flex;
+    align-content: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+.flex-items {
+    display: inline-flex;
+}
+input[type="file"] {
+    display: none;
+}

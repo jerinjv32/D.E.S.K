@@ -23,6 +23,10 @@ class ComposerStaticInit188a7c86e28e0b09a0c7d5e36b5e9c90
             'Medoo\\' => 6,
             'Matrix\\' => 7,
         ),
+        'H' => 
+        array (
+            'Hackzilla\\PasswordGenerator\\' => 28,
+        ),
         'C' => 
         array (
             'Composer\\Pcre\\' => 14,
@@ -59,6 +63,10 @@ class ComposerStaticInit188a7c86e28e0b09a0c7d5e36b5e9c90
         'Matrix\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
+        ),
+        'Hackzilla\\PasswordGenerator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hackzilla/password-generator',
         ),
         'Composer\\Pcre\\' => 
         array (

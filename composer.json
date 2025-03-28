@@ -1,6 +1,7 @@
 {
     "require": {
         "catfan/medoo": "^2.1",
-        "phpoffice/phpspreadsheet": "^4.1"
+        "phpoffice/phpspreadsheet": "^4.1",
+        "hackzilla/password-generator": "^1.7"
     }
 }
