@@ -51,6 +51,8 @@ try{
     <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
     <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
     <link rel="stylesheet" href="http://localhost:5500/styles/student_management.css">
+    <script src="includes/redirect.js"></script>
+    <script src="includes/fileUpload.js"></script>
     <script src='node_modules/sweetalert2/dist/sweetalert2.all.min.js'></script>
     <script src='includes/alert.js'></script>
 </head>
@@ -83,21 +85,22 @@ try{
             <form action="add_new_students.php" method="GET" class='flex-items'>
                 <br><button type="submit" name="add_stud" value="add_sub" class="add_btn">+ Add new student</button>
             </form>
-            <form method="POST" action="includes/upload_students.php" enctype="multipart/form-data">
-                <button type="button" name="upload_file" class="add_btn" title="Upload SpreadSheet" style="display:flex;justify-content: center;align-items:center;" onclick="document.getElementById('file_upload').click()">
+            <form method="POST" action="includes/upload_students.php" enctype="multipart/form-data" id="upload_form">
+                <button type="button" name="upload_file" class="add_btn" title="Upload SpreadSheet" style="display:flex;justify-content: center;align-items:center;" onclick="fileUpload();">
                     <img src="icons\upload_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">Upload</button>
                 <input type="file" name="file" id="file_upload" title="Upload Spreadsheet" required>
+                <button type="submit" id="submit_btn" style="display: none;">button</button>
             </form>
         </div>
         <?php if(isset($_GET['search_btn'])): ?>
         <table class="my_table"style="margin-top:30px;">
             <thead>
                 <tr>
-                    <th>id</th>
-                    <th>Name</th>
+                    <th>College Id</th>
                     <th>Course</th>
+                    <th>Name</th>
                     <th>Semester</th>
-                    <th>Edit</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -109,11 +112,11 @@ try{
                             <td><?=$student['sname']?></td>
                             <td><?=$student['semester']?></td>
                             <td>
-                            <form method='post' action='includes/remove_student.php'>
-                                <input type='button' value='Edit' class='func_btn' onclick="event.stopPropagation();redirect(edit_students.php?id=<?= $student['college_id'] ?>">
-                                <input type='hidden' name='hid_college_id' value="<?=$student['college_id']?>">
-                                <input type='submit' value='Remove' name='remove_btn' class='remove_btn' style="margin-left: 10px;" onclick="event.stopPropagation();">
-                            </form>
+                                <form method='post' action='includes/remove_student.php' id="remove_form">
+                                    <input type='button' value='Edit' class='edit_btn' onclick="event.stopPropagation();redirect(`edit_students.php?id=<?= $student['college_id']?>`);">
+                                    <input type='hidden' name='hid_college_id' value="<?=$student['college_id']?>">
+                                    <input type='submit' value='Remove' name='remove_btn' class='remove_btn' style="margin-left: 2px;" onclick="event.stopPropagation();">
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach ?>
@@ -146,9 +149,12 @@ try{
                 case 23000:
                     showAlert('Failed','Student Data Already Exists','error');
                     break;
+                case 300:
+                    showAlert('Done','Removed Successfully','success');
+                    break;
             }
         });
     </script>
-    <script src="includes/redirect.js"></script>
+    
 </body>
 </html>

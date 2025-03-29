@@ -19,7 +19,7 @@ input[type="submit"]:hover,input[type="button"]:hover,button:hover{
 .add_btn:hover{
     background-color: #009879;
 }
-.func_btn:hover{
+.func_btn:hover , .edit_btn:hover{
     background-color: #0073e6;
 }
 .remove_btn:hover{

@@ -17,7 +17,7 @@ if (isset($_POST['search_btn'])) {
     $sem = filter_var($_POST['semester'] ?? '',FILTER_VALIDATE_INT);
     $adm_no = filter_var($_POST['admission_no'] ?? '',FILTER_VALIDATE_INT);
     $fiiltered_query = array_filter(['college_id'=>$college_id,
-        'sname'=>$name ?: null,
+        '[~]sname'=>$name ?: null,
         'cname'=>$course ?: null,
         'semester'=>$sem ?: null,
         'adno'=>$adm_no ?: null
@@ -68,13 +68,15 @@ if (isset($_POST['search_btn'])) {
                 <label for="name_box" style="padding-right: 51px;">Name:</label>
                 <input type="text" name="name" id="name_box" placeholder="Enter name"><br><br>
                 <label for="course_box" style="padding-right: 45px;">Course:</label>
-                <select name="course" id="course_box" style="width:175px;height:25px;">
+                <select name="course" id="course_box" style="width:175px;height:25px;" place>
+                        <option value="" disabled selected>Choose-></option>
                         <?php foreach($courses as $course): ?>
                             <option><?= $course ?></option>
                         <?php endforeach ?>
                 </select><br><br>
                 <label for="semester_box" style="padding-right: 30px;">Semester:</label>
                 <select name="semester" id="semester_box" style="width:175px;height:25px;">
+                    <option value="" disabled selected>Choose-></option>
                     <?php for($i = 1;$i <= 8; $i+=1): ?>
                         <option><?= $i ?></option>
                     <?php endfor ?>

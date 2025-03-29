@@ -1,2 +1,6 @@
 2025-03-28 07-45-02-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'uce22cs039' for key 'student.PRIMARY'
 2025-03-28 07-50-19-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'uce22cs039' for key 'student.PRIMARY'
+2025-03-29 18-24-30-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'uce22cs039' for key 'student.PRIMARY'
+2025-03-29 18-24-39-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'uce22cs039' for key 'student.PRIMARY'
+2025-03-29 18-24-53-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'uce22cs039' for key 'student.PRIMARY'
+2025-03-29 18-29-45-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'uce22cs039' for key 'student.PRIMARY'
