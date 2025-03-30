@@ -124,12 +124,12 @@
                 <input type="submit" value="Logout" name="logout_btn" class="content" id="line4">
             </form>
             <div class="sidebar_icons">
-                <img src="http://localhost:5500/icons/apps_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" class="sidebar_icons" id="dashboard_icon">
+                <img src="/icons/apps_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" class="sidebar_icons" id="dashboard_icon">
                 <?php if($role !== "student"){ ?>
-                    <img src="http://localhost:5500/icons/search_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" class="sidebar_icons" id="search_icon">
+                    <img src="/icons/search_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" class="sidebar_icons" id="search_icon">
                 <?php } ?>
-                <img src="http://localhost:5500/icons/notifications_active_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" class="sidebar_icons" id="noti_icon">
-                <img src="http://localhost:5500/icons/logout_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" class="sidebar_icons" id="logout_icon">
+                <img src="/icons/notifications_active_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" class="sidebar_icons" id="noti_icon">
+                <img src="/icons/logout_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" class="sidebar_icons" id="logout_icon">
             </div>
         </div>
 </body>

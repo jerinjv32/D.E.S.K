@@ -59,8 +59,8 @@ if (isset($_POST['remove_noti'])) {
             min-width: 10vw;
         }
     </style>
-    <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
-    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+    <link rel="stylesheet" href="/styles/table.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
     <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="includes/alert.js"></script>
 </head>

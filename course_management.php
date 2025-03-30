@@ -38,9 +38,9 @@ try {
             overflow: auto;
         }
     </style>
-    <link rel="stylesheet" href="http://localhost:5500/styles/course_management.css">
-    <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
-    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+    <link rel="stylesheet" href="/styles/course_management.css">
+    <link rel="stylesheet" href="/styles/table.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
     <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src='includes/alert.js'></script>
 </head>
@@ -67,11 +67,11 @@ try {
                     </select>
                     <div class="container">
                         <div class="flex_items" onclick="redirect('add_course.php')">
-                            <img src="http://localhost:5500/icons/add_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="add_course" class="course-btn" id="cbtn1">
+                            <img src="/icons/add_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="add_course" class="course-btn" id="cbtn1">
                             <figcaption class="icon_title" id="title1">Add Course</figcaption>
                         </div>
                         <div class="flex_items" onclick="redirect('remove_course.php');">
-                            <img src="http://localhost:5500/icons/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="delete_course" class="course-btn" id="cbtn3">
+                            <img src="/icons/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="delete_course" class="course-btn" id="cbtn3">
                             <figcaption class="icon_title" id="title1">Remove</figcaption>
                         </div>
                     </div>

@@ -58,8 +58,8 @@
             transform: scale(1.05);
         }
     </style>
-    <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
-    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+    <link rel="stylesheet" href="/styles/navbar_with_return.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
     <script src="/includes/redirect.js"></script>
 </head>
 <body>
@@ -71,7 +71,7 @@
             <div class="profile_container">
                 <!--Profile photo-->
                 <div class="profile_pic_col" style="grid-area: panel1; width: 200px;">
-                    <img src="http://localhost:5500/images/user-profile-front-side.jpg" id="profile_pic">
+                    <img src="/images/user-profile-front-side.jpg" id="profile_pic">
                 </div>
                 <!--first part-->
                 <div class="main_details" style="grid-area: panel2;">

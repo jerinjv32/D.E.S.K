@@ -49,7 +49,7 @@ $notifications = $database->select("notification","*");
             min-width: 10vw;
         }
     </style>
-    <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
+    <link rel="stylesheet" href="/styles/table.css">
 </head>
 <body>
     <?php include('sidebar.php') ?>

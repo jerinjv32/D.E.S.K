@@ -72,8 +72,8 @@ try{
             min-width: 16.5vw;
         }
     </style>
-    <link rel="stylesheet" href="http://localhost:5500/styles/table.css">
-    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+    <link rel="stylesheet" href="/styles/table.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
 </head>
 <body>
     <?php include('sidebar.php') ?>

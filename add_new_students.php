@@ -48,8 +48,8 @@
             transform: scale(1.05);
         }
     </style>
-    <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
-    <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+    <link rel="stylesheet" href="/styles/navbar_with_return.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
     <script src="/includes/redirect.js"></script>
 </head>
 <body>

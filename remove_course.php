@@ -33,8 +33,8 @@
             overflow: auto;
         }
         </style>
-        <link rel="stylesheet" href="http://localhost:5500/styles/navbar_with_return.css">
-        <link rel="stylesheet" href="http://localhost:5500/styles/buttons.css">
+        <link rel="stylesheet" href="/styles/navbar_with_return.css">
+        <link rel="stylesheet" href="/styles/buttons.css">
         <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
         <script src="/includes/alert.js"></script>
 </head>

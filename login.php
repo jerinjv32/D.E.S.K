@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             </div>
         </form>
-        <a href="https://localhost:82/user_help.php">
+        <a href="/user_help.php">
             <p id="help">Forgot Password ?/New User</p>
         </a>
     </div>
