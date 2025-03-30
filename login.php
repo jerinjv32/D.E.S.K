@@ -24,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 $error = "Invalid password!";
             }
-        } else {
-            $error = "Invalid college ID!";
         }
+    } else {
+        $error = "Invalid college ID!";
     }
 }
 ?>
@@ -50,9 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 margin: 0;
             }
             .container {
-                background-color: #ca3131;
+                background-color: #ffffff;
                 width: 350px;
-                height: 395px;
                 border-radius: 10px;
                 border: #232323;
                 padding: 0;
@@ -62,82 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.33);
                 -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.33);
             }
-            .header {
-                background-color: #232323;
-                height: 300px;
-                border-top-left-radius: 10px;
-                border-top-right-radius: 10px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            } 
-            h1 {
-                color: #ffffff;
-                font-size: 24px;
-                margin: 0;
-            }
-            .box {
-                background-color: #ffffff;
-                padding: 10px;
-                border-bottom-left-radius: 10px;
-                border-bottom-right-radius: 10px;
-                flex-grow: 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
-            h2 {
-                margin: 10px 0 5px 2px;
-                font-size: 16px;
-                color: #333;
-            }
-            input[type="text"],
-            input[type="password"]{
-                width: 300px;
-                height: 35px;
-                padding: 0 10px;
-                margin: 10px 0;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                background-color: #fff;
-            }
-            select {
-                height: 35px;
-            }
-            button {
-                width: 100%;
-                height: 40px;
-                background-color: #232323;
-                color: #ffffff;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                font-size: 16px;
-                margin-top: 10px;
-            }
-            button:hover {
-                opacity: 0.7;
-            }
-            button:active {
-                opacity: 1;
-            }
-            p {
-                color: red;
-                font-size: 14px;
-                text-align: center;
-                margin-top: 10px;
-            }
-            .login_input{
-                font-family: poppins;
-            }
     </style>
+    <link rel="stylesheet" href="/styles/login.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Sign In</h1>
         </div>
-        
         <form action="login.php" method="POST">
             <div class="box">
                 <h2 id=college_id>College ID</h2>
@@ -150,8 +81,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <button type="submit" class="login_input">Log In</button>
 
                 <?php if (isset($error)) { echo "<p style='color: red;'>$error</p>"; } ?>
+
             </div>
         </form>
+        <a href="https://localhost:82/user_help.php">
+            <p id="help">Forgot Password ?/New User</p>
+        </a>
     </div>
 </body>
 </html>
