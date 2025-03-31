@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <style>
             body{
                 font-family: poppins;
-                background-image: url("http://localhost:5500/background/139441191_3daeaaf0-bf35-47ec-9b33-293cdcf519b2.svg");
+                background-image: url("/background/139441191_3daeaaf0-bf35-47ec-9b33-293cdcf519b2.svg");
                 background-size: cover;
                 display: flex;
                 justify-content: center;

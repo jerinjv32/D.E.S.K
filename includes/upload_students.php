@@ -4,16 +4,7 @@ require '../db.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 
-// $generator = new ComputerPasswordGenerator();
-
-// $generator
-//   ->setOptionValue(ComputerPasswordGenerator::OPTION_UPPER_CASE, true)
-//   ->setOptionValue(ComputerPasswordGenerator::OPTION_LOWER_CASE, true)
-//   ->setOptionValue(ComputerPasswordGenerator::OPTION_NUMBERS, true)
-//   ->setOptionValue(ComputerPasswordGenerator::OPTION_SYMBOLS, false)
-// ;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(!empty($_FILES) && $_FILES['file']['error'] == 0 ) {
@@ -54,16 +45,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'college_id'=>$value['college_id'],'adno'=>$value['admission_no'],'cname'=>$value['course_name'],'yoj'=>$value['batch'],
                 'semester'=>$value['semester'],'email'=>$value['mail'],'mobno'=>$value['mobile_no'],'address'=>$value['address'],
                 'blood_group'=>$value['blood_group'],'mother_tongue'=>$value['mother_tongue'],'resident'=>$value['resident']]);
-                
-                // $password = $generator->generatePassword();
-                // $database->insert('users',['username'=>$value['college_id'],'password'=>$password]);
+
+                $password = $value['college_id'].$value['admission_no'];
+                $password = password_hash($password,PASSWORD_DEFAULT); 
+
+                var_dump($value);
+                $database->insert('users',['username'=>$value['college_id'],'password'=>$password,'role'=>'student']);
             }
             $database->pdo->commit();
             header('Location:../student_management.php?check=100');
             exit();
         } catch(PDOException $e) {
             $database->pdo->rollBack();
-            file_put_contents("debugg.txt", date('Y-m-d H-i-s')."-". $e->getMessage(). PHP_EOL, FILE_APPEND);
+            file_put_contents("debugg.txt", date('Y-m-d H:i:s')."-". $e->getMessage(). PHP_EOL, FILE_APPEND);
             if ($e->getCode() == 23000) {
                 header('Location:../student_management.php?check=23000');
                 exit();
