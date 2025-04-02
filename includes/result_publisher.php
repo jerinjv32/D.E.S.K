@@ -38,13 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($values as $value) {
                 $database->insert('results',['name'=>$value['name'],'college_id'=>$value['college_id'], 
                             'semester'=>$value['semester'], 'subject_id'=>$value['subject_id'], 
-                            'course_id'=>$value['course_id'], 'mark'=>$value['mark']]);
+                            'course_id'=>$value['course_id'], 'mark'=>$value['mark'], 'exam_id'=>$value['exam_id']]);
             }
+            header('Location:../result.php?check=100');
+            exit();
         } catch(PDOException $e) {
             file_put_contents("debugg.txt", date('Y-m-d H-i-s')."-". $e->getMessage(). PHP_EOL, FILE_APPEND);
-            die("<h1>Something Went Wrong, Try Again Later</h1>");
-        } finally {
-            header('Location:../result.php');
+            header('Location:../result.php?check=101');
+            exit();
         }
     }
 }

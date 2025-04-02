@@ -64,15 +64,15 @@
                     case 100:
                         showAlert('Done','Password Changed','success');
                         break;
-                        case 101:
-                            showAlert('Invalid OTP','','error');
-                            break;
-                            case 102:
-                                showAlert('Try again','Passwords are not matching','error');
-                                break;
-                            }
-                        });
-                        </script>
+                    case 101:
+                        showAlert('Invalid OTP','','error');
+                        break;
+                    case 102:
+                        showAlert('Try again','Passwords are not matching','error');
+                        break;
+                }
+            });
+        </script>
     </main>
 </body>
 </html>

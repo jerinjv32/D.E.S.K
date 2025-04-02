@@ -3,6 +3,7 @@ session_start();
 include ('db.php');
 try{
     $courses = $database->select('course','cname');
+    $years = $database->select('student','yoj',['GROUP'=>'yoj','ORDER'=>['yoj'=>'ASC']]);
 } catch (PDOException $e) {
     file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
     echo "Something went wrong";
@@ -10,17 +11,19 @@ try{
 //Search
 $query = [];
 if (isset($_POST['search_btn'])) {
-    $table_name = htmlspecialchars($_POST['table_name'] ?? '',ENT_QUOTES,'UTF-8');
     $college_id = htmlspecialchars($_POST['college_id'] ?? '',ENT_QUOTES,'UTF-8');
     $name = htmlspecialchars($_POST['name'] ?? '',ENT_QUOTES,'UTF-8');
     $course = htmlspecialchars($_POST['course'] ?? '',ENT_QUOTES,'UTF-8');
-    $sem = filter_var($_POST['semester'] ?? '',FILTER_VALIDATE_INT);
-    $adm_no = filter_var($_POST['admission_no'] ?? '',FILTER_VALIDATE_INT);
-    $fiiltered_query = array_filter(['college_id'=>$college_id,
+    $sem = filter_var(htmlspecialchars($_POST['semester'] ?? '',ENT_QUOTES,'UTF-8'),FILTER_VALIDATE_INT);
+    $adm_no = filter_var(htmlspecialchars($_POST['admission_no'] ?? '',ENT_QUOTES,'UTF-8'),FILTER_VALIDATE_INT);
+    $year_of_join = filter_var(htmlspecialchars($_POST['year_of_join'] ?? '',ENT_QUOTES,'UTF-8'),FILTER_VALIDATE_INT);;
+    $fiiltered_query = array_filter([
+        'college_id'=>$college_id ?: null,
         '[~]sname'=>$name ?: null,
         'cname'=>$course ?: null,
         'semester'=>$sem ?: null,
-        'adno'=>$adm_no ?: null
+        'adno'=>$adm_no ?: null,
+        'yoj'=>$year_of_join ?: null
     ], fn($value)=> !is_null($value) && $value !== '');
     try {
         $query = $database->select("student",['college_id','sname','cname','semester','adno'],$fiiltered_query);
@@ -74,16 +77,23 @@ if (isset($_POST['search_btn'])) {
                             <option><?= $course ?></option>
                         <?php endforeach ?>
                 </select><br><br>
-                <label for="semester_box" style="padding-right: 30px;">Semester:</label>
+                <label for="semester_box" style="padding-right: 29px;">Semester:</label>
                 <select name="semester" id="semester_box" style="width:175px;height:25px;">
                     <option value="" disabled selected>Choose-></option>
                     <?php for($i = 1;$i <= 8; $i+=1): ?>
                         <option><?= $i ?></option>
                     <?php endfor ?>
                 </select><br><br>
-                <label for="college_id_box" style="padding-right: 25px;">College id:</label>
+                <label for="year_box" style="padding-right: 14px;">Year Of Join:</label>
+                <select name="year_of_join" id="year_box" style="width:175px;height:25px;">
+                    <option value="" disabled selected>Choose-></option>
+                    <?php foreach($years as $year): ?>
+                        <option><?= $year ?></option>
+                    <?php endforeach ?>
+                </select><br><br>
+                <label for="college_id_box" style="padding-right: 26px;">College id:</label>
                 <input type="text" name="college_id" id="college_id_box" placeholder="Enter college id"><br><br>
-                <label for="adm_box" style="padding-right: 1px;">Admission No:</label>
+                <label for="adm_box" style="padding-right: 2px;">Admission No:</label>
                 <input type="text" name="admission_no" id="adm_box" placeholder="Enter admission No"><br><br>
                 
                 <input type="submit" value="search" name="search_btn" class='func_btn'>

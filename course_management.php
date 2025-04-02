@@ -6,8 +6,9 @@ $subjects = [];
 try {
     $courses = $database->select("course","*");
     if(isset($_GET['display'])){
+        $sem = filter_var(htmlspecialchars($_GET['semester']??'',ENT_QUOTES,'UTF-8'),FILTER_VALIDATE_INT);
         $cid = htmlspecialchars($_GET['course_name']??'', ENT_QUOTES,'UTF-8');
-        $subjects = $database->select("subjects","*",['course_id'=>$cid]);
+        $subjects = $database->select("subjects","*",['course_id'=>$cid,'semester'=>$sem]);
     }
 } catch(PDOException $e) {
     file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
@@ -53,7 +54,7 @@ try {
         <form method="get">
             <label for="course_text" style="font-size: 14px;padding-right:30px;">Course:</label>
             <select name="course_name" style="padding-right:5px;height:26px;width:175px;" required>
-                <option>Choose--></option>
+                <option value="" disabled selected>Choose-></option>
                 <?php foreach($courses as $course): ?>
                     <option value='<?= $course['course_id'] ?>'> <?= $course['cname'] ?> </option>
                     <?php endforeach ?>
@@ -62,9 +63,9 @@ try {
                 <label for="semester_text" style="font-size: 14px;padding-right:14px;padding-top:2px">Semester:</label>
                 <select type="number" name="semester" style="width:175px;">
                     <?php for ($i = 1; $i <= 8; $i+=1 ): ?>
-                        <option value="<?= $i ?>"><?= $i ?></option> 
-                        <?php endfor ?>
-                    </select>
+                        <option><?= $i ?></option> 
+                    <?php endfor ?>
+                </select>
                     <div class="container">
                         <div class="flex_items" onclick="redirect('add_course.php')">
                             <img src="/icons/add_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="add_course" class="course-btn" id="cbtn1">

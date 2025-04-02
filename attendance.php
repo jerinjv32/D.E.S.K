@@ -64,7 +64,14 @@
         .my_table td,.my_table th{
             min-width: 5vw;
         }
+        .add_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+        }
     </style>
+    <script src="/includes/fileUpload.js"></script>
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -81,13 +88,19 @@
                 <?php endforeach ?>
             </select>
             <label for="semester_text" style="font-size: 14px;padding: 2px 2px 0 14px;">Semester:</label>
-            <input type="number" name="sem" oninput="notBelowOne(this);" required><br><br>
+            <select name="sem" style="width: 175px;height:25px;" required>
+                <option value="" disabled selected>choose-></option>
+                <?php for($i=1;$i<=8;$i+=1): ?>
+                    <option><?=$i?></option>
+                <?php endfor ?>>
+            </select><br><br>
             <input type="submit" name="show_result" class="func_btn" value="Show Results"><br><br>
             
         </form>
-        <form method="post" action="includes/attendance_upload.php" enctype="multipart/form-data">
-            <input type="file" class="func_btn" name="file"><br><br>
-            <input type="submit">
+        <form method="post" action="includes/attendance_upload.php" id="upload_form" enctype="multipart/form-data">
+            <button type="button" class="add_btn" value="Publish" onclick="fileUpload();">
+                <img src="/icons/upload_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">Upload</button>
+            <input type="file" id="file_upload" name="file" style="display: none;">
         </form>
 
         <hr style="margin: 10px 10px 0 auto;">

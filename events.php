@@ -41,13 +41,17 @@
             transform: scale(1.05);
         }
     </style>
+    <link rel="stylesheet" href="/styles/buttons.css">
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="includes/alert.js"></script>
+    <script src="includes/check.js"></script>
 </body>
 <?php include('sidebar.php') ?>
     <div class="nav_bar">
         <h3 class="nav_content1">Events</h3>
     </div>
     <main>
-        <form method="post" action="includes/event_publisher.php">
+        <form method="post" action="includes/event_publisher.php" autocomplete="off">
             <div>
                 <label for="event_name_box" style="padding-right:10px;">Event Name:</label>
                 <input type="text" name="event_name" id="event_name_box" required>
@@ -57,23 +61,34 @@
                     <option value="exam">Exam</option>
                     <option value="arts">Arts</option>
                     <option calue="other">Other</option>            
-                </select><br><br>
+                </select>
                 
+                <label for="event_id" style="padding-left: 10px;">Event Id:</label>
+                <input name="event_id" type="text" id="event_id" required><br><br>
 
                 <label for="event_notify_box" style="padding-right:60px;">Notify:</label>
                 <select name="event_notify" id="event_notify_box" style="width:150px;height:25px;" required>
                     <option>All</option>
-                    <option>Staffs</option>            
+                    <option>Faculties</option>            
+                    <option>Students</option>            
                 </select>
 
                 <label for="event_date_box" style="padding-left: 47px;padding-right:8px;">Event Date:</label>
                 <input type="date" name="event_date" id="event_date_box" required><br><br>
 
-                <label style="padding-right:5px;">Event Details:</label>
-                <textarea name="event_details" id="event_details_box"  rows="6" cols="50" required></textarea><br><br>
+                <label style="padding-right:5px;">Event Details:</label><br>
+                <textarea name="event_details" id="event_details_box"  rows="6" cols="80" style="resize:none;overflow:auto;" required></textarea><br><br>
 
-                <input type="submit" value="Publish" name="event_publish" id="event_publish_btn" style="border:none;background-color:rgb(33,33,33);color:white;font-size:large;border-radius:3px;">
+                <input type="submit" value="Publish" name="event_publish" id="event_publish_btn" class="func_btn">
             </div>
         </form>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded',() =>{
+            let search = new URLSearchParams(window.location.search);
+            let code = Number(search.get('check'));
+
+            checkSearch(code);
+        })
+    </script>
 </html>

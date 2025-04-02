@@ -41,18 +41,26 @@
                 <label>Course Name:</label>
                 <input type="text" name="cname" required>
                 <br><br>
-                <input type="submit" value="Add Course" name="add_course" class="add_btn_medium">
+                <label style="padding-right: 34px;">Course Id:</label>
+                <input type="text" name="cid" pattern="\d+" required>
+                <br><br>
+                <input type="submit" value="Add Course" name="add_course" class="add_btn">
             </form>
         </article>
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 let search = new URLSearchParams(window.location.search);
                 let check = Number(search.get('check'));
-                console.log('Value:',check);
-                if (check === 1) {
-                    showAlert('Done','Course Is Added','success');
-                } else if (check === -1) {
-                    showAlert('Failed','Course Already Exists','error');
+                switch (check) {
+                    case 1:
+                        showAlert('Done','Course Is Added','success');
+                        break;
+                    case -1:
+                        showAlert('Failed','Course Already Exists','error');
+                        break;
+                    case 200:
+                        showAlert('Failed','','error');
+                        break;
                 }
             })
         </script>

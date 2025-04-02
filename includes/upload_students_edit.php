@@ -18,9 +18,15 @@ foreach ($fields as $field => $columnName){
 }
 try {
     $database->update("student",$query,['college_id'=>$_POST['collegeid']]);
+    header('Location: ../add_new_students.php?check=100');
+    exit();
 } catch(PDOException $e) {
     file_put_contents("error_log.txt",date("Y-m-d H-i-s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);
-    echo "Something went wrong, Try again later";
+    if ($e->getCode() == 23000) {
+        header('Location: ../add_new_students.php?check=23000');
+        exit();
+    } else {
+        header('Location: ../add_new_students.php?check=-100');
+        exit();
+    }
 }
-header('Location: ../student_management.php');
-exit();

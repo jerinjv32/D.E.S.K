@@ -97,7 +97,9 @@ class SendEmail {
             //Content
             $mail->isHTML(true);                                  
             $mail->Subject = 'Password Reset Request';
-            $mail->Body    = 'If you requested to change password, use the code given below <br><br><p style="border:1px solid blue; padding: 10px; border-radius: 5px; background-color: blue;color:white;font-weight:bold;">'.$this->otp.'</p>';
+            $mail->Body    = 'If you requested to change password, use the code given below 
+                                <br><br>
+                                <p style="border:1px solid blue; padding: 10px; border-radius: 5px; background-color: blue;color:white;font-weight:bold;">'.$this->otp.'</p>';
             $mail->AltBody = 'If you didn\'t request this message please ignore this';
         
             $mail->send();

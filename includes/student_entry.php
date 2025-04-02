@@ -24,10 +24,17 @@ try {
     $database->insert("student",$query);
     $database->insert("users",['username'=>$query['college_id'],'password'=>$hash,'role'=>$role]);
     $database->pdo->commit();
+    header('Location:../add_new_students.php?check=100');
+    die();
 } catch(PDOException $e) {
     file_put_contents("error_log.txt",date("Y-m-d H-i-s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);
-    header('Location:../add_new_students.php');
-    die();
+    if ($e->getCode() == 23000){
+        header('Location:../add_new_students.php?check=23000');
+        die();    
+    } else {
+        header('Location:../add_new_students.php?check=-100');
+        die();
+    }
 }
 header('Location:../add_new_students.php');
 

@@ -74,6 +74,10 @@ try{
     </style>
     <link rel="stylesheet" href="/styles/table.css">
     <link rel="stylesheet" href="/styles/buttons.css">
+    <script src""></script>
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src='includes/alert.js'></script>
+    <script src="/includes/redirect.js"></script>
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -84,17 +88,16 @@ try{
         <form method="get">
             <label for="course_text" style="font-size: 14px;padding-right:10px;">Course Name:</label>
             <select name="course_name" required>
-                <option>-->Choose</option>
-                <?php 
-                foreach ($courses as $course) {
-                    echo "<option>".$course."</option>";
-                }
-                ?>
+                <option value="" disabled selected>Choose-></option>
+                <?php foreach ($courses as $course): ?>
+                    <option><?= $course ?></option>
+                <?php endforeach?>
             </select><br><br>
             <input type="submit" value="Get Results" name="get_results" class="func_btn">
             <hr style="margin: 10px 10px 0 auto;">
         </form>
         <br><input type="submit" class="add_btn" value="+ Add new faculty" onclick="redirect('add_new_faculty.php')">
+        <?php if(isset($_GET['get_results'])): ?>
         <table class="my_table"style="margin-top:30px;">
             <thead>
                 <tr>
@@ -105,25 +108,38 @@ try{
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                    foreach($faculties as $faculty) {
-                        echo "<tr onclick=\"redirect('profile_faculty_dyn.php?id=".$faculty['college_id']."');\">";
-                        echo "<td>".$faculty['college_id']."</td>";
-                        echo "<td>".$faculty['fname']."</td>";
-                        echo "<td>".$faculty['cname']."</td>";
-                        echo "<td>";
-                        echo "<form method='post' action='includes/remove_faculty.php'>";
-                        echo "<input type='button' value='Edit' class='func_btn' onclick=\"event.stopPropagation();redirect('edit_faculty.php?id=".$faculty['college_id']."');\">";
-                        echo "<input type='hidden' name='hid_college_id' value=\"".$faculty['college_id']."\">";
-                        echo "<input type='submit' value='Remove' name='remove_btn' class='remove_btn' style=\"margin-left: 10px;\" onclick=\"event.stopPropagation();\">";
-                        echo "</form>";
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                    ?>
+                <?php if(!empty($faculties)): ?>
+                    <?php foreach($faculties as $faculty): ?>
+                            <tr onclick="redirect('profile_faculty_dyn.php?id=<?=$faculty['college_id']?>');">
+                                <td><?= $faculty['college_id']?></td>
+                                <td><?= $faculty['fname']?></td>
+                                <td><?= $faculty['cname']?></td>
+                                <td>
+                                    <form method='post' action='includes/remove_faculty.php'>
+                                        <input type='button' value='Edit' class='edit_btn' onclick="event.stopPropagation();redirect('edit_faculty.php?id=<?=$faculty['college_id']?>');">
+                                        <input type='hidden' name='hid_college_id' value="<?=$faculty['college_id']?>">
+                                        <input type='submit' value='Remove' name='remove_btn' class='remove_btn' style="margin-left: 10px;" onclick="event.stopPropagation();">
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="4" style="text-align: center;font-weight:bold;">No Results</td>
+                    </tr>
+                <?php endif ?>
             </tbody>
         </table>
+        <?php endif ?>
     </main>
-    <script src="/includes/redirect.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let search = new URLSearchParams(window.location.search);
+            let code = Number(search.get('check'));
+            if (code == 100) {
+                showAlert('Removed','Faculty Is removed Successfully','success');
+            }
+        });
+    </script>                    
 </body>
 </html>

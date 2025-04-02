@@ -76,7 +76,7 @@
                 <!--first part-->
                 <div class="main_details" style="grid-area: panel2;">
                     <div style="margin:20px 530px 0 10px;justify-items:left;padding-left:50px;">
-                        <label for="name_box">Name:</label>
+                        <label for="name_box">Name:</label><br>
                         <input type="text" name="name" id="name_box" value="<?php echo $fields['fname']; ?>" required> <br><br>
                         <div>Date of birth:</div>
                         <input type="date" name="dob" value="<?php echo $fields['fdob'];?>" required><br><br>

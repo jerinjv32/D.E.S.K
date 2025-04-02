@@ -1,5 +1,4 @@
 <?php 
-    session_start();
     include('db.php');
     include('sidebar.php');
     try {
@@ -57,13 +56,16 @@
     </style>
     <link rel="stylesheet" href="/styles/navbar_with_return.css">
     <link rel="stylesheet" href="/styles/buttons.css">
+    <script src="/includes/redirect.js"></script>
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src='includes/alert.js'></script>
 </head>
 <body>
     <nav>
         <h3 class="nav_content1"><span onclick="redirect('faculty_management.php')">Faculty Management </span> / Add Faculty</h3>
     </nav>
     <main>
-        <form method="post" action="includes/faculty_entry.php">
+        <form method="post" action="includes/faculty_entry.php" autocomplete="off">
             <div class="profile_container">
                 <!--Profile photo-->
                 <div class="profile_pic_col" style="grid-area: panel1; width: 200px;">
@@ -100,11 +102,10 @@
                     <div style="padding: 10px 0 10px 20px;">
                         <div>Course name:</div>
                         <select name="course_name" required>
-                            <option>Choose Course--></option>
-                            <?php foreach($cnames as $course) {
-                            echo "<option>".$course."</option>";
-                            }
-                            ?>
+                            <option value="" disabled selected>Choose Course-></option>
+                            <?php foreach($cnames as $course): ?>
+                                <option><?= $course ?></option>
+                            <?php endforeach ?>
                         </select>
                         <br><br>
                         <div>Year of join:</div>
@@ -121,7 +122,7 @@
                         <div>Phone number:</div>
                         <input type="text" name="mobno" required><br><br>
                         <div>Address:</div>
-                        <input type="text" name="address" style="width:400px;padding-bottom:200px;" required>
+                        <textarea name="address" style="resize: none;overflow:auto;" rows="7" cols="50"  required></textarea>
                     </div>
                 </div>
                 <!--Other-->
@@ -139,6 +140,22 @@
             </div>
         </form>
     </main>
-    <script src="/includes/redirect.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let search = new URLSearchParams(window.location.search);
+            let code = Number(search.get('check'));
+            switch(code) {
+                case 100:
+                    showAlert('Done','Faculty Is Added','success');
+                    break;
+                case 23000:
+                    showAlert('Failed','Data Already Exists','error');
+                    break;
+                case -100:
+                    showAlert('Failed','','error');
+                    break;
+            }
+        })
+    </script>
 </body>
 </html>

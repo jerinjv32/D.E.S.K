@@ -2,7 +2,7 @@
 session_start();
 include ('../db.php');
 $fields = ['name'=>'fname','dob'=>'fdob','gender'=>'fgender','collegeid'=>'college_id',
-            'coursename'=>'cname','yearjoin'=>'yoj','mail'=>'email','mobno'=>'fpno',
+            'course_name'=>'cname','yearjoin'=>'yoj','mail'=>'email','mobno'=>'fpno',
             'address'=>'address','bloodgroup'=>'blood_group','lang'=>'mother_tongue'];
 
 $query = [];
@@ -26,11 +26,17 @@ try {
     $database->insert("faculty",$query);
     $database->insert("users",['username'=>$query['college_id'],'password'=>$hash,'role'=>$role]);
     $database->pdo->commit();
+    header('Location:../add_new_faculty.php?check=100');
+    exit();
 } catch(PDOException $e) {
-    file_put_contents("error_log_faculty.txt",date("Y-m-d H-i-s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);
-    header('Location:../add_new_faculty.php');
-    die();
+    file_put_contents("error_log_faculty.txt",date("Y-m-d H:i:s")."-".$e->getMessage(). PHP_EOL, FILE_APPEND);
+    if ($e->getCode() == 23000) {
+        header('Location:../add_new_faculty.php?check=23000');
+        exit();
+    } else {
+        header('Location:../add_new_faculty.php?check=-100');
+        exit();
+    }
 }
-header('Location:../add_new_faculty.php');
-exit();
+
 ?>

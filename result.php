@@ -7,9 +7,12 @@
     $subjects = [];
     $courseId = htmlspecialchars($_GET['course_name']??'',ENT_QUOTES,'UTF-8');
     $semester = htmlspecialchars($_GET['sem']??'',ENT_QUOTES,'UTF-8');
+    $examId = htmlspecialchars($_GET['exam_id']??'',ENT_QUOTES,'UTF-8');
+
      
     try {
         $courses  = $database->select("course","*");
+        $exams = $database->select('events','event_id',['event_type'=>'Exam']);
         if (isset($_GET['show_result'])) {
             $datas = $database->select('results','*', ['course_id'=>$courseId,'semester'=>$semester]);
         }
@@ -33,6 +36,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/table.css">
     <link rel="stylesheet" href="/styles/buttons.css">
+    <script src="/includes/fileUpload.js"></script>
     <style>
         *{
             margin: 0px;
@@ -64,6 +68,12 @@
         .my_table td,.my_table th{
             min-width: 5vw;
         }
+        .add_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+        }
     </style>
 </head>
 <body>
@@ -74,20 +84,35 @@
     <main>
         <form method="GET">
             <label for="course_text" style="font-size: 14px;padding-right:10px;">Course:</label>
-            <select name="course_name" required>
-                <option>Choose--></option>
+            <select name="course_name" style="width: 175;height:25px;" required>
+                <option value="" disabled selected>Choose-></option>
                 <?php foreach ($courses as $cname): ?>
                     <option value=<?= $cname['course_id'] ?>><?= $cname['cname']; ?></option>;
                 <?php endforeach ?>
             </select>
             <label for="semester_text" style="font-size: 14px;padding: 2px 2px 0 14px;">Semester:</label>
-            <input type="number" name="sem" oninput="notBelowOne(this);" required><br><br>
+            <select name="sem" style="width: 175px;height:25px;" required>
+                <option value="" disabled selected>choose-></option>
+                <?php for($i=1;$i<=8;$i+=1): ?>
+                    <option><?=$i?></option>
+                <?php endfor ?>
+            </select>
+            
+            <label for="exam_id" style="font-size: 14px;padding: 2px 2px 0 14px;">Exam Id:</label>
+            <select id="exam_id" name="exam_id" style="height: 25px;width: 175px;" required>
+                    <option value="" disabled selected>Choose-></option>
+                    <?php foreach($exams as $exam): ?>
+                        <option><?= $exam ?></option>
+                    <?php endforeach ?>
+            </select><br><br>
+
             <input type="submit" name="show_result" class="func_btn" value="Show Results"><br><br>
             
         </form>
-        <form method="post" action="includes/result_publisher.php" enctype="multipart/form-data">
-            <input type="file" class="func_btn" name="file"><br><br>
-            <input type="submit" value="Publish">
+        <form method="post" action="includes/result_publisher.php" id="upload_form" enctype="multipart/form-data">
+            <button type="button" class="add_btn" value="Publish" onclick="fileUpload();">
+                <img src="/icons/upload_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">Upload</button>
+            <input type="file" id="file_upload" name="file" style="display: none;">
         </form>
 
         <hr style="margin: 10px 10px 0 auto;">

@@ -3,21 +3,11 @@ session_start();
 include('db.php');
 $notifications = [];
 try{
-    $notifications = $database->select("notification","*");
+    $notifications = $database->select("notification",["[>]events"=>["event_id"=>"event_id"]],
+    ["notification.event_id","events.event_details","events.event_date","events.event_type"]);
 }catch(PDOException $e){
     file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
     die("Something Wrong, Try again later");
-}
-//remove notification
-if (isset($_POST['remove_noti'])) {
-    $slno = htmlspecialchars($_POST['notification_number']??'',ENT_QUOTES,'UTF-8');
-    try{
-        $database->delete("notification",['slno'=>$slno]);
-        $check = 10;
-    }catch(PDOException $e){
-        file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
-        die("Something Wrong, Try again later");
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -58,11 +48,17 @@ if (isset($_POST['remove_noti'])) {
         .my_table td, .my_table th {
             min-width: 10vw;
         }
+        #special_btn:hover {
+            cursor: not-allowed;
+            background-color: grey;
+            opacity: 0.8;
+        }
     </style>
     <link rel="stylesheet" href="/styles/table.css">
     <link rel="stylesheet" href="/styles/buttons.css">
     <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="includes/alert.js"></script>
+    <script src="includes/check.js"></script>
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -82,11 +78,11 @@ if (isset($_POST['remove_noti'])) {
             <?php if (!empty($notifications)): ?>
                 <?php foreach($notifications as $notification): ?>
                     <tr>
-                        <td><?=$notification['date']?></td>
-                        <td><?=$notification['content']?></td>
+                        <td><?=$notification['event_date']?></td>
+                        <td><?=$notification['event_details']?></td>
                         <td>
-                            <form method="POST">
-                                <input type="hidden" value="<?= $notification['slno'] ?>" name='notification_number'>
+                            <form method="POST" action="/includes/remove_event.php">
+                                <input type="hidden" value="<?= $notification['event_id'] ?>" name='notification_number'>
                                 <input type="submit" class="remove_btn" name='remove_noti' value='Remove'>
                             </form>
                         </td>
@@ -102,10 +98,9 @@ if (isset($_POST['remove_noti'])) {
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            let check = <?php echo $check ?>;
-            if (check == 10) {
-                showAlert('Done','Notification Is Removed','success');
-            }
+            let search = new URLSearchParams(window.location.search);
+            let check = Number(search.get('check'));
+            checkSearch(check);
         });
     </script>
 </body>

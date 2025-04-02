@@ -2,7 +2,7 @@
 
 include ('../db.php');
 
-$fields = ['event_name','event_type','event_notify','event_date','event_details'];
+$fields = ['event_name','event_type','event_id','event_notify','event_date','event_details'];
 $query = [];
 
 foreach ($fields as $field) {
@@ -13,12 +13,12 @@ foreach ($fields as $field) {
 $database->pdo->beginTransaction();
 try {
     $database->insert("events",$query);
-    if ($_POST['event_notify'] == "All") {
-        $database->insert("notification",['date'=>$query['event_date'],'content'=>$query['event_details']]);
-    }
+    $database->insert("notification",['event_id'=>$query['event_id'],'event_notify'=>$query['event_notify']]);
     $database->pdo->commit();
-    header('Location: ../events.php');
+    header('Location: ../events.php?check=100');
+    exit();
 } catch (PDOException $e) {
     file_put_contents("error_log.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
-    echo "Something went wrong. Try again later";
+    header('Location: ../events.php?check=101');
+    exit();
 }

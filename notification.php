@@ -2,8 +2,9 @@
 session_start(); 
 include('db.php');
 $notifications = [];
+$event_notified = ['1'=>'all','2'=>'faculties'];
 try{
-    $notifications = $database->select("notification","*");
+    $notifications = $database->select("events","*",['OR'=>['event_notify'=>$event_notified['1'],'event'=>$event_notified['2']]]);
 }catch(PDOException $e){
     file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
     echo "Something Wrong, Try again later";
@@ -61,18 +62,16 @@ $notifications = $database->select("notification","*");
             <thead>
                 <tr>
                     <th style="width: 13vw;">Date</th>
-                    <th style="width: 52vw;">Content</th>
+                    <th>Content</th>
                 </tr>
             </thead>
             <tbody>
-            <?php 
-                    foreach($notifications as $notification) {
-                        echo "<tr>";
-                        echo "<td>".$notification['date']."</td>";
-                        echo "<td>".$notification['content']."</td>";
-                        echo "</tr>";
-                    }
-                    ?>
+            <?php foreach($notifications as $notification): ?>
+                        <tr>
+                            <td><?= $notification['event_date']?></td>
+                            <td><?= $notification['event_details']?></td>
+                        </tr>
+                    <?php endforeach ?>
             </tbody>
         </table>
     </main>
