@@ -75,6 +75,9 @@
             width: 100px;
         }
     </style>
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="includes/alert.js"></script>
+    <script src="includes/check.js"></script>
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -141,6 +144,12 @@
         </table>
         <?php endif; ?>
     </main>
-    <script src="includes/not_below_1.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let search = new URLSearchParams(window.location.search);
+            let check = Number(search.get('check'));
+            checkSearch(check);
+        });
+    </script>
 </body>
 </html>

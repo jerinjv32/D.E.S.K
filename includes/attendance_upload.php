@@ -25,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $data = $sheet->toArray();
             $headers = $data[0];
-            
+            $headers = array_map('strtolower',$headers);
+
             foreach (array_slice($data,1) as $row) {
                 $sanitized_rows = array_map('htmlspecialchars',$row);
                 $values[] = array_combine($headers, $sanitized_rows);

@@ -1,6 +1,2 @@
-2025-04-02 20-31-38-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'events' in 'field list'
-2025-04-02 20-34-05-SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM "notification" LEFT JOIN "events" ON "notification"."notification" = "event' at line 1
-2025-04-02 20-34-27-SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM "notification" LEFT JOIN "events" USING ("notificationevent_id", "eventseve' at line 1
-2025-04-02 20-34-45-SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM "notification" LEFT JOIN "events" USING ("notification.event_id", "events.e' at line 1
-2025-04-02 20-34-46-SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM "notification" LEFT JOIN "events" USING ("notification.event_id", "events.e' at line 1
-2025-04-02 21-55-31-SQLSTATE[42S02]: Base table or view not found: 1146 Table 'desk.evets' doesn't exist
+2025-04-03 03-03-51-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'event' in 'where clause'
+2025-04-03 03-09-23-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'notify.event_notify' in 'where clause'

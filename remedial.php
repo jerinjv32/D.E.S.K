@@ -1,5 +1,27 @@
 <?php 
-    session_start();
+session_start();
+include('db.php');
+$subjects = [];
+$remedial = [];
+//get Subjects and course
+try {
+    $courses = $database->select("course","*");
+    $sem = filter_var(htmlspecialchars($_GET['semester']??'',ENT_QUOTES,'UTF-8'),FILTER_VALIDATE_INT);
+    $cid = htmlspecialchars($_GET['course_name']??'', ENT_QUOTES,'UTF-8');
+} catch(PDOException $e) {
+    file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+    echo "Something went wrong,Try again later";
+}
+try {
+    if(isset($_GET['show_result'])){
+        $remedials = $database->select("student",["[>]remedial"=>["college_id"=>"college_id"]],
+        ["student.sname","remedial.subject_id","student.cname","remedial.college_id","remedial.semester"],
+        ["remedial.course_id"=>$cid]);
+    };
+}catch(PDOException $e) {
+    file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+    echo "Something went wrong,Try again later";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,9 +62,7 @@
             overflow: auto;
         }
         .my_table th, .my_table td{
-            padding: 15px 15px;
-            min-width: 214px;
-            border-bottom: solid #dddddd;
+            width: 14vw;
         }
     </style>
     
@@ -53,42 +73,52 @@
         <h3 class="nav_content1">Remedial Class</h3>
     </div>
     <main>
-        <form action="post">
+        <form method="get" action="remedial.php"> 
             <label for="course_text" style="font-size: 14px;padding-right:10px;">Course:</label>
             <select name="course_name" style="width: 175;height:25px;" required>
                 <option value="" disabled selected>Choose-></option>
                 <?php foreach ($courses as $cname): ?>
                     <option value=<?= $cname['course_id'] ?>><?= $cname['cname']; ?></option>;
                 <?php endforeach ?>
-            </select>
-            <label for="semester_text" style="font-size: 14px;padding: 2px 2px 0 14px;">Semester:</label>
+            </select><br><br>
+            <!-- <label for="semester_text" style="font-size: 14px;padding: 2px 2px 0 14px;">Semester:</label>
             <select name="sem" style="width: 175px;height:25px;" required>
                 <option value="" disabled selected>choose-></option>
                 <?php for($i=1;$i<=8;$i+=1): ?>
                     <option><?=$i?></option>
                 <?php endfor ?>
-            </select><br><br>
-            <input type="submit" value="Show Result" class="func_btn">
+            </select><br><br> -->
+            <input type="submit" value="Show Result" name="show_result" class="func_btn">
         </form>
             <hr style="margin: 10px 10px 0 auto;">
-            <?php if (!empty($row) && !empty($subjects)): ?>
+            <?php if (isset($_GET['show_result'])): ?>
             <table class="my_table"style="margin-top:50px;">
                 <thead>
                     <tr>
-                        
+                        <th>Name</th>
+                        <th>College Id</th>
+                        <th>Course Name</th>
+                        <th>Semester</th>
+                        <th>Subject Code</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($row as $name=>$subjectData): ?>
+                    <?php if (!empty($remedials)): ?>
+                        <?php foreach($remedials as $remedial):?>
                         <tr>
-                            <td><?= $name; ?></td>
-                            <td><?= $semester; ?></td>
-                            <?php foreach ($subjects as $subject): ?>
-                                <td><?= $subjectData[$subject] ?? 'N/a'; ?></td>
-                            <?php endforeach ?>
+                            <td><?= $remedial['sname'] ?></td>
+                            <td><?= $remedial['college_id'] ?></td>
+                            <td><?= $remedial['cname'] ?></td>
+                            <td><?= $remedial['semester'] ?></td>
+                            <td><?= $remedial['subject_id'] ?></td>
                         </tr>
-                    <?php endforeach; ?>
+                        <?php endforeach ?>
                 </tbody>
+                    <?php else: ?>
+                    <tr>
+                        <td colspan="5" style="text-align: center;font-weight:bold;">No Results</td>
+                    </tr>
+                    <?php endif ?>
             </table>
             <?php endif; ?>
     </main>

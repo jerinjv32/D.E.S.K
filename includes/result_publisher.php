@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $data = $sheet->toArray();
             $headers = $data[0];
+            $headers = array_map('strtolower',$headers);
             
             foreach (array_slice($data,1) as $row) {
                 $sanitized_rows = array_map('htmlspecialchars',$row);
@@ -39,6 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $database->insert('results',['name'=>$value['name'],'college_id'=>$value['college_id'], 
                             'semester'=>$value['semester'], 'subject_id'=>$value['subject_id'], 
                             'course_id'=>$value['course_id'], 'mark'=>$value['mark'], 'exam_id'=>$value['exam_id']]);
+                if ($value['mark'] < 40) {
+                    $database->insert('remedial',['college_id'=>$value['college_id'],'course_id'=>$value['course_id'],
+                    'subject_id'=>$value['subject_id'],'semester'=>$value['semester']]);
+                }
             }
             header('Location:../result.php?check=100');
             exit();

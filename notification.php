@@ -2,9 +2,11 @@
 session_start(); 
 include('db.php');
 $notifications = [];
-$event_notified = ['1'=>'all','2'=>'faculties'];
+$role = $_SESSION['role'];
 try{
-    $notifications = $database->select("events","*",['OR'=>['event_notify'=>$event_notified['1'],'event'=>$event_notified['2']]]);
+    $notifications = $database->select("notification",["[>]events"=>["event_id"=>"event_id"]],
+    ["notification.event_id","events.event_details","events.event_date","events.event_type"],
+    ['OR'=>['notification.event_notify'=>'faculty','notification.event_notify'=>'all']]);
 }catch(PDOException $e){
     file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
     echo "Something Wrong, Try again later";

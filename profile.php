@@ -2,7 +2,8 @@
 session_start();
 include('db.php');
 include('sidebar.php');
-$college_id = $_SESSION['college_id'] ?? null;
+$college_id = $_SESSION['college_id'];
+$details = [];
 try{
         $details = $database->get("faculty","*",['college_id'=>$college_id]);
     } catch(PDOException $e) {
