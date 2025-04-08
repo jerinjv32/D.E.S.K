@@ -4,13 +4,18 @@ include('db.php');
 $collegeId = $_SESSION['college_id'];
 try {
     $courses = $database->select('course','*');
+    $exams = $database->select('events','event_id',['event_type'=>'Exam']);
 } catch (PDOException $e) {
     file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
     die("<h1>Something Went Wrong Try again later</h1>");
 }
 $results = [];
 try {
-    $results = $database->select('results','*',['college_id'=>$collegeId]);
+    if (isset($_POST['show_results'])) {
+        $examId = htmlspecialchars($_POST['exam_id']??'',ENT_QUOTES,'UTF-8');
+        $sem = htmlspecialchars($_POST['semester'] ?? '',ENT_QUOTES,'UTF-8');
+        $results = $database->select('results','*',['college_id'=>$collegeId,'semester'=>$sem,'exam_id'=>$examId]);
+    }
 } catch (PDOException $e) {
     file_put_contents("debugg.txt",date('Y-m-d H-i-s')."-".$e->getMessage().PHP_EOL,FILE_APPEND);
     die("<h1>Something Went Wrong Try again later</h1>");
@@ -26,6 +31,10 @@ $json_data = json_encode(['labels'=>$labels,'data'=>$mark]);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Assessment</title>
+    <link rel="stylesheet" href="/styles/table.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
+    <script src="/includes/fileUpload.js"></script>
+    <script src="node_modules/chart.js/dist/chart.umd.js"></script>
     <style>
         *{
             font-family: poppins;
@@ -73,33 +82,64 @@ $json_data = json_encode(['labels'=>$labels,'data'=>$mark]);
         <h3 class="nav_content1">Academic Assessment</h3>
     </div>
     <main>
+        <form method='post'>
+            <label for="semester_box">Semester:</label>
+            <select name="semester" style="width: 175px;height:25px;" required>
+                <option value="" disabled selected>choose-></option>
+                <?php for($i=1;$i<=8;$i+=1): ?>
+                    <option><?=$i?></option>
+                <?php endfor ?>
+            </select>
+            <label for="exam_id" style="padding: 2px 27px 0 22px;">Exam Id:</label>
+            <select id="exam_id" name="exam_id" style="height: 25px;width: 175px;" required>
+                    <option value="" disabled selected>Choose-></option>
+                    <?php foreach($exams as $exam): ?>
+                        <option><?= $exam ?></option>
+                    <?php endforeach ?>
+            </select><br><br>
+
+            <input type="submit" value="Show Results" name="show_results" class="func_btn">
+            </form>
+            <br>
             <canvas id="myChart" style="width: 100px;"></canvas>
-            
-            <script src="/includes/not_below_1.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
             <script>
                 const chartData = <?php echo $json_data; ?>;
                 console.log('chart data:', chartData);
                 
                 const labels = chartData.labels;
                 const data = chartData.data;
+                const threshold = 50;
+                const barColors = data.map(mark => (mark < threshold ? 'rgba(255, 99, 132, 0.5)' : 'rgba(75, 192, 192, 0.5)'));
+                const borderColors = data.map(mark => (mark < threshold ? 'rgba(255, 99, 132, 1)' : 'rgba(75, 192, 192, 1)'));
                 const ctx = document.getElementById('myChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: 'Student Marks',
+                            label: '<?php echo $collegeId ?>',
                             data: data,
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: barColors, 
+                            borderColor: borderColors, 
                             borderWidth: 1
+
                         }]
                     },
                     options: {
                         scales: {
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Marks'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Subjects'
+                                }
                             }
                         }
                     }

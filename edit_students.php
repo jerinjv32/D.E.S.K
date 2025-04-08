@@ -67,7 +67,7 @@
         <h3 class="nav_content1"><span onclick="redirect('student_management.php')">Student Management </span> / Edit Student Details</h3>
     </nav>
     <main>
-        <form method="post" action="includes/upload_students_edit.php">
+        <form method="post" action="includes/upload_students_edit.php" autocomplete="off">
             <div class="profile_container">
                 <!--Profile photo-->
                 <div class="profile_pic_col" style="grid-area: panel1; width: 200px;">
@@ -113,7 +113,7 @@
                         <div>Email:</div>
                         <input type="text" name="mail" value="<?php echo $fields['email'];?>" required><br><br>
                         <div>Phone number:</div>
-                        <input type="text" name="mobno" value="<?php echo $fields['mobno'];?>" required><br><br>
+                        <input type="text" name="mobno" maxlength="10" value="<?php echo $fields['mobno'];?>" required><br><br>
                         <div>Address:</div>
                         <input type="text" name="address" style="width:400px;padding-bottom:200px;" value="<?php echo $fields['address'];?>" required>
                     </div>

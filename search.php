@@ -19,7 +19,7 @@ if (isset($_POST['search_btn'])) {
     $year_of_join = filter_var(htmlspecialchars($_POST['year_of_join'] ?? '',ENT_QUOTES,'UTF-8'),FILTER_VALIDATE_INT);;
     $fiiltered_query = array_filter([
         'college_id'=>$college_id ?: null,
-        '[~]sname'=>$name ?: null,
+        'sname[~]'=>$name ?: null,
         'cname'=>$course ?: null,
         'semester'=>$sem ?: null,
         'adno'=>$adm_no ?: null,

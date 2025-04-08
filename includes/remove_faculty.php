@@ -5,6 +5,7 @@ if (isset($_POST['hid_college_id'])){
 }
 try {
     $database->delete("faculty",['college_id'=>$faculty_id]);
+    $database->delete("users",['username'=>$faculty_id]);
     header('Location: ../faculty_management.php?check=100');
     exit();
 } catch(PDOException $e) {

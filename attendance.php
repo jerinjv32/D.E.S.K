@@ -72,6 +72,10 @@
         }
     </style>
     <script src="/includes/fileUpload.js"></script>
+    <script src="includes/redirect.js"></script>
+    <script src="includes/fileUpload.js"></script>
+    <script src='node_modules/sweetalert2/dist/sweetalert2.all.min.js'></script>
+    <script src='includes/alert.js'></script>
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -129,6 +133,32 @@
         </table>
         <?php endif; ?>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let search = new URLSearchParams(window.location.search);
+            let check = Number(search.get('check'));
+            switch (check) {
+                case 100:
+                    showAlert('Done','Uploaded Successfully','success');
+                    break;
+                case 101:
+                    showAlert('Failed','Upload Failed','error');
+                    break;
+                case 200:
+                    showAlert('Loading Failed','Couldn\'t Load the file','error');
+                    break;
+                case 201:
+                    showAlert('Wrong File Type','File Type is Not supported','error');
+                    break;
+                case 23000:
+                    showAlert('Failed','Student Data Already Exists','error');
+                    break;
+                case 300:
+                    showAlert('Done','Removed Successfully','success');
+                    break;
+            }
+        });
+    </script>
     <script src="includes/not_below_1.js"></script>
 </body>
 </html>

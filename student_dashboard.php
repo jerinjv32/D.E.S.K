@@ -17,7 +17,7 @@
         exit();
     }
     if(isset($_GET['remedial_class'])){
-        header('Location:remedial.php');
+        header('Location:remedial_student.php');
         exit();
     }
 ?>

@@ -1,2 +1,4 @@
 2025-04-02 18-03-01-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
 2025-04-02 18-09-30-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '41' for key 'course.PRIMARY'
+2025-04-03 04-57-09-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '5577' for key 'student.adno'
+2025-04-08 05-04-51-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'college_id' in 'where clause'

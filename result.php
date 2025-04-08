@@ -36,7 +36,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/table.css">
     <link rel="stylesheet" href="/styles/buttons.css">
-    <script src="/includes/fileUpload.js"></script>
     <style>
         *{
             margin: 0px;
@@ -75,9 +74,10 @@
             width: 100px;
         }
     </style>
-    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <script src="includes/alert.js"></script>
-    <script src="includes/check.js"></script>
+    <script src="includes/redirect.js"></script>
+    <script src="includes/fileUpload.js"></script>
+    <script src='node_modules/sweetalert2/dist/sweetalert2.all.min.js'></script>
+    <script src='includes/alert.js'></script>
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -148,7 +148,26 @@
         document.addEventListener('DOMContentLoaded', () => {
             let search = new URLSearchParams(window.location.search);
             let check = Number(search.get('check'));
-            checkSearch(check);
+            switch (check) {
+                case 100:
+                    showAlert('Done','Uploaded Successfully','success');
+                    break;
+                case 101:
+                    showAlert('Failed','Upload Failed','error');
+                    break;
+                case 200:
+                    showAlert('Loading Failed','Couldn\'t Load the file','error');
+                    break;
+                case 201:
+                    showAlert('Wrong File Type','File Type is Not supported','error');
+                    break;
+                case 23000:
+                    showAlert('Failed','Student Data Already Exists','error');
+                    break;
+                case 300:
+                    showAlert('Done','Removed Successfully','success');
+                    break;
+            }
         });
     </script>
 </body>

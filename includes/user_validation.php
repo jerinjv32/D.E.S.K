@@ -5,7 +5,11 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 require_once 'vendor/autoload.php';
+use Dotenv\Dotenv;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
+
+$dotEnv = Dotenv::createImmutable(__DIR__);
+$dotEnv->safeLoad();
 
 class ValidateUser {
     private $college_id;
@@ -84,8 +88,8 @@ class SendEmail {
             $mail->isSMTP();                                            
             $mail->Host       = 'smtp.gmail.com';                     
             $mail->SMTPAuth   = true;                                   
-            $mail->Username   = 'deskproject144@gmail.com';                     
-            $mail->Password   = 'avcp bnfn upww qwkb';                               
+            $mail->Username   = $_ENV['MAIL_USER'];                     
+            $mail->Password   = $_ENV['MAIL_PASS'];                               
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
             $mail->Port       = 465;                                    
         

@@ -69,7 +69,7 @@ try {
             <div class="profile_container">
                 <!--Profile photo-->
                 <div class="profile_pic_col" style="grid-area: panel1; width: 200px;">
-                    <img src="http://localhost:5500/images/user-profile-front-side.jpg" id="profile_pic">
+                    <img src="/images/user-profile-front-side.jpg" id="profile_pic">
                 </div>
                 <!--first part-->
                 <div class="main_details" style="grid-area: panel2;">
@@ -122,7 +122,7 @@ try {
                         <div>Email:</div>
                         <input type="text" name="mail" required><br><br>
                         <div>Phone number:</div>
-                        <input type="text" name="mobno" required><br><br>
+                        <input type="text" name="mobno" maxlength="10" required><br><br>
                         <div>Address:</div>
                         <textarea name="address" style="resize: none;overflow:auto;" rows="7" cols="50"  required></textarea>
                     </div>
@@ -153,7 +153,7 @@ try {
             let code = Number(search.get('check'));
             switch(code) {
                 case 100:
-                    showAlert('Done','Faculty Is Added','success');
+                    showAlert('Done','Student Is Added','success');
                     break;
                 case 23000:
                     showAlert('Failed','Data Already Exists','error');

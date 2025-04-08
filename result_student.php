@@ -4,10 +4,17 @@
     $database->pdo->beginTransaction();
     $datas = [];
     $row = [];
-    $collegeId = $_SESSION['college_id'];
+    $subjects = [];
+    $semester = htmlspecialchars($_GET['sem']??'',ENT_QUOTES,'UTF-8');
+    $examId = htmlspecialchars($_GET['exam_id']??'',ENT_QUOTES,'UTF-8');
+    $cid = $_SESSION['college_id']??'';
+     
     try {
-        $sem  = $database->get("student","semester",['college_id'=>$collegeId]) ?? '';
-        $datas = $database->select('results','*', ['college_id'=>$collegeId]);
+        $courses  = $database->select("course","*");
+        $exams = $database->select('events','event_id',['event_type'=>'Exam']);
+        if (isset($_GET['show_result'])) {
+            $datas = $database->select('results','*', ['college_id'=>$cid,'semester'=>$semester]);
+        }
         foreach ($datas as $data) {
             $subjects[] = $data['subject_id'];
             $row[$data['name']][$data['subject_id']] = $data['mark'];
@@ -28,6 +35,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/table.css">
     <link rel="stylesheet" href="/styles/buttons.css">
+    <script src="/includes/fileUpload.js"></script>
     <style>
         *{
             margin: 0px;
@@ -59,7 +67,16 @@
         .my_table td,.my_table th{
             min-width: 5vw;
         }
+        .add_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+        }
     </style>
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="includes/alert.js"></script>
+    <script src="includes/check.js"></script>
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -67,7 +84,28 @@
         <h3 class="nav_content1">Results</h3>
     </div>
     <main>
-        <h4>Name:<?php echo "" ?></h4>
+        <form method="GET">
+            <label for="semester_text" style="font-size: 14px;padding: 2px 2px 0 0;">Semester:</label>
+            <select name="sem" style="width: 175px;height:25px;" required>
+                <option value="" disabled selected>choose-></option>
+                <?php for($i=1;$i<=8;$i+=1): ?>
+                    <option><?=$i?></option>
+                <?php endfor ?>
+            </select>
+            
+            <label for="exam_id" style="font-size: 14px;padding: 2px 2px 0 14px;">Exam Id:</label>
+            <select id="exam_id" name="exam_id" style="height: 25px;width: 175px;" required>
+                    <option value="" disabled selected>Choose-></option>
+                    <?php foreach($exams as $exam): ?>
+                        <option><?= $exam ?></option>
+                    <?php endforeach ?>
+            </select><br><br>
+
+            <input type="submit" name="show_result" class="func_btn" value="Show Results"><br><br>
+            
+        </form>
+
+        <hr style="margin: 10px 10px 0 auto;">
         <?php if (!empty($row) && !empty($subjects)): ?>
         <table class="my_table"style="margin-top:50px;">
             <thead>
@@ -83,7 +121,7 @@
                 <?php foreach ($row as $name=>$subjectData): ?>
                     <tr>
                         <td><?= $name; ?></td>
-                        <td><?= $sem ?></td>
+                        <td><?= $semester; ?></td>
                         <?php foreach ($subjects as $subject): ?>
                             <td><?= $subjectData[$subject] ?? 'N/a'; ?></td>
                         <?php endforeach ?>
@@ -93,6 +131,12 @@
         </table>
         <?php endif; ?>
     </main>
-    <script src="includes/not_below_1.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let search = new URLSearchParams(window.location.search);
+            let check = Number(search.get('check'));
+            checkSearch(check);
+        });
+    </script>
 </body>
 </html>

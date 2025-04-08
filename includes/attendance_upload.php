@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $filetype = pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION);
 
         if (!in_array($filetype, $allowedFileTypes)) {
-            die("<script>window.alert('Invalid File Format');</script>");
+            header('Location:../attendance.php?check=201');
+            exit();        
         }
 
         try {
@@ -33,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } catch (Exception $e) {
             file_put_contents("debugg.txt", date('Y-m-d H-i-s')."-". $e->getMessage(). PHP_EOL, FILE_APPEND);
-            die("<h1>Something Went Wrong, Try Again Later</h1>");
+            header('Location:../attendance.php?check=200');
+            exit();        
         }
         try {
             foreach ($values as $value) {
@@ -41,11 +43,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             'semester'=>$value['semester'], 'subject_id'=>$value['subject_id'], 
                             'course_id'=>$value['course_id'], 'percentage'=>$value['percentage']]);
             }
+            header('Location:../attendance.php?check=100');
+            exit();
         } catch(PDOException $e) {
             file_put_contents("debugg.txt", date('Y-m-d H-i-s')."-". $e->getMessage(). PHP_EOL, FILE_APPEND);
-            die("<h1>Something Went Wrong, Try Again Later</h1>");
-        } finally {
-            header('Location:../attendance.php');
+            if ($e->getCode() == 23000) {
+                header('Location:../attendance.php?check=23000');
+                exit();
+            } else {
+                header('Location:../attendance.php?check=101');
+                exit();
+            }
+    
         }
+
     }
-}
+}   

@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,9 +67,9 @@
 
                 <label for="event_notify_box" style="padding-right:60px;">Notify:</label>
                 <select name="event_notify" id="event_notify_box" style="width:150px;height:25px;" required>
-                    <option>All</option>
-                    <option>Faculties</option>            
-                    <option>Students</option>            
+                    <option value="all">All</option>
+                    <option value="faculty">Faculties</option>            
+                    <option value="student">Students</option>            
                 </select>
 
                 <label for="event_date_box" style="padding-left: 47px;padding-right:8px;">Event Date:</label>

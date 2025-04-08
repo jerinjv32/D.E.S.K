@@ -67,11 +67,11 @@
         <h3 class="nav_content1"><span onclick="redirect('faculty_management.php')">Faculty Management </span> / Edit Faculty Details</h3>
     </nav>
     <main>
-        <form method="post" action="includes/upload_faculty_edit.php">
+        <form method="post" action="includes/upload_faculty_edit.php" autocomplete="off">
             <div class="profile_container">
                 <!--Profile photo-->
                 <div class="profile_pic_col" style="grid-area: panel1; width: 200px;">
-                    <img src="http://localhost:5500/images/user-profile-front-side.jpg" id="profile_pic">
+                    <img src="/images/user-profile-front-side.jpg" id="profile_pic">
                 </div>
                 <!--first part-->
                 <div class="main_details" style="grid-area: panel2;">
@@ -109,7 +109,7 @@
                         <div>Email:</div>
                         <input type="text" name="mail" value="<?php echo $fields['email'];?>" required><br><br>
                         <div>Phone number:</div>
-                        <input type="text" name="mobno" value="<?php echo $fields['fpno'];?>" required><br><br>
+                        <input type="text" name="mobno" maxlength="10" value="<?php echo $fields['fpno'];?>" required><br><br>
                         <div>Address:</div>
                         <input type="text" name="address" style="width:400px;padding-bottom:200px;" value="<?php echo $fields['address'];?>" required>
                     </div>

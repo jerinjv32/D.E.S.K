@@ -1,6 +1,6 @@
 <?php
     @session_start(); // Warning? What warning? 😎
-    $role = $_SESSION['role'];
+    $role = $_SESSION['role']??'';
     if(isset($_POST["dash_icon"])){
         if($_SESSION['role'] === "admin"){
             header('Location:admin_dashboard.php');   
@@ -60,6 +60,11 @@
             height: 10em;
             margin-top: 2em;
             margin-left: 26px;
+            transition: transform 0.25s ease-in-out;
+            cursor: pointer;
+        }
+        .profile_pic:hover {
+            transform: scale(1.02);
         }
         .item1{
             text-align: center;
@@ -110,11 +115,15 @@
             left: 31px;
         }
     </style>
+    <script src="/includes/redirect.js"></script>
 </head>
 <body>
     <div class="sidebar">
             <div class="item1"><?php echo strtoupper($role); ?></div>
-            <img src="images/school-building-illustration_138676-2399.jpg" class="profile_pic">
+                <img src="images/school-building-illustration_138676-2399.jpg" class="profile_pic" 
+                onclick="<?php if($_SESSION['role'] == 'student'): ?> redirect('profile_students.php?id=<?=$_SESSION['college_id'] ?>'); <?php ?>
+                <?php elseif($_SESSION['role'] == 'faculty' || 'admin' ): ?> redirect('profile.php?id=<?=$_SESSION['college_id'] ?>'); <?php ?>
+                <?php endif ?>">
             <form method="post" action="sidebar.php">
                 <input type="submit" value="Dashboard" name="dash_icon" class="content" id="line1"><br>
                 <?php if($_SESSION['role'] != "student"){ ?>

@@ -71,6 +71,11 @@ try{
         .my_table th, .my_table td{
             min-width: 16.5vw;
         }
+        #special_remove:hover {
+            background-color: grey;
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
     </style>
     <link rel="stylesheet" href="/styles/table.css">
     <link rel="stylesheet" href="/styles/buttons.css">
@@ -118,7 +123,11 @@ try{
                                     <form method='post' action='includes/remove_faculty.php'>
                                         <input type='button' value='Edit' class='edit_btn' onclick="event.stopPropagation();redirect('edit_faculty.php?id=<?=$faculty['college_id']?>');">
                                         <input type='hidden' name='hid_college_id' value="<?=$faculty['college_id']?>">
+                                        <?php if ($faculty['college_id'] == $_SESSION['college_id']): ?>
+                                        <input type='button' id="special_remove" title="you can't remove your self" value='Remove' name='remove_btn' class='remove_btn' style="margin-left: 10px;" onclick="event.stopPropagation();">
+                                        <?php else: ?>
                                         <input type='submit' value='Remove' name='remove_btn' class='remove_btn' style="margin-left: 10px;" onclick="event.stopPropagation();">
+                                        <?php endif ?>
                                     </form>
                                 </td>
                             </tr>

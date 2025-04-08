@@ -9,7 +9,7 @@ $query = [];
 foreach ($fields as $field => $columnName){
     if (!empty($_POST[$field])) {
         if (in_array($field,['admno','sem','mobno','yearjoin'])) {
-            $query[$columnName] = filter_var($_POST[$field] ?? '',FILTER_VALIDATE_INT);
+            $query[$columnName] = filter_var( htmlspecialchars($_POST[$field] ?? '',ENT_QUOTES,'UTF-8'),FILTER_VALIDATE_INT);
         }
         else {
             $query[$columnName] = htmlspecialchars($_POST[$field] ?? '',ENT_QUOTES,'UTF-8');

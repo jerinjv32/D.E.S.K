@@ -1,17 +1,16 @@
 <?php 
-session_start(); 
+session_start();
 include('db.php');
 $notifications = [];
 $role = $_SESSION['role'];
 try{
     $notifications = $database->select("notification",["[>]events"=>["event_id"=>"event_id"]],
     ["notification.event_id","events.event_details","events.event_date","events.event_type"],
-    ['OR'=>['notification.event_notify'=>'faculty','notification.event_notify'=>'all']]);
+    ['OR'=>['events.event_notify'=>'All','notification.event_notify'=>$role]]);
 }catch(PDOException $e){
     file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
-    echo "Something Wrong, Try again later";
+    die("Something Wrong, Try again later");
 }
-$notifications = $database->select("notification","*");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,10 +48,19 @@ $notifications = $database->select("notification","*");
             overflow: auto;
         }
         .my_table td, .my_table th {
-            min-width: 10vw;
+            min-width: 35.7vw;
+        }
+        #special_btn:hover {
+            cursor: not-allowed;
+            background-color: grey;
+            opacity: 0.8;
         }
     </style>
     <link rel="stylesheet" href="/styles/table.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="includes/alert.js"></script>
+    <script src="includes/check.js"></script>
 </head>
 <body>
     <?php include('sidebar.php') ?>
@@ -63,17 +71,23 @@ $notifications = $database->select("notification","*");
         <table class="my_table">
             <thead>
                 <tr>
-                    <th style="width: 13vw;">Date</th>
+                    <th style="width: 53px;">Date</th>
                     <th>Content</th>
                 </tr>
             </thead>
-            <tbody>
-            <?php foreach($notifications as $notification): ?>
-                        <tr>
-                            <td><?= $notification['event_date']?></td>
-                            <td><?= $notification['event_details']?></td>
-                        </tr>
-                    <?php endforeach ?>
+            <tbody
+            <?php if (!empty($notifications)): ?>
+                <?php foreach($notifications as $notification): ?>
+                    <tr>
+                        <td><?=$notification['event_date']?></td>
+                        <td><?=$notification['event_details']?></td>
+                    </tr>
+                <?php endforeach ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="2" style="text-align: center;font-weight:bold;">No Notification</td>
+                </tr>
+            <?php endif ?>
             </tbody>
         </table>
     </main>
