@@ -1,0 +1,2 @@
+2025-04-03 03-03-51-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'event' in 'where clause'
+2025-04-03 03-09-23-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'notify.event_notify' in 'where clause'

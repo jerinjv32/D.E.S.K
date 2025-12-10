@@ -1,0 +1,95 @@
+<?php 
+session_start();
+include('db.php');
+$notifications = [];
+$role = $_SESSION['role'];
+try{
+    $notifications = $database->select("notification",["[>]events"=>["event_id"=>"event_id"]],
+    ["notification.event_id","events.event_details","events.event_date","events.event_type"],
+    ['OR'=>['events.event_notify'=>'All','notification.event_notify'=>$role]]);
+}catch(PDOException $e){
+    file_put_contents("debugg.txt",date("Y-m-d H-i-s")."-".$e->getMessage().PHP_EOL,FILE_APPEND);
+    die("Something Wrong, Try again later");
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        *{
+            font-family: poppins;
+            margin:0px;
+        }
+        .nav_bar{
+            height: 53px;
+            width: 100%;
+            background-color: rgb(33, 33, 33);
+        }
+        .nav_content1{
+            display: block;
+            padding-left: 225px;
+            padding-top: 12px;
+            font-size: larger;
+            color: white;
+        }
+        main{
+            height: 100px;
+            border: 1px black solid;  
+            margin: 20px 20px 20px 228px;
+            border-radius: 5px;
+            padding:20px 10px 0 20px;
+            box-shadow: 0 5px 5px rgba(0,0,0,0.25);
+            min-height: 500px;
+            max-height: 100%;
+            overflow: auto;
+        }
+        .my_table td, .my_table th {
+            min-width: 35.7vw;
+        }
+        #special_btn:hover {
+            cursor: not-allowed;
+            background-color: grey;
+            opacity: 0.8;
+        }
+    </style>
+    <link rel="stylesheet" href="/styles/table.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="includes/alert.js"></script>
+    <script src="includes/check.js"></script>
+</head>
+<body>
+    <?php include('sidebar.php') ?>
+    <div class="nav_bar">
+        <h3 class="nav_content1">Notification</h3>
+    </div>
+    <main>
+        <table class="my_table">
+            <thead>
+                <tr>
+                    <th style="width: 53px;">Date</th>
+                    <th>Content</th>
+                </tr>
+            </thead>
+            <tbody
+            <?php if (!empty($notifications)): ?>
+                <?php foreach($notifications as $notification): ?>
+                    <tr>
+                        <td><?=$notification['event_date']?></td>
+                        <td><?=$notification['event_details']?></td>
+                    </tr>
+                <?php endforeach ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="2" style="text-align: center;font-weight:bold;">No Notification</td>
+                </tr>
+            <?php endif ?>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

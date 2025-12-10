@@ -1,0 +1,51 @@
+2025-03-04T10:48:57.110897Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2025-03-04T10:48:57.301522Z 0 [Warning] [MY-010097] [Server] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2025-03-04T10:48:57.301876Z 0 [System] [MY-010116] [Server] C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqld (mysqld 8.4.3) starting as process 15124
+2025-03-04T10:48:57.366721Z 0 [Warning] [MY-010075] [Server] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 4613d501-f8e6-11ef-b6b5-c01850da368f.
+2025-03-04T10:48:57.392865Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2025-03-04T10:48:57.858609Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2025-03-04T10:48:57.875333Z 1 [ERROR] [MY-013178] [Server] Execution of server-side SQL statement 'CREATE SCHEMA mysql DEFAULT COLLATE utf8mb4_0900_ai_ci' failed with error code = 1049, error message = 'System schema directory does not exist.'.
+2025-03-04T10:48:57.876683Z 0 [ERROR] [MY-010020] [Server] Data Dictionary initialization failed.
+2025-03-04T10:48:57.877027Z 0 [ERROR] [MY-010119] [Server] Aborting
+2025-03-04T10:48:58.075955Z 0 [System] [MY-010910] [Server] C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqld: Shutdown complete (mysqld 8.4.3)  MySQL Community Server - GPL.
+2025-03-04T10:48:58.076819Z 0 [System] [MY-015016] [Server] MySQL Server - end.
+2025-03-04T10:54:42.025035Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2025-03-04T10:54:42.182840Z 0 [Warning] [MY-010097] [Server] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2025-03-04T10:54:42.183264Z 0 [System] [MY-010116] [Server] C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqld (mysqld 8.4.3) starting as process 9320
+2025-03-04T10:54:42.260379Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2025-03-04T10:54:42.707886Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2025-03-04T10:54:42.710704Z 1 [ERROR] [MY-013178] [Server] Execution of server-side SQL statement 'CREATE SCHEMA mysql DEFAULT COLLATE utf8mb4_0900_ai_ci' failed with error code = 1049, error message = 'System schema directory does not exist.'.
+2025-03-04T10:54:42.713346Z 0 [ERROR] [MY-010020] [Server] Data Dictionary initialization failed.
+2025-03-04T10:54:42.713764Z 0 [ERROR] [MY-010119] [Server] Aborting
+2025-03-04T10:54:42.894434Z 0 [System] [MY-010910] [Server] C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqld: Shutdown complete (mysqld 8.4.3)  MySQL Community Server - GPL.
+2025-03-04T10:54:42.895217Z 0 [System] [MY-015016] [Server] MySQL Server - end.
+2025-03-04T10:57:45.686628Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2025-03-04T10:57:45.933621Z 0 [Warning] [MY-010097] [Server] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2025-03-04T10:57:45.933710Z 0 [System] [MY-010116] [Server] C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqld (mysqld 8.4.3) starting as process 7324
+2025-03-04T10:57:45.985179Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2025-03-04T10:57:46.365814Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2025-03-04T10:57:46.368706Z 1 [ERROR] [MY-013178] [Server] Execution of server-side SQL statement 'CREATE SCHEMA mysql DEFAULT COLLATE utf8mb4_0900_ai_ci' failed with error code = 1049, error message = 'System schema directory does not exist.'.
+2025-03-04T10:57:46.371447Z 0 [ERROR] [MY-010020] [Server] Data Dictionary initialization failed.
+2025-03-04T10:57:46.372069Z 0 [ERROR] [MY-010119] [Server] Aborting
+2025-03-04T10:57:46.589177Z 0 [System] [MY-010910] [Server] C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqld: Shutdown complete (mysqld 8.4.3)  MySQL Community Server - GPL.
+2025-03-04T10:57:46.589901Z 0 [System] [MY-015016] [Server] MySQL Server - end.
+2025-03-04T10:58:58.967291Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2025-03-04T10:58:59.117234Z 0 [Warning] [MY-010097] [Server] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2025-03-04T10:58:59.117315Z 0 [System] [MY-010116] [Server] C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqld (mysqld 8.4.3) starting as process 5984
+2025-03-04T10:58:59.157041Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2025-03-04T10:58:59.518261Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2025-03-04T10:58:59.520968Z 1 [ERROR] [MY-013178] [Server] Execution of server-side SQL statement 'CREATE SCHEMA mysql DEFAULT COLLATE utf8mb4_0900_ai_ci' failed with error code = 1049, error message = 'System schema directory does not exist.'.
+2025-03-04T10:58:59.523517Z 0 [ERROR] [MY-010020] [Server] Data Dictionary initialization failed.
+2025-03-04T10:58:59.524087Z 0 [ERROR] [MY-010119] [Server] Aborting
+2025-03-04T10:58:59.711800Z 0 [System] [MY-010910] [Server] C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqld: Shutdown complete (mysqld 8.4.3)  MySQL Community Server - GPL.
+2025-03-04T10:58:59.712505Z 0 [System] [MY-015016] [Server] MySQL Server - end.
+2025-03-04T11:05:16.229679Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2025-03-04T11:05:16.446493Z 0 [Warning] [MY-010097] [Server] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2025-03-04T11:05:16.446801Z 0 [System] [MY-010116] [Server] C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqld (mysqld 8.4.3) starting as process 6420
+2025-03-04T11:05:16.553057Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2025-03-04T11:05:17.018942Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2025-03-04T11:05:17.032888Z 1 [ERROR] [MY-013178] [Server] Execution of server-side SQL statement 'CREATE SCHEMA mysql DEFAULT COLLATE utf8mb4_0900_ai_ci' failed with error code = 1049, error message = 'System schema directory does not exist.'.
+2025-03-04T11:05:17.035738Z 0 [ERROR] [MY-010020] [Server] Data Dictionary initialization failed.
+2025-03-04T11:05:17.036784Z 0 [ERROR] [MY-010119] [Server] Aborting
+2025-03-04T11:05:17.229210Z 0 [System] [MY-010910] [Server] C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysqld: Shutdown complete (mysqld 8.4.3)  MySQL Community Server - GPL.
+2025-03-04T11:05:17.230342Z 0 [System] [MY-015016] [Server] MySQL Server - end.

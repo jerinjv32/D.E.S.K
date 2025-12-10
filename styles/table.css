@@ -1,0 +1,35 @@
+*{
+    font-family: Poppins;
+}
+.my_table{
+    border-collapse: collapse;
+    font-size: 0.9em;
+    margin: 25px 0;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.15);
+}
+.my_table thead tr{
+    background-color: rgb(33, 33, 33);
+    color: #ffffff;
+    font-weight: bold;
+}
+.my_table th, .my_table td{
+    padding: 15px 15px;
+    border-bottom: solid #dddddd;
+}
+.my_table tbody tr{
+    text-align: center;
+    background-color:rgb(236, 236, 236);
+    transition: background-color 0.25s linear, color 0.25s linear;
+}
+.my_table tbody tr:nth-child(even){
+    background-color: white;
+}
+.my_table tbody tr:hover{
+    background-color: rgba(120,120,120,0.25);
+    box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    cursor: pointer;
+    font-weight: bold;
+    color: #33A4A4;
+}
